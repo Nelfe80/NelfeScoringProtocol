@@ -41,17 +41,24 @@ signatures **ECDSA P-256**, clé **SPKI DER**, signature **ASN.1 DER**, encodage
 **base64url** ; `key_id = SHA-256(SPKI_DER)`. Ancrage : **OpenTimestamps sur Bitcoin**
 (hors CoreVerifier).
 
-## Lancer les vecteurs (C#)
+## Lancer les vecteurs
+**C# (référence, régénère aussi profil + vecteurs) :**
 ```
-cd ref/csharp/NelfeScoring.Vectors
-dotnet run -c Release
+cd ref/csharp/NelfeScoring.Vectors && dotnet run -c Release      # → 11/11
 ```
-Régénère `manifest/…/1.json` + `vectors/*.json` et vérifie **11/11** verdicts. Chaque
-`vectors/*.passport.json` est un cas ; `vectors/index.json` liste `{vector, expected}`.
+**PHP (NelfePlay) — rejoue les mêmes vecteurs :**
+```
+docker run --rm -v "$PWD:/app" php:8.4-cli php /app/ref/php/run-vectors.php   # → 11/11
+```
+Chaque `vectors/*.passport.json` est un cas ; `vectors/index.json` liste
+`{vector, expected}`.
 
-**Contrat inter-langages** : PHP (NelfePlay) et C++ (listener) porteront le **même**
-CoreVerifier et devront donner **exactement** le même verdict sur `vectors/*` — c'est
-le critère de sortie du Lot 0.
+**Contrat inter-langages (critère de sortie du Lot 0)** : chaque port doit donner
+**exactement** le même verdict sur `vectors/*`. Le vecteur `valid` qui passe est la
+preuve d'un **JCS byte-identique** (sinon la signature ECDSA ne vérifie pas).
+- **C# (APIExpose) : ✅ 11/11**
+- **PHP (NelfePlay) : ✅ 11/11** (via `php:8.4-cli`)
+- **C++ (listener) : à venir**
 
 ## Vecteurs V1 (Sonic 1cc)
 `valid` (→ pass) + refus déterministes : `core_mismatch`, `mem_mismatch`,
@@ -60,6 +67,8 @@ le critère de sortie du Lot 0.
 d'interop (triplet clé/message/signature figé) et cas statistiques (§6.6b, côté serveur).
 
 ## Statut
-- **Lot 0 (contrat + vecteurs + CoreVerifier de référence) : EN COURS** — C# vert.
-- Suite : ports PHP/C++, ServerAdmissionVerifier, couche attestation du listener,
-  endpoint de soumission NelfePlay, ancrage OTS. Découpage dans le plan (Lots 0-5).
+- **Lot 0 : CoreVerifier C# ✅ + PHP ✅** (11/11 chacun, verdicts identiques, JCS
+  byte-identique prouvé par la signature). Reste : **port C++** (listener) + vecteurs
+  crypto d'interop (triplet clé/message/signature figé).
+- Suite : ServerAdmissionVerifier (§6.5), couche attestation du listener, endpoint de
+  soumission NelfePlay, ancrage OTS. Découpage dans le plan (Lots 0-5).
