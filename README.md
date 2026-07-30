@@ -50,6 +50,12 @@ cd ref/csharp/NelfeScoring.Vectors && dotnet run -c Release      # → 11/11
 ```
 docker run --rm -v "$PWD:/app" php:8.4-cli php /app/ref/php/run-vectors.php   # → 11/11
 ```
+**C++ (listener) — build + run :**
+```
+docker run --rm -v "$PWD:/app" -w /app gcc:14 sh -c \
+  'apt-get update -qq >/dev/null 2>&1 && apt-get install -y -qq libssl-dev nlohmann-json3-dev >/dev/null 2>&1 \
+   && g++ -std=c++20 -O2 ref/cpp/run_vectors.cpp -lssl -lcrypto -o /tmp/rv && /tmp/rv /app'   # → 11/11
+```
 Chaque `vectors/*.passport.json` est un cas ; `vectors/index.json` liste
 `{vector, expected}`.
 
@@ -58,7 +64,7 @@ Chaque `vectors/*.passport.json` est un cas ; `vectors/index.json` liste
 preuve d'un **JCS byte-identique** (sinon la signature ECDSA ne vérifie pas).
 - **C# (APIExpose) : ✅ 11/11**
 - **PHP (NelfePlay) : ✅ 11/11** (via `php:8.4-cli`)
-- **C++ (listener) : à venir**
+- **C++ (listener) : ✅ 11/11** (via `gcc` + `libssl` + `nlohmann-json`)
 
 ## Vecteurs V1 (Sonic 1cc)
 `valid` (→ pass) + refus déterministes : `core_mismatch`, `mem_mismatch`,
@@ -67,8 +73,9 @@ preuve d'un **JCS byte-identique** (sinon la signature ECDSA ne vérifie pas).
 d'interop (triplet clé/message/signature figé) et cas statistiques (§6.6b, côté serveur).
 
 ## Statut
-- **Lot 0 : CoreVerifier C# ✅ + PHP ✅** (11/11 chacun, verdicts identiques, JCS
-  byte-identique prouvé par la signature). Reste : **port C++** (listener) + vecteurs
-  crypto d'interop (triplet clé/message/signature figé).
-- Suite : ServerAdmissionVerifier (§6.5), couche attestation du listener, endpoint de
-  soumission NelfePlay, ancrage OTS. Découpage dans le plan (Lots 0-5).
+- **Lot 0 COMPLET** : CoreVerifier **C# ✅ + PHP ✅ + C++ ✅** (11/11 chacun, verdicts
+  **identiques octet pour octet**), + vecteurs **crypto d'interop** (JCS + signature).
+  Le critère de sortie du Lot 0 est atteint.
+- Suite : ServerAdmissionVerifier (§6.5 — état serveur, `held`, rangs), couche
+  attestation du listener (SHA-256/handshake, additive), endpoint de soumission
+  NelfePlay, ancrage OTS. Découpage dans le plan (Lots 0-5).
