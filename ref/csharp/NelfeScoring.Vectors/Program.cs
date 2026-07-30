@@ -202,10 +202,26 @@ foreach (var (name, expected, p) in vectors)
 }
 File.WriteAllText(Path.Combine(vectorsDir, "index.json"), Pretty(index));
 
+// ── vecteurs crypto d'interop (indépendants des passeports) ───────────────────
+Console.WriteLine("\n── Vecteurs crypto d'interop ──");
+var jcsInput = JsonNode.Parse(File.ReadAllText(Path.Combine(root, "vectors", "crypto", "jcs", "input.json")));
+var jcsGot = Jcs.Canonical(jcsInput);
+var jcsExp = File.ReadAllText(Path.Combine(root, "vectors", "crypto", "jcs", "expected.jcs.txt")).TrimEnd('\n', '\r');
+bool jcsOk = jcsGot == jcsExp;
+if (!jcsOk) failures++;
+Console.WriteLine($"  {(jcsOk ? "OK " : "XX ")}jcs : forme canonique {(jcsOk ? "conforme" : "DIVERGENTE")}");
+if (!jcsOk) Console.WriteLine($"     attendu: {jcsExp}\n     obtenu : {jcsGot}");
+
+var sigMsg = File.ReadAllBytes(Path.Combine(root, "vectors", "crypto", "signature", "message.txt"));
+var sigB64 = File.ReadAllText(Path.Combine(root, "vectors", "crypto", "signature", "signature.device.b64url")).Trim();
+bool sigOk = Crypto.Verify(deviceSpki, sigMsg, sigB64);
+if (!sigOk) failures++;
+Console.WriteLine($"  {(sigOk ? "OK " : "XX ")}signature : message figé {(sigOk ? "vérifie" : "ÉCHOUE")}");
+
 Console.WriteLine($"\ndevice key_id = {deviceKeyId}\nissuer key_id = {issuerKeyId}");
 Console.WriteLine(failures == 0
-    ? $"\n✅ {vectors.Count}/{vectors.Count} vecteurs au verdict attendu. Vecteurs écrits dans /vectors."
-    : $"\n❌ {failures} divergence(s) sur {vectors.Count}.");
+    ? $"\n✅ {vectors.Count} passeports + 2 vecteurs crypto au verdict attendu."
+    : $"\n❌ {failures} divergence(s).");
 return failures == 0 ? 0 : 1;
 
 // ── utilitaires ───────────────────────────────────────────────────────────────
