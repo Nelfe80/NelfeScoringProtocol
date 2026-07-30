@@ -1,0 +1,56 @@
+{
+  "system_id": "megadrive",
+  "rom_group": "sonic-the-hedgehog",
+  "engine": "libretro",
+  "ruleset": "1cc",
+  "version": 1,
+  "manifest_epoch": 12,
+  "published_at": "2026-07-01T00:00:00Z",
+  "opened_at": "2026-07-01T00:00:00Z",
+  "metric": {
+    "type": "score",
+    "unit": "points",
+    "ranking_direction": "higher_better",
+    "result_source": "final"
+  },
+  "trajectory_policy": {
+    "monotonicity": "non_decreasing"
+  },
+  "allowed_content_sha256": [
+    "7a1c2c99ed7e72d025f2e8768a5b7994d63548ef384c3128d45ddca99485077b"
+  ],
+  "allowed_core_sha256": [
+    "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2"
+  ],
+  "allowed_listener_sha256": [
+    "e85685fad0aa07543472e65c941b5caac4b74e1bdb8df854d59b18c8c1330376"
+  ],
+  "mem_sha256": "08eef0fe36803e828e36278937a055d5514f612ffed383273e72e563249709d9",
+  "bios": {
+    "mode": "none"
+  },
+  "rules": {
+    "save_state": "forbidden",
+    "cheats": "forbidden",
+    "rewind": "forbidden",
+    "runahead": "forbidden",
+    "continues": "forbidden",
+    "players": 1
+  },
+  "correlation_rules": [
+    {
+      "event": "ring_collected",
+      "requires_any": [
+        "score_delta",
+        "rings_delta"
+      ]
+    },
+    {
+      "event": "level_complete",
+      "requires": [
+        "level_delta",
+        "time_checkpoint"
+      ]
+    }
+  ]
+}

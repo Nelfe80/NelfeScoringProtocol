@@ -1,0 +1,184 @@
+{
+  "protocol": 1,
+  "session_id": "b3f1c2a4-5d6e-4f80-9a1b-2c3d4e5f6071",
+  "ticket": {
+    "ticket_id": "t_9f2a3b",
+    "device_id": "dev-001",
+    "scope": "scoring_session",
+    "manifest_epoch": 12,
+    "issued_at": "2026-07-30T18:00:00Z",
+    "expires_at": "2026-07-30T20:00:00Z",
+    "nonce": "n_abc123",
+    "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
+    "signature": "MEUCIGmO-3JYE4DtzrTv-TYbVxT1IUeWo1OzzrjKUDA3Nh6MAiEAgbceWEstnkSO83KMjgDCXM2RAKGIFbnUfyz1pDSLqPE"
+  },
+  "game": {
+    "system_id": "megadrive",
+    "rom_group": "sonic-the-hedgehog",
+    "engine": "libretro",
+    "ruleset": "1cc",
+    "profile_version": 1,
+    "manifest_commit": "a1b2c3d4e5f6",
+    "profile_document_sha256": "e6a0c7a7f17fa19b2b2dcc81742b9523b582315da8c2bdbcacc548663dba1819"
+  },
+  "device": {
+    "device_id": "dev-001",
+    "key_id": "44d0aeacdc1943a61ff55e8982577ee3eb780b93f9b762939c349481dc1079cd",
+    "key_type": "ecdsa_p256"
+  },
+  "identity": {
+    "player_ref": null,
+    "session_player_id": null
+  },
+  "listener": {
+    "build": "4.2.0",
+    "start_sha256": "e85685fad0aa07543472e65c941b5caac4b74e1bdb8df854d59b18c8c1330376",
+    "loaded_sha256": "e85685fad0aa07543472e65c941b5caac4b74e1bdb8df854d59b18c8c1330376",
+    "end_sha256": "e85685fad0aa07543472e65c941b5caac4b74e1bdb8df854d59b18c8c1330376",
+    "certification": "listener-tests-2026.1"
+  },
+  "software": {
+    "modules": [
+      {
+        "role": "frontend",
+        "sha256": "8b68e4c9f7f5c3cfd386ddbae19b58b1266b28d7fb2bfe615126e3046ab72192"
+      },
+      {
+        "role": "listener",
+        "sha256": "e85685fad0aa07543472e65c941b5caac4b74e1bdb8df854d59b18c8c1330376"
+      },
+      {
+        "role": "real_core",
+        "sha256": "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2"
+      },
+      {
+        "role": "apiexpose",
+        "sha256": "81cff2eb74257ae2404a67e4914f9b1a1310e79192b241991c8eac2448e89705"
+      },
+      {
+        "role": "emulatorlauncher",
+        "sha256": "37e21a3ac8907ef05e1ad30d69b0846f7f77ee27717265ae537dfc20e71517ec"
+      },
+      {
+        "role": "gamescript_hook",
+        "sha256": "32176ce2fc21a9426b533f91a9193bc3491e0b91670fd0a406589ab2215e4c60"
+      }
+    ],
+    "modules_digest": "a4623dae321a629ff135f70fe5efbd96e040b4ad1929b49b82f5eec447da834b"
+  },
+  "artifacts": {
+    "core": {
+      "start_sha256": "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2",
+      "loaded_sha256": "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2",
+      "end_sha256": "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2"
+    },
+    "content": {
+      "start_sha256": "7a1c2c99ed7e72d025f2e8768a5b7994d63548ef384c3128d45ddca99485077b",
+      "loaded_sha256": "7a1c2c99ed7e72d025f2e8768a5b7994d63548ef384c3128d45ddca99485077b",
+      "end_sha256": "7a1c2c99ed7e72d025f2e8768a5b7994d63548ef384c3128d45ddca99485077b"
+    },
+    "mem": {
+      "start_sha256": "08eef0fe36803e828e36278937a055d5514f612ffed383273e72e563249709d9",
+      "loaded_sha256": "b688afec5814898f568dd2429bd79ddb401a44080298e433c6160fd5d4ee77ab",
+      "end_sha256": "08eef0fe36803e828e36278937a055d5514f612ffed383273e72e563249709d9"
+    },
+    "core_options_digest": "9d029d5af69ff8a858d5db6c073038edd4642d463c691d7923e62fad00da6430",
+    "bios": {
+      "mode": "none"
+    }
+  },
+  "process": {
+    "pid": 12345,
+    "executable_sha256": "8b68e4c9f7f5c3cfd386ddbae19b58b1266b28d7fb2bfe615126e3046ab72192",
+    "parent_pid": 6789,
+    "created_at": "2026-07-30T18:40:11Z",
+    "open_files": [
+      {
+        "role": "content",
+        "identity": "vol1:file:1001"
+      },
+      {
+        "role": "mem",
+        "identity": "vol1:file:1002"
+      },
+      {
+        "role": "core",
+        "identity": "vol1:file:1003"
+      }
+    ]
+  },
+  "timing": {
+    "started_at": "2026-07-30T18:40:12Z",
+    "ended_at": "2026-07-30T18:42:07Z",
+    "monotonic_ms": 115000,
+    "frame_count": 6900
+  },
+  "sensitive": {
+    "cheats": false,
+    "save_state_loaded": false,
+    "resets": 0,
+    "rewind": false,
+    "runahead": false,
+    "fast_forward": false,
+    "netplay": false,
+    "continues": 0
+  },
+  "metric": {
+    "type": "score",
+    "unit": "points",
+    "value": "14523400",
+    "ranking_direction": "higher_better",
+    "result_source": "final"
+  },
+  "progression": {
+    "checkpoints": [
+      {
+        "t_ms": 5000,
+        "frame": 300,
+        "metric": "100",
+        "event": "ring_collected",
+        "counters": {
+          "lives": 3,
+          "level": 1,
+          "rings": 1
+        }
+      },
+      {
+        "t_ms": 42000,
+        "frame": 2520,
+        "metric": "28400",
+        "event": "level_complete",
+        "counters": {
+          "lives": 3,
+          "level": 2,
+          "rings": 0
+        }
+      },
+      {
+        "t_ms": 90000,
+        "frame": 5400,
+        "metric": "50000",
+        "event": "ring_collected",
+        "counters": {
+          "lives": 2,
+          "level": 2,
+          "rings": 5
+        }
+      },
+      {
+        "t_ms": 115000,
+        "frame": 6900,
+        "metric": "14523400",
+        "event": "game_end",
+        "counters": {
+          "lives": 0,
+          "level": 3,
+          "rings": 0
+        }
+      }
+    ],
+    "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
+  },
+  "local_check": "pass",
+  "signature": "MEUCIEK98iPbgKErnZWuaitlrQ_gEfo74SbUFOsF8JOh4FzIAiEAswsderDOPp1Rxj4VPZmDEqDIPkkRwr-EqgXcEzWzuxY"
+}

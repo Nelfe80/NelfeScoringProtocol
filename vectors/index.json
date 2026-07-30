@@ -1,0 +1,46 @@
+[
+  {
+    "vector": "valid.passport.json",
+    "expected": "pass"
+  },
+  {
+    "vector": "fail_core_mismatch.passport.json",
+    "expected": "profile.core_mismatch"
+  },
+  {
+    "vector": "fail_mem_mismatch.passport.json",
+    "expected": "profile.mem_mismatch"
+  },
+  {
+    "vector": "fail_listener_unauthorized.passport.json",
+    "expected": "profile.listener_unauthorized"
+  },
+  {
+    "vector": "fail_save_state.passport.json",
+    "expected": "runtime.save_state_detected"
+  },
+  {
+    "vector": "fail_continue.passport.json",
+    "expected": "runtime.continue_forbidden"
+  },
+  {
+    "vector": "fail_monotonicity.passport.json",
+    "expected": "progression.monotonicity"
+  },
+  {
+    "vector": "fail_correlation.passport.json",
+    "expected": "progression.invalid_correlation"
+  },
+  {
+    "vector": "fail_digest_mismatch.passport.json",
+    "expected": "progression.digest_mismatch"
+  },
+  {
+    "vector": "fail_ticket_expired.passport.json",
+    "expected": "session.ticket_expired"
+  },
+  {
+    "vector": "fail_signature_invalid.passport.json",
+    "expected": "session.signature_invalid"
+  }
+]

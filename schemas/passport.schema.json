@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nelfeplay.com/scoring/schemas/passport.schema.json",
+  "title": "Passeport de scoring certifié (SPEC v1.0 §5.2)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol", "session_id", "ticket", "game", "device", "identity", "listener", "software", "artifacts", "process", "timing", "sensitive", "metric", "progression", "local_check", "signature"],
+  "properties": {
+    "protocol": { "const": 1 },
+    "session_id": { "$ref": "#/$defs/uuid" },
+    "ticket": { "$ref": "https://nelfeplay.com/scoring/schemas/ticket.schema.json" },
+
+    "game": {
+      "type": "object", "additionalProperties": false,
+      "required": ["system_id", "rom_group", "engine", "ruleset", "profile_version", "manifest_commit", "profile_document_sha256"],
+      "properties": {
+        "system_id": { "type": "string" },
+        "rom_group": { "type": "string" },
+        "engine": { "enum": ["libretro", "mame_standalone", "fbneo_standalone"] },
+        "ruleset": { "type": "string" },
+        "profile_version": { "type": "integer", "minimum": 1 },
+        "manifest_commit": { "type": "string" },
+        "profile_document_sha256": { "$ref": "#/$defs/sha256hex" }
+      }
+    },
+
+    "device": {
+      "type": "object", "additionalProperties": false,
+      "required": ["device_id", "key_id", "key_type"],
+      "properties": {
+        "device_id": { "type": "string" },
+        "key_id": { "$ref": "#/$defs/sha256hex" },
+        "key_type": { "const": "ecdsa_p256" }
+      },
+      "comment": "trust_level est renseigné par le SERVEUR (account_devices), jamais déclaré ici."
+    },
+
+    "identity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["player_ref", "session_player_id"],
+      "properties": {
+        "player_ref": { "type": ["string", "null"] },
+        "session_player_id": { "type": ["string", "null"] }
+      }
+    },
+
+    "listener": {
+      "type": "object", "additionalProperties": false,
+      "required": ["build", "start_sha256", "loaded_sha256", "end_sha256", "certification"],
+      "properties": {
+        "build": { "type": "string" },
+        "start_sha256": { "$ref": "#/$defs/sha256hex" },
+        "loaded_sha256": { "$ref": "#/$defs/sha256hex" },
+        "end_sha256": { "$ref": "#/$defs/sha256hex" },
+        "certification": { "type": "string" }
+      }
+    },
+
+    "software": {
+      "type": "object", "additionalProperties": false,
+      "required": ["modules", "modules_digest"],
+      "properties": {
+        "modules": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["role", "sha256"],
+            "properties": {
+              "role": { "enum": ["frontend", "listener", "real_core", "apiexpose", "emulatorlauncher", "gamescript_hook"] },
+              "sha256": { "$ref": "#/$defs/sha256hex" }
+            }
+          }
+        },
+        "modules_digest": { "$ref": "#/$defs/sha256hex" }
+      }
+    },
+
+    "artifacts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["core", "content", "mem", "core_options_digest", "bios"],
+      "properties": {
+        "core": { "$ref": "#/$defs/hashTriple" },
+        "content": { "$ref": "#/$defs/hashTriple" },
+        "mem": { "$ref": "#/$defs/hashTriple" },
+        "core_options_digest": { "$ref": "#/$defs/sha256hex" },
+        "bios": {
+          "type": "object", "additionalProperties": false, "required": ["mode"],
+          "properties": { "mode": { "enum": ["none", "vfs_observed", "os_observed"] } }
+        }
+      }
+    },
+
+    "process": {
+      "type": "object", "additionalProperties": false,
+      "required": ["pid", "executable_sha256", "parent_pid", "created_at", "open_files"],
+      "properties": {
+        "pid": { "type": "integer", "minimum": 0 },
+        "executable_sha256": { "$ref": "#/$defs/sha256hex" },
+        "parent_pid": { "type": "integer", "minimum": 0 },
+        "created_at": { "type": "string", "format": "date-time" },
+        "open_files": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["role", "identity"],
+            "properties": {
+              "role": { "enum": ["content", "mem", "bios", "core"] },
+              "identity": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "timing": {
+      "type": "object", "additionalProperties": false,
+      "required": ["started_at", "ended_at", "monotonic_ms", "frame_count"],
+      "properties": {
+        "started_at": { "type": "string", "format": "date-time" },
+        "ended_at": { "type": "string", "format": "date-time" },
+        "monotonic_ms": { "type": "integer", "minimum": 0 },
+        "frame_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+
+    "sensitive": {
+      "type": "object", "additionalProperties": false,
+      "required": ["cheats", "save_state_loaded", "resets", "rewind", "runahead", "fast_forward", "netplay", "continues"],
+      "properties": {
+        "cheats": { "type": "boolean" },
+        "save_state_loaded": { "type": "boolean" },
+        "resets": { "type": "integer", "minimum": 0 },
+        "rewind": { "type": "boolean" },
+        "runahead": { "type": "boolean" },
+        "fast_forward": { "type": "boolean" },
+        "netplay": { "type": "boolean" },
+        "continues": { "type": "integer", "minimum": 0 }
+      }
+    },
+
+    "metric": {
+      "type": "object", "additionalProperties": false,
+      "required": ["type", "unit", "value", "ranking_direction", "result_source"],
+      "properties": {
+        "type": { "enum": ["score", "time", "distance", "level", "wins"] },
+        "unit": { "type": "string" },
+        "value": { "$ref": "#/$defs/decimalString" },
+        "ranking_direction": { "enum": ["higher_better", "lower_better"] },
+        "result_source": { "enum": ["final", "best", "max", "min"] }
+      }
+    },
+
+    "progression": {
+      "type": "object", "additionalProperties": false,
+      "required": ["checkpoints", "checkpoints_digest"],
+      "properties": {
+        "checkpoints": {
+          "type": "array", "minItems": 1, "maxItems": 128,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["t_ms", "frame", "metric", "event", "counters"],
+            "properties": {
+              "t_ms": { "type": "integer", "minimum": 0 },
+              "frame": { "type": "integer", "minimum": 0 },
+              "metric": { "$ref": "#/$defs/decimalString" },
+              "event": { "type": "string" },
+              "counters": { "type": "object", "additionalProperties": { "type": "integer" } }
+            }
+          }
+        },
+        "checkpoints_digest": { "$ref": "#/$defs/sha256hex" }
+      }
+    },
+
+    "local_check": { "type": "string" },
+    "signature": { "$ref": "#/$defs/b64url" }
+  },
+
+  "$defs": {
+    "sha256hex": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "b64url": { "type": "string", "pattern": "^[A-Za-z0-9_-]+$" },
+    "uuid": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$" },
+    "decimalString": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
+    "hashTriple": {
+      "type": "object", "additionalProperties": false,
+      "required": ["start_sha256", "loaded_sha256", "end_sha256"],
+      "properties": {
+        "start_sha256": { "$ref": "#/$defs/sha256hex" },
+        "loaded_sha256": { "$ref": "#/$defs/sha256hex" },
+        "end_sha256": { "$ref": "#/$defs/sha256hex" }
+      }
+    }
+  }
+}

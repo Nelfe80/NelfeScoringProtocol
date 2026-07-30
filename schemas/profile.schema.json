@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nelfeplay.com/scoring/schemas/profile.schema.json",
+  "title": "Profil de scoring — manifeste (SPEC v1.0 §8)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["system_id", "rom_group", "engine", "ruleset", "version", "manifest_epoch", "published_at", "opened_at", "metric", "trajectory_policy", "allowed_content_sha256", "allowed_core_sha256", "allowed_listener_sha256", "mem_sha256", "bios", "rules", "correlation_rules"],
+  "properties": {
+    "system_id": { "type": "string" },
+    "rom_group": { "type": "string" },
+    "engine": { "enum": ["libretro", "mame_standalone", "fbneo_standalone"] },
+    "ruleset": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "manifest_epoch": { "type": "integer", "minimum": 0 },
+    "published_at": { "type": "string", "format": "date-time" },
+    "opened_at": { "type": "string", "format": "date-time" },
+
+    "metric": {
+      "type": "object", "additionalProperties": false,
+      "required": ["type", "unit", "ranking_direction", "result_source"],
+      "properties": {
+        "type": { "enum": ["score", "time", "distance", "level", "wins"] },
+        "unit": { "type": "string" },
+        "ranking_direction": { "enum": ["higher_better", "lower_better"] },
+        "result_source": { "enum": ["final", "best", "max", "min"] }
+      }
+    },
+    "trajectory_policy": {
+      "type": "object", "additionalProperties": false, "required": ["monotonicity"],
+      "properties": { "monotonicity": { "enum": ["non_decreasing", "non_increasing", "free"] } }
+    },
+
+    "allowed_content_sha256": { "$ref": "#/$defs/sha256Array" },
+    "allowed_core_sha256": { "$ref": "#/$defs/sha256Array" },
+    "allowed_listener_sha256": { "$ref": "#/$defs/sha256Array" },
+    "allowed_modules": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/sha256Array" }
+    },
+    "mem_sha256": { "$ref": "#/$defs/sha256hex" },
+
+    "bios": {
+      "type": "object", "additionalProperties": false, "required": ["mode"],
+      "properties": { "mode": { "enum": ["none", "vfs_observed", "os_observed"] } }
+    },
+
+    "core_options_policy": { "type": "object" },
+
+    "rules": {
+      "type": "object", "additionalProperties": false,
+      "required": ["save_state", "cheats", "rewind", "runahead", "continues", "players"],
+      "properties": {
+        "save_state": { "enum": ["forbidden", "allowed"] },
+        "cheats": { "enum": ["forbidden", "allowed"] },
+        "rewind": { "enum": ["forbidden", "allowed"] },
+        "runahead": { "enum": ["forbidden", "allowed"] },
+        "continues": { "enum": ["forbidden", "allowed"] },
+        "players": { "type": "integer", "minimum": 1 }
+      }
+    },
+
+    "correlation_rules": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["event"],
+        "properties": {
+          "event": { "type": "string" },
+          "requires": { "$ref": "#/$defs/tokens" },
+          "requires_any": { "$ref": "#/$defs/tokens" }
+        },
+        "anyOf": [ { "required": ["requires"] }, { "required": ["requires_any"] } ]
+      }
+    },
+
+    "plausibility": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "max_delta_per_event": { "type": ["string", "integer"] },
+        "hold_threshold": { "type": ["string", "integer"] },
+        "hold_max_hours": { "type": "integer", "minimum": 0 },
+        "min_sessions_for_record": { "type": "integer", "minimum": 0 }
+      }
+    },
+
+    "test_vectors_ref": { "type": "string" }
+  },
+
+  "$defs": {
+    "sha256hex": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "sha256Array": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/sha256hex" } },
+    "tokens": {
+      "type": "array", "minItems": 1,
+      "items": { "enum": ["score_delta", "rings_delta", "level_delta", "lives_delta", "time_checkpoint"] }
+    }
+  }
+}

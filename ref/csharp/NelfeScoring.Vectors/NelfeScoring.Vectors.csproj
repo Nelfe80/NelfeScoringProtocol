@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Implémentation de RÉFÉRENCE du CoreVerifier (SPEC v1.0, §6.1-6.4) + générateur
+       et exécuteur de vecteurs de test. Un des trois langages cibles (C#/C++/PHP) :
+       tous doivent donner le MÊME verdict, octet pour octet, sur vectors/*.json. -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>nelfe-scoring-vectors</AssemblyName>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+</Project>
