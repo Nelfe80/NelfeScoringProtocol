@@ -75,7 +75,14 @@ d'interop (triplet clé/message/signature figé) et cas statistiques (§6.6b, c�
 ## Statut
 - **Lot 0 COMPLET** : CoreVerifier **C# ✅ + PHP ✅ + C++ ✅** (11/11 chacun, verdicts
   **identiques octet pour octet**), + vecteurs **crypto d'interop** (JCS + signature).
-  Le critère de sortie du Lot 0 est atteint.
-- Suite : ServerAdmissionVerifier (§6.5 — état serveur, `held`, rangs), couche
-  attestation du listener (SHA-256/handshake, additive), endpoint de soumission
-  NelfePlay, ancrage OTS. Découpage dans le plan (Lots 0-5).
+- **ServerAdmissionVerifier (§6.5) ✅** — référence PHP (`ref/php/src/ServerAdmission.php`),
+  la couche À ÉTAT au-dessus du CoreVerifier : idempotence, révocations
+  (device/clé/listener/profil), ticket consommé, **statistique → `held`** (jamais un
+  refus), verdict `published`/`held`/`refused`/`duplicate`. **8/8** cas :
+  ```
+  docker run --rm -v "$PWD:/app" php:8.4-cli php /app/ref/php/run-admission.php   # → 8/8
+  ```
+  L'état passe par une interface `StateStore` (en prod : NelfePlay / account_devices +
+  tables scoring ; en test : magasin mémoire).
+- Suite : câbler `StateStore` sur la base NelfePlay + endpoint de soumission ; couche
+  attestation du listener (SHA-256/handshake, additive) ; ancrage OTS. Plan (Lots 0-5).
