@@ -84,5 +84,15 @@ d'interop (triplet clé/message/signature figé) et cas statistiques (§6.6b, c�
   ```
   L'état passe par une interface `StateStore` (en prod : NelfePlay / account_devices +
   tables scoring ; en test : magasin mémoire).
-- Suite : câbler `StateStore` sur la base NelfePlay + endpoint de soumission ; couche
-  attestation du listener (SHA-256/handshake, additive) ; ancrage OTS. Plan (Lots 0-5).
+- **Flux de soumission adossé à une base ✅** — `StateStore` implémenté sur **PDO**
+  (`ref/php/src/PdoStateStore.php`, SQLite en test / MariaDB en prod, schéma
+  `ref/php/sql/schema.sql`) + `SubmissionService` (vérifie → **persiste** l'audit et le
+  score publié → calcule le **rang**). L'idempotence (session), l'usage unique du ticket,
+  les révocations et le `held` sont **persistés en base**. **9/9** cas :
+  ```
+  docker run --rm -v "$PWD:/app" php:8.4-cli php /app/ref/php/run-submission.php   # → 9/9
+  ```
+  Reste à brancher : l'adaptateur `StateStore` sur les vraies tables NelfePlay + l'endpoint
+  HTTP `POST /api/v1/scores/submissions` (le service ci-dessus EST sa logique).
+- Suite : adaptateur `StateStore` + endpoint HTTP côté NelfePlay ; couche attestation du
+  listener (SHA-256/handshake, additive) ; ancrage OTS. Plan (Lots 0-5).
