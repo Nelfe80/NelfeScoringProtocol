@@ -24,6 +24,25 @@ final class Crypto
         return base64_decode($t, true) ?: '';
     }
 
+    public static function b64url(string $data): string
+    {
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
+
+    /**
+     * Signe un message avec une clé privée EC P-256 (PEM). openssl_sign produit
+     * nativement une signature ASN.1 DER pour EC — exactement ce que verify() attend.
+     * @param string $privateKeyPem PEM (BEGIN EC PRIVATE KEY / PRIVATE KEY)
+     */
+    public static function signB64Url(string $privateKeyPem, string $message): string
+    {
+        $key = openssl_pkey_get_private($privateKeyPem);
+        if ($key === false) return '';
+        $signature = '';
+        if (!openssl_sign($message, $signature, $key, OPENSSL_ALGO_SHA256)) return '';
+        return self::b64url($signature);
+    }
+
     /** @param string $publicKeyPem PEM SPKI (BEGIN PUBLIC KEY) */
     public static function verify(string $publicKeyPem, string $message, string $signatureB64Url): bool
     {
