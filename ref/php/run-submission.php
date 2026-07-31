@@ -9,7 +9,8 @@ declare(strict_types=1);
 require __DIR__ . '/src/Jcs.php';
 require __DIR__ . '/src/Crypto.php';
 require __DIR__ . '/src/CoreVerifier.php';
-require __DIR__ . '/src/ServerAdmission.php';
+require __DIR__ . '/src/StateStore.php';
+require __DIR__ . '/src/ServerAdmissionVerifier.php';
 require __DIR__ . '/src/PdoStateStore.php';
 require __DIR__ . '/src/SubmissionService.php';
 
