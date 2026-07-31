@@ -1,0 +1,68 @@
+site_name: NelfePlay — Scoring rétro certifié
+site_description: Protocole ouvert et auditable de scoring rétro certifié — passeport signé, vérifieur public, ancrage OpenTimestamps/Bitcoin.
+site_url: https://nelfe80.github.io/NelfeScoringProtocol/
+repo_url: https://github.com/Nelfe80/NelfeScoringProtocol
+repo_name: Nelfe80/NelfeScoringProtocol
+docs_dir: wiki
+edit_uri: ""
+
+theme:
+  name: material
+  language: fr
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Mode sombre
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Mode clair
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      languages:
+        - locale: fr
+          default: true
+          name: Français
+          build: true
+        - locale: en
+          name: English
+          build: true
+          site_name: NelfePlay — Certified Retro Scoring
+          nav_translations:
+            Accueil: Home
+            Transparence: Transparency
+            Vérifier un score: Verify a score
+            Homologation: Homologation
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+
+nav:
+  - Accueil: index.md
+  - Transparence: transparence.md
+  - Vérifier un score: verifier-un-score.md
+  - Homologation: homologation.md
