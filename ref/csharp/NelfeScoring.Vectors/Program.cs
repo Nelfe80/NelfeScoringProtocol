@@ -11,6 +11,9 @@ using NelfeScoring;
 // Sortie non nulle si un seul verdict diverge.
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Mode dédié : preuve de la signature device via CNG/NCrypt (verrou de l'étape 2).
+if (args.Length > 0 && args[0] == "cng") return CngProof.Run();
+
 string root = FindRoot();
 string keys = Path.Combine(root, "keys");
 string vectorsDir = Path.Combine(root, "vectors");
