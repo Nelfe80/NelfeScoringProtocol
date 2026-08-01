@@ -5,6 +5,9 @@ repo_url: https://github.com/Nelfe80/NelfeScoringProtocol
 repo_name: Nelfe80/NelfeScoringProtocol
 docs_dir: wiki
 edit_uri: ""
+exclude_docs: |
+  gen-*.py
+  assets/gen-*.py
 
 theme:
   name: material
@@ -48,9 +51,55 @@ plugins:
           site_name: NelfePlay — Certified Retro Scoring
           nav_translations:
             Accueil: Home
+            Les records: The records
             Transparence: Transparency
             Vérifier un score: Verify a score
+            Héberger le vérifieur: Host the verifier
             Homologation: Homologation
+        - locale: es
+          name: Español
+          build: true
+          site_name: NelfePlay — Puntuación retro certificada
+          nav_translations:
+            Accueil: Inicio
+            Les records: Los récords
+            Transparence: Transparencia
+            Vérifier un score: Verificar una puntuación
+            Héberger le vérifieur: Alojar el verificador
+            Homologation: Homologación
+        - locale: ja
+          name: 日本語
+          build: true
+          site_name: NelfePlay — 認証レトロスコアリング
+          nav_translations:
+            Accueil: ホーム
+            Les records: 記録
+            Transparence: 透明性
+            Vérifier un score: スコアを検証
+            Héberger le vérifieur: 検証ツールをホスト
+            Homologation: 認定
+        - locale: zh
+          name: 中文
+          build: true
+          site_name: NelfePlay — 认证复古计分
+          nav_translations:
+            Accueil: 首页
+            Les records: 记录
+            Transparence: 透明度
+            Vérifier un score: 验证分数
+            Héberger le vérifieur: 自行托管验证器
+            Homologation: 认证
+        - locale: ko
+          name: 한국어
+          build: true
+          site_name: NelfePlay — 인증 레트로 스코어링
+          nav_translations:
+            Accueil: 홈
+            Les records: 기록
+            Transparence: 투명성
+            Vérifier un score: 점수 검증
+            Héberger le vérifieur: 검증기 호스팅
+            Homologation: 인증
 
 markdown_extensions:
   - admonition
@@ -63,6 +112,8 @@ markdown_extensions:
 
 nav:
   - Accueil: index.md
+  - Les records: records.md
   - Transparence: transparence.md
   - Vérifier un score: verifier-un-score.md
+  - Héberger le vérifieur: heberger-le-verifieur.md
   - Homologation: homologation.md
