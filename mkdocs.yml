@@ -9,8 +9,13 @@ exclude_docs: |
   gen-*.py
   assets/gen-*.py
 
+extra_css:
+  - assets/brand.css
+
 theme:
   name: material
+  logo: assets/brand/nelfe-verified-white.svg
+  favicon: assets/brand/favicon.svg
   language: fr
   features:
     - navigation.sections
