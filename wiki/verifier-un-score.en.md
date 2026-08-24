@@ -4,7 +4,7 @@ You don't have to take our word for it. Three independent checks.
 
 ## 1. Replay the verifier on the test vectors
 The **vectors** (`vectors/*.json`) are **(passport, expected verdict)** pairs. The public
-verifier (`ref/`) must return **exactly** those verdicts — the same verdict, byte for
+verifier (`ref/`) must return **exactly** those verdicts - the same verdict, byte for
 byte, in every implementation (C#, PHP, C++…). That is the protocol's exit criterion.
 
 ```
@@ -25,7 +25,7 @@ The signature covers **everything**: score, core/content/MEM/listener fingerprin
 checkpoints, ticket. One byte changed afterwards = invalid signature.
 
 ## 3. Verify anteriority (blockchain anchoring)
-Every ranked score — and each game's **opening** — is grouped into a Merkle tree whose
+Every ranked score - and each game's **opening** - is grouped into a Merkle tree whose
 root is anchored via **OpenTimestamps on Bitcoin**. With a standard OpenTimestamps
 client, anyone can verify, **without us**, that the data existed **before a given Bitcoin
 block**.
@@ -39,7 +39,7 @@ grows, it is not rewritten).
 |---|---|
 | Vectors | The **rules** applied are exactly those published. |
 | Signature | The passport was **not altered** and comes from **that machine**. |
-| Anchoring | The data **existed before** a Bitcoin block — no backdating. |
+| Anchoring | The data **existed before** a Bitcoin block - no backdating. |
 
 What they do not prove: that the closed listener *read* the right memory address. That
 trust comes from the [listener homologation](homologation.md).

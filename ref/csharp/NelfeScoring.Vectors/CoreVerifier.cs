@@ -4,13 +4,13 @@ using System.Text.Json.Nodes;
 namespace NelfeScoring;
 
 /// <summary>
-/// CoreVerifier — implémentation de RÉFÉRENCE, déterministe et SANS ÉTAT
+/// CoreVerifier - implémentation de RÉFÉRENCE, déterministe et SANS ÉTAT
 /// (SPEC v1.0 §6.1-6.4). Il produit `local_check` côté machine et le socle du verdict
 /// côté serveur. Il ne fait AUCUN contrôle à état (révocations, ticket consommé,
 /// statistiques) : ceux-là sont du ServerAdmissionVerifier (§6.5).
 ///
 /// Entrées : le passeport, le profil signé, et les clés publiques (SPKI DER) fournies
-/// — le CoreVerifier ne connaît pas d'annuaire. Sortie : Ok + reason_code (§8ter).
+/// - le CoreVerifier ne connaît pas d'annuaire. Sortie : Ok + reason_code (§8ter).
 /// </summary>
 public sealed record VerifyResult(bool Ok, string ReasonCode)
 {

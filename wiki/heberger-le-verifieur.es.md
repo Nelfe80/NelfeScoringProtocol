@@ -1,7 +1,7 @@
 # Alojar el verificador
 
 El verificador es un **archivo HTML autónomo**. **Cualquiera puede alojarlo, donde
-sea** — y como todo se recalcula en el navegador del visitante, alojarlo **no reduce la
+sea** - y como todo se recalcula en el navegador del visitante, alojarlo **no reduce la
 confianza**: el visitante lo re-verifica todo.
 
 [El pack en GitHub →](https://github.com/Nelfe80/NelfeScoringProtocol/tree/main/records-viewer){ .md-button .md-button--primary }
@@ -10,14 +10,14 @@ confianza**: el visitante lo re-verifica todo.
 | Archivo | Rol |
 |---|---|
 | `verify.html` | El **verificador**: recalcula la huella y **verifica la firma ECDSA P-256** en el navegador, luego lee el estado del sello Bitcoin. Sin servidor, sin build, sin dependencias. |
-| `mirror.sh` | Toma una **instantánea duradera** (`snapshot/`) — índice firmado, anclas y cada prueba `.ots` — para que los récords sigan siendo demostrables **aunque nelfeplay.com desaparezca**. |
+| `mirror.sh` | Toma una **instantánea duradera** (`snapshot/`) - índice firmado, anclas y cada prueba `.ots` - para que los récords sigan siendo demostrables **aunque nelfeplay.com desaparezca**. |
 
 ## Alojarlo (30 segundos)
 `verify.html` es solo un archivo estático:
 
-- **GitHub Pages / Netlify / Cloudflare Pages** — sube el archivo.
-- **En local** — abre `verify.html`, o `python3 -m http.server`.
-- **Sin conexión / archivo** — ejecuta `./mirror.sh` primero, guarda la carpeta.
+- **GitHub Pages / Netlify / Cloudflare Pages** - sube el archivo.
+- **En local** - abre `verify.html`, o `python3 -m http.server`.
+- **Sin conexión / archivo** - ejecuta `./mirror.sh` primero, guarda la carpeta.
 
 Lee la **API pública** de `nelfeplay.com` (CORS activado).
 
@@ -28,10 +28,10 @@ Lee la **API pública** de `nelfeplay.com` (CORS activado).
 | **Instantánea** | verifica contra una copia local (`mirror.sh`) | **Resistente a la censura**: funciona aunque el sitio desaparezca |
 
 El modo instantánea hace que «inmutable» sea **de verdad** cierto: mientras guardes la
-carpeta, los récords siguen siendo demostrables — para siempre, sin nosotros.
+carpeta, los récords siguen siendo demostrables - para siempre, sin nosotros.
 
 ## Crea tu propio verificador
-Ni siquiera necesitas nuestro archivo — la API es **pública y firmada**.
+Ni siquiera necesitas nuestro archivo - la API es **pública y firmada**.
 
 | Endpoint | Devuelve |
 |---|---|

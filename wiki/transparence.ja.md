@@ -7,11 +7,11 @@
 ```
 RetroArch
    │  ▼
-NelfeMemoryListener  — CLOSED · HOMOLOGATED ————————————————
+NelfeMemoryListener  - CLOSED · HOMOLOGATED ----------------
    reads memory, resolves addresses, computes score+counters,
    emits raw checkpoints
    │  ▼  normalized event { score, counters, frame, time, event }
-Open protocol (this repo)  — PUBLIC ————————————————————————
+Open protocol (this repo)  - PUBLIC ------------------------
    ticket · JCS canonicalization · passport · signature · verify · submit
 ```
 公開コードはこれらのイベントの**連続性**と**整合性**を検証できますが、それがどう得られた
@@ -34,7 +34,7 @@ Open protocol (this repo)  — PUBLIC ——————————————
 付き**、セッション中**改変されていない**こと。イベントが発行後**改変されていない**こと（署名）。
 そしてサーバーが**公開ルール**を適用したこと。
 
-したがって*計測*への信頼は、**認定・署名・版管理・監査**されたリスナーに基づきます —
+したがって*計測*への信頼は、**認定・署名・版管理・監査**されたリスナーに基づきます -
 [認定](homologation.md)参照。
 
 ## 100% 公開のまま
@@ -46,5 +46,5 @@ Open protocol (this repo)  — PUBLIC ——————————————
 > 「NelfePlay のルールと検証は公開・再現可能。メモリ計測は、認定・署名・版管理・監査された
 > 専有リスナーが行う。」
 
-「チートは数学的に不可能」ではありません — プレイヤーの PC 上で動くソフトには偽りです。しかし
+「チートは数学的に不可能」ではありません - プレイヤーの PC 上で動くソフトには偽りです。しかし
 **正確で説明責任のある**保証は、検証できない約束に勝ります。

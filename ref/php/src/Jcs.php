@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace NelfeScoring;
 
 /**
- * Canonicalisation JSON — RFC 8785 (JCS), sous-ensemble du contrat (nombres ENTIERS
+ * Canonicalisation JSON - RFC 8785 (JCS), sous-ensemble du contrat (nombres ENTIERS
  * uniquement ; les valeurs sensibles sont des chaînes). DOIT produire des octets
- * IDENTIQUES à l'implémentation C# — sinon la signature ne vérifie pas.
+ * IDENTIQUES à l'implémentation C# - sinon la signature ne vérifie pas.
  *
  * Décoder le passeport avec json_decode($json) (objets en stdClass, tableaux en
  * array) pour préserver la distinction objet/tableau. Clés d'objet triées par octets
- * (ksort SORT_STRING) — équivalent au tri UTF-16 de C# tant que les clés sont ASCII
+ * (ksort SORT_STRING) - équivalent au tri UTF-16 de C# tant que les clés sont ASCII
  * (elles le sont dans tout le contrat).
  */
 final class Jcs

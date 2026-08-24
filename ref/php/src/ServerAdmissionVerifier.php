@@ -8,7 +8,7 @@ namespace NelfeScoring;
  * verdict opposable. `published` | `held` | `refused` | `duplicate`.
  *
  * Règle d'or (§4) : une anomalie DÉTERMINISTE (CoreVerifier ou règle serveur) refuse ;
- * une anomalie UNIQUEMENT statistique met en `held` (jamais un refus — publication auto
+ * une anomalie UNIQUEMENT statistique met en `held` (jamais un refus - publication auto
  * au délai, gérée ailleurs). Zéro examen humain.
  *
  * Un fichier = un type (voir StateStore.php).

@@ -6,7 +6,7 @@ namespace NelfeScoring;
 /**
  * État serveur nécessaire au ServerAdmissionVerifier (§6.5). Le CoreVerifier est
  * SANS état ; toute la connaissance à état (annuaire des clés, révocations, tickets
- * consommés, sessions vues, statistiques) passe par cette interface — implémentée en
+ * consommés, sessions vues, statistiques) passe par cette interface - implémentée en
  * prod par NelfePlay (account_devices, tables scoring), en test par un magasin mémoire.
  *
  * Un fichier = un type (l'autoloader PSR-4 des consommateurs, ex. NelfePlay, en dépend).

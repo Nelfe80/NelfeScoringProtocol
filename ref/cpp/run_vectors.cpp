@@ -1,4 +1,4 @@
-// CoreVerifier — port C++ de RÉFÉRENCE (SPEC v1.0 §6.1-6.4). Côté listener/protocole.
+// CoreVerifier - port C++ de RÉFÉRENCE (SPEC v1.0 §6.1-6.4). Côté listener/protocole.
 // DOIT donner exactement le même verdict que C# et PHP sur vectors/*.
 // Build (Docker) :
 //   g++ -std=c++20 -O2 ref/cpp/run_vectors.cpp -lssl -lcrypto -o rv && ./rv
@@ -255,7 +255,7 @@ int main(int argc, char** argv) {
         std::printf("  %s %-38s attendu=%-32s obtenu=%s\n", ok ? "OK " : "XX ", name.c_str(), expected.c_str(), got.c_str());
     }
     if (fail == 0)
-        std::printf("\n✅ %zu/%zu — verdicts C++ IDENTIQUES au C#/PHP (JCS byte-identique prouve par la signature).\n",
+        std::printf("\n✅ %zu/%zu - verdicts C++ IDENTIQUES au C#/PHP (JCS byte-identique prouve par la signature).\n",
                     index.size(), index.size());
     else
         std::printf("\n❌ %d divergence(s) sur %zu.\n", fail, index.size());

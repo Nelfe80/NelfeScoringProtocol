@@ -1,6 +1,6 @@
-# NelfePlay — 认证复古计分
+# NelfePlay - 认证复古计分
 
-**记录并排名复古游戏的*真实*分数，任何人皆可验证 —— 服务器既不持有 ROM 也不持有模拟器。**
+**记录并排名复古游戏的*真实*分数，任何人皆可验证 - 服务器既不持有 ROM 也不持有模拟器。**
 
 [认证记录 →](records.md){ .md-button .md-button--primary }
 [验证分数 →](https://nelfeplay.com/verify/){ .md-button }
@@ -17,12 +17,12 @@
 **Bitcoin 锚定**证明。
 
 ## 无需信任我们即可验证
-1. **签名** —— 每份护照对其规范形式（JCS, RFC 8785）签名（ECDSA P-256）。
-2. **向量** —— 对 `vectors/*` 运行公开验证器：与我们相同的裁决。
-3. **先后性** —— 每个分数都通过 **OpenTimestamps 锚定于 Bitcoin**。
+1. **签名** - 每份护照对其规范形式（JCS, RFC 8785）签名（ECDSA P-256）。
+2. **向量** - 对 `vectors/*` 运行公开验证器：与我们相同的裁决。
+3. **先后性** - 每个分数都通过 **OpenTimestamps 锚定于 Bitcoin**。
 
 ## 深入了解
-- [认证记录 —— 全过程](records.md)
+- [认证记录 - 全过程](records.md)
 - [透明度：何为开放，何为不开放](transparence.md)
 - [亲自验证一个分数](verifier-un-score.md)
 - [自行托管验证器](heberger-le-verifieur.md)

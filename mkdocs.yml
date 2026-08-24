@@ -1,5 +1,5 @@
-site_name: NelfePlay — Scoring rétro certifié
-site_description: Protocole ouvert et auditable de scoring rétro certifié — passeport signé, vérifieur public, ancrage OpenTimestamps/Bitcoin.
+site_name: NelfePlay - Scoring rétro certifié
+site_description: Protocole ouvert et auditable de scoring rétro certifié - passeport signé, vérifieur public, ancrage OpenTimestamps/Bitcoin.
 site_url: https://nelfe80.github.io/NelfeScoringProtocol/
 repo_url: https://github.com/Nelfe80/NelfeScoringProtocol
 repo_name: Nelfe80/NelfeScoringProtocol
@@ -53,7 +53,7 @@ plugins:
         - locale: en
           name: English
           build: true
-          site_name: NelfePlay — Certified Retro Scoring
+          site_name: NelfePlay - Certified Retro Scoring
           nav_translations:
             Accueil: Home
             Les records: The records
@@ -64,7 +64,7 @@ plugins:
         - locale: es
           name: Español
           build: true
-          site_name: NelfePlay — Puntuación retro certificada
+          site_name: NelfePlay - Puntuación retro certificada
           nav_translations:
             Accueil: Inicio
             Les records: Los récords
@@ -75,7 +75,7 @@ plugins:
         - locale: ja
           name: 日本語
           build: true
-          site_name: NelfePlay — 認証レトロスコアリング
+          site_name: NelfePlay - 認証レトロスコアリング
           nav_translations:
             Accueil: ホーム
             Les records: 記録
@@ -86,7 +86,7 @@ plugins:
         - locale: zh
           name: 中文
           build: true
-          site_name: NelfePlay — 认证复古计分
+          site_name: NelfePlay - 认证复古计分
           nav_translations:
             Accueil: 首页
             Les records: 记录
@@ -97,7 +97,7 @@ plugins:
         - locale: ko
           name: 한국어
           build: true
-          site_name: NelfePlay — 인증 레트로 스코어링
+          site_name: NelfePlay - 인증 레트로 스코어링
           nav_translations:
             Accueil: 홈
             Les records: 기록

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://nelfeplay.com/scoring/schemas/profile.schema.json",
-  "title": "Profil de scoring — manifeste (SPEC v1.0 §8)",
+  "title": "Profil de scoring - manifeste (SPEC v1.0 §8)",
   "type": "object",
   "additionalProperties": false,
   "required": ["system_id", "rom_group", "engine", "ruleset", "version", "manifest_epoch", "published_at", "opened_at", "metric", "trajectory_policy", "allowed_content_sha256", "allowed_core_sha256", "allowed_listener_sha256", "mem_sha256", "bios", "rules", "correlation_rules"],

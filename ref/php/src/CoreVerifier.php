@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace NelfeScoring;
 
 /**
- * CoreVerifier — port PHP de RÉFÉRENCE (SPEC v1.0 §6.1-6.4). Déterministe, SANS état.
+ * CoreVerifier - port PHP de RÉFÉRENCE (SPEC v1.0 §6.1-6.4). Déterministe, SANS état.
  * DOIT donner exactement le même verdict que le CoreVerifier C# sur vectors/*.
  * Entrées : passeport et profil (stdClass via json_decode), clés publiques PEM.
  */

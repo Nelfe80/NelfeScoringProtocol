@@ -4,7 +4,7 @@ using System.Text.Json.Nodes;
 using NelfeScoring;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Lot 0 — générateur + exécuteur de vecteurs de test (SPEC v1.0).
+// Lot 0 - générateur + exécuteur de vecteurs de test (SPEC v1.0).
 // 1) construit le profil Sonic 1cc + un passeport VALIDE signé (device + ticket),
 // 2) en dérive des mutations à verdict connu,
 // 3) exécute le CoreVerifier de référence et compare au verdict attendu.
@@ -29,7 +29,7 @@ string deviceKeyId = Crypto.KeyId(deviceSpki);
 string issuerKeyId = Crypto.KeyId(issuerSpki);
 
 // Empreintes de test : cohérentes entre profil et passeport (les vrais binaires ne
-// sont pas ici — on hache des libellés stables, ça reste des SHA-256 valides).
+// sont pas ici - on hache des libellés stables, ça reste des SHA-256 valides).
 string H(string label) => Crypto.Sha256Hex(label);
 string coreH = H("genesis_plus_gx_libretro.dll@v1");
 string contentH = H("Sonic The Hedgehog (USA, Europe).md");

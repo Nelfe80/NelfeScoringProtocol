@@ -31,7 +31,7 @@ final class Crypto
 
     /**
      * Signe un message avec une clé privée EC P-256 (PEM). openssl_sign produit
-     * nativement une signature ASN.1 DER pour EC — exactement ce que verify() attend.
+     * nativement une signature ASN.1 DER pour EC - exactement ce que verify() attend.
      * @param string $privateKeyPem PEM (BEGIN EC PRIVATE KEY / PRIVATE KEY)
      */
     public static function signB64Url(string $privateKeyPem, string $message): string

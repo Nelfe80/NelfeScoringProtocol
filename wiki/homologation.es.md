@@ -2,7 +2,7 @@
 
 El listener (`NelfeMemoryListener`) es el componente cerrado que **mide** la puntuación
 en memoria. Su credibilidad no viene de su código (secreto), sino de su
-**homologación** — como el firmware cerrado de un instrumento de medición (analogía
+**homologación** - como el firmware cerrado de un instrumento de medición (analogía
 **técnica**, no una afirmación regulatoria).
 
 ## Vocabulario (preciso)
@@ -27,7 +27,7 @@ Cada versión del listener publica:
 }
 ```
 Cada **perfil de scoring** referencia los builds autorizados (`allowed_listener_sha256`).
-El **pasaporte** lleva el hash del listener **antes / cargado / después** — medido
+El **pasaporte** lleva el hash del listener **antes / cargado / después** - medido
 **independientemente por el componente abierto** (no por el propio listener, para evitar
 la auto-atestación).
 
@@ -53,4 +53,4 @@ versiones** · **programa de divulgación de vulnerabilidades**.
 Nada de esto prueba *matemáticamente* que el listener leyó la dirección correcta.
 Establece que un build **homologado, sin modificar** estaba **ligado al proceso correcto**
 y que se aplicaron las **reglas públicas**. La confianza en la medición se basa en la
-homologación — una base defendible, la misma que los instrumentos de medición reales.
+homologación - una base defendible, la misma que los instrumentos de medición reales.

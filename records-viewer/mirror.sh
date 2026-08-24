@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────────────────
-# mirror.sh — take a durable, self-verifiable SNAPSHOT of the NelfePlay records.
+# mirror.sh - take a durable, self-verifiable SNAPSHOT of the NelfePlay records.
 #
 # Downloads the signed index, the anchor metadata, and every OpenTimestamps (.ots)
 # proof into ./snapshot/. That snapshot is enough to prove the records EXISTED and
-# were sealed on Bitcoin — even if nelfeplay.com disappears. Nothing here trusts us:
+# were sealed on Bitcoin - even if nelfeplay.com disappears. Nothing here trusts us:
 # the signature is re-checkable offline, and the .ots proofs verify against Bitcoin
 # with the standard OpenTimestamps client (`pip install opentimestamps-client`).
 #
@@ -43,16 +43,16 @@ done
 cat > "$OUT/VERIFY.txt" <<'TXT'
 Ce dossier est un instantané auto-vérifiable des records NelfePlay.
 
-1) SIGNATURE — ouvrez ../verify.html (il recalcule l'empreinte de index.json et
+1) SIGNATURE - ouvrez ../verify.html (il recalcule l'empreinte de index.json et
    vérifie la signature ECDSA P-256 dans votre navigateur, sans serveur).
 
-2) BITCOIN — chaque records-index-genN.ots prouve l'antériorité sur Bitcoin.
+2) BITCOIN - chaque records-index-genN.ots prouve l'antériorité sur Bitcoin.
    Vérifiez-le sans nous, avec le client OpenTimestamps standard :
        pip install opentimestamps-client
        ots verify records-index-gen1.ots       # (attend le fichier d'origine)
    Le message ancré est le "root" (hex) présent dans index.json.
 
-Tant que vous gardez ce dossier, les records restent prouvables — pour toujours.
+Tant que vous gardez ce dossier, les records restent prouvables - pour toujours.
 TXT
 
-echo "OK — instantané dans ./$OUT/  ($(date -u '+%Y-%m-%d %H:%M UTC'))"
+echo "OK - instantané dans ./$OUT/  ($(date -u '+%Y-%m-%d %H:%M UTC'))"

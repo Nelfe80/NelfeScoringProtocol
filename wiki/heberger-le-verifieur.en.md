@@ -1,6 +1,6 @@
 # Host the verifier
 
-The verifier is a **self-contained HTML file**. **Anyone can host it, anywhere** — and
+The verifier is a **self-contained HTML file**. **Anyone can host it, anywhere** - and
 because everything is recomputed in the visitor's browser, hosting it **does not reduce
 trust**: the visitor re-verifies everything.
 
@@ -10,14 +10,14 @@ trust**: the visitor re-verifies everything.
 | File | What it does |
 |---|---|
 | `verify.html` | The **verifier**: recomputes the fingerprint and **verifies the ECDSA P-256 signature** in the browser, then reads the Bitcoin seal state. No server, no build, no dependency. |
-| `mirror.sh` | Takes a **durable snapshot** (`snapshot/`) — signed index, anchors, every `.ots` proof — so the records stay provable **even if nelfeplay.com disappears**. |
+| `mirror.sh` | Takes a **durable snapshot** (`snapshot/`) - signed index, anchors, every `.ots` proof - so the records stay provable **even if nelfeplay.com disappears**. |
 
 ## Host it (30 seconds)
 `verify.html` is just a static file:
 
-- **GitHub Pages / Netlify / Cloudflare Pages** — drop the file.
-- **Locally** — open `verify.html`, or `python3 -m http.server`.
-- **Offline / archival** — run `./mirror.sh` first, keep the folder.
+- **GitHub Pages / Netlify / Cloudflare Pages** - drop the file.
+- **Locally** - open `verify.html`, or `python3 -m http.server`.
+- **Offline / archival** - run `./mirror.sh` first, keep the folder.
 
 It reads the **public API** at `nelfeplay.com` (CORS-enabled).
 
@@ -28,10 +28,10 @@ It reads the **public API** at `nelfeplay.com` (CORS-enabled).
 | **Snapshot** | verifies against a local copy (`mirror.sh`) | **Censorship-resistant**: works even if the site disappears |
 
 Snapshot mode makes "immutable" **truly** true: as long as you keep the folder, the
-records stay provable — forever, without us.
+records stay provable - forever, without us.
 
 ## Build your own verifier
-You don't even need our file — the API is **public and signed**.
+You don't even need our file - the API is **public and signed**.
 
 | Endpoint | Returns |
 |---|---|

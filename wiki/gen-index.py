@@ -6,10 +6,10 @@ def write(page,lng,body):
     open(os.path.join(here, f"{page}.md" if lng=='fr' else f"{page}.{lng}.md"),'w',encoding='utf-8').write(body.strip()+"\n")
 def chain(lng): return f"![](assets/chain-of-trust-{lng}.svg)"
 IDX={
- 'fr':f"""# NelfePlay — Scoring rétro certifié
+ 'fr':f"""# NelfePlay - Scoring rétro certifié
 
 **Enregistrer et classer le *vrai* score d'un jeu rétro, de façon vérifiable par
-n'importe qui — sans que le serveur possède la ROM ni l'émulateur.**
+n'importe qui - sans que le serveur possède la ROM ni l'émulateur.**
 
 [Les records certifiés →](records.md){{ .md-button .md-button--primary }}
 [Vérifier un score →]({VERIFY}){{ .md-button }}
@@ -28,21 +28,21 @@ Le **format du passeport** (`schemas/`) · l'**algorithme de vérification** (`r
 classement**, la preuve d'**ancrage Bitcoin**.
 
 ## Trois façons de vérifier, sans nous faire confiance
-1. **La signature** — chaque passeport est signé (ECDSA P-256) sur sa forme canonique
+1. **La signature** - chaque passeport est signé (ECDSA P-256) sur sa forme canonique
    (JCS, RFC 8785).
-2. **Les vecteurs** — lancez le vérifieur public sur `vectors/*` : mêmes verdicts que nous.
-3. **L'antériorité** — chaque score est ancré via **OpenTimestamps sur Bitcoin**.
+2. **Les vecteurs** - lancez le vérifieur public sur `vectors/*` : mêmes verdicts que nous.
+3. **L'antériorité** - chaque score est ancré via **OpenTimestamps sur Bitcoin**.
 
 ## Aller plus loin
-- [Les records certifiés — tout le process](records.md)
+- [Les records certifiés - tout le process](records.md)
 - [Transparence : ce qui est ouvert, ce qui ne l'est pas](transparence.md)
 - [Vérifier un score soi-même](verifier-un-score.md)
 - [Héberger le vérifieur](heberger-le-verifieur.md)
 - [Homologation du listener](homologation.md)
 """,
- 'en':f"""# NelfePlay — Certified Retro Scoring
+ 'en':f"""# NelfePlay - Certified Retro Scoring
 
-**Record and rank a retro game's *real* score, verifiable by anyone — without the
+**Record and rank a retro game's *real* score, verifiable by anyone - without the
 server holding the ROM or the emulator.**
 
 [The certified records →](records.md){{ .md-button .md-button--primary }}
@@ -62,22 +62,22 @@ replayable **test vectors** (`vectors/`) · the **refusal codes**, **ranking rul
 the **Bitcoin anchoring** proof.
 
 ## Verify without trusting us
-1. **Signature** — every passport is signed (ECDSA P-256) over its canonical form
+1. **Signature** - every passport is signed (ECDSA P-256) over its canonical form
    (JCS, RFC 8785).
-2. **Vectors** — run the public verifier over `vectors/*`: the same verdicts we get.
-3. **Anteriority** — every score is anchored via **OpenTimestamps on Bitcoin**.
+2. **Vectors** - run the public verifier over `vectors/*`: the same verdicts we get.
+3. **Anteriority** - every score is anchored via **OpenTimestamps on Bitcoin**.
 
 ## Go further
-- [The certified records — the whole process](records.md)
+- [The certified records - the whole process](records.md)
 - [Transparency: what is open, what is not](transparence.md)
 - [Verify a score yourself](verifier-un-score.md)
 - [Host the verifier](heberger-le-verifieur.md)
 - [Listener homologation](homologation.md)
 """,
- 'es':f"""# NelfePlay — Puntuación retro certificada
+ 'es':f"""# NelfePlay - Puntuación retro certificada
 
 **Registrar y clasificar la puntuación *real* de un juego retro, verificable por
-cualquiera — sin que el servidor tenga la ROM ni el emulador.**
+cualquiera - sin que el servidor tenga la ROM ni el emulador.**
 
 [Los récords certificados →](records.md){{ .md-button .md-button--primary }}
 [Verificar una puntuación →]({VERIFY}){{ .md-button }}
@@ -96,20 +96,20 @@ El **formato del pasaporte** (`schemas/`) · el **algoritmo de verificación** (
 de clasificación** y la prueba de **anclaje en Bitcoin**.
 
 ## Verificar sin confiar en nosotros
-1. **Firma** — cada pasaporte se firma (ECDSA P-256) sobre su forma canónica (JCS, RFC 8785).
-2. **Vectores** — ejecuta el verificador público sobre `vectors/*`: los mismos veredictos.
-3. **Anterioridad** — cada puntuación se ancla vía **OpenTimestamps en Bitcoin**.
+1. **Firma** - cada pasaporte se firma (ECDSA P-256) sobre su forma canónica (JCS, RFC 8785).
+2. **Vectores** - ejecuta el verificador público sobre `vectors/*`: los mismos veredictos.
+3. **Anterioridad** - cada puntuación se ancla vía **OpenTimestamps en Bitcoin**.
 
 ## Ir más lejos
-- [Los récords certificados — todo el proceso](records.md)
+- [Los récords certificados - todo el proceso](records.md)
 - [Transparencia: qué es abierto y qué no](transparence.md)
 - [Verificar una puntuación tú mismo](verifier-un-score.md)
 - [Alojar el verificador](heberger-le-verifieur.md)
 - [Homologación del listener](homologation.md)
 """,
- 'ja':f"""# NelfePlay — 認証レトロスコアリング
+ 'ja':f"""# NelfePlay - 認証レトロスコアリング
 
-**レトロゲームの*本当の*スコアを記録・ランク付けし、誰でも検証可能に — サーバーは ROM も
+**レトロゲームの*本当の*スコアを記録・ランク付けし、誰でも検証可能に - サーバーは ROM も
 エミュレータも持ちません。**
 
 [認証された記録 →](records.md){{ .md-button .md-button--primary }}
@@ -127,20 +127,20 @@ de clasificación** y la prueba de **anclaje en Bitcoin**.
 **却下コード**、**ランキング規則**、**Bitcoin アンカー**の証明。
 
 ## 私たちを信用せず検証する
-1. **署名** — 各パスポートは正規形（JCS, RFC 8785）に対して署名（ECDSA P-256）。
-2. **ベクタ** — `vectors/*` に公開検証ツールを実行：私たちと同じ判定。
-3. **先行性** — 各スコアは **OpenTimestamps で Bitcoin** にアンカー。
+1. **署名** - 各パスポートは正規形（JCS, RFC 8785）に対して署名（ECDSA P-256）。
+2. **ベクタ** - `vectors/*` に公開検証ツールを実行：私たちと同じ判定。
+3. **先行性** - 各スコアは **OpenTimestamps で Bitcoin** にアンカー。
 
 ## さらに詳しく
-- [認証された記録 — 全プロセス](records.md)
+- [認証された記録 - 全プロセス](records.md)
 - [透明性：何が公開で何が非公開か](transparence.md)
 - [自分でスコアを検証](verifier-un-score.md)
 - [検証ツールをホスト](heberger-le-verifieur.md)
 - [リスナーの認定](homologation.md)
 """,
- 'zh':f"""# NelfePlay — 认证复古计分
+ 'zh':f"""# NelfePlay - 认证复古计分
 
-**记录并排名复古游戏的*真实*分数，任何人皆可验证 —— 服务器既不持有 ROM 也不持有模拟器。**
+**记录并排名复古游戏的*真实*分数，任何人皆可验证 - 服务器既不持有 ROM 也不持有模拟器。**
 
 [认证记录 →](records.md){{ .md-button .md-button--primary }}
 [验证分数 →]({VERIFY}){{ .md-button }}
@@ -157,20 +157,20 @@ de clasificación** y la prueba de **anclaje en Bitcoin**.
 **Bitcoin 锚定**证明。
 
 ## 无需信任我们即可验证
-1. **签名** —— 每份护照对其规范形式（JCS, RFC 8785）签名（ECDSA P-256）。
-2. **向量** —— 对 `vectors/*` 运行公开验证器：与我们相同的裁决。
-3. **先后性** —— 每个分数都通过 **OpenTimestamps 锚定于 Bitcoin**。
+1. **签名** - 每份护照对其规范形式（JCS, RFC 8785）签名（ECDSA P-256）。
+2. **向量** - 对 `vectors/*` 运行公开验证器：与我们相同的裁决。
+3. **先后性** - 每个分数都通过 **OpenTimestamps 锚定于 Bitcoin**。
 
 ## 深入了解
-- [认证记录 —— 全过程](records.md)
+- [认证记录 - 全过程](records.md)
 - [透明度：何为开放，何为不开放](transparence.md)
 - [亲自验证一个分数](verifier-un-score.md)
 - [自行托管验证器](heberger-le-verifieur.md)
 - [监听器认证](homologation.md)
 """,
- 'ko':f"""# NelfePlay — 인증 레트로 스코어링
+ 'ko':f"""# NelfePlay - 인증 레트로 스코어링
 
-**레트로 게임의 *진짜* 점수를 기록·순위 매기고 누구나 검증 가능 — 서버는 ROM도 에뮬레이터도
+**레트로 게임의 *진짜* 점수를 기록·순위 매기고 누구나 검증 가능 - 서버는 ROM도 에뮬레이터도
 갖지 않습니다.**
 
 [인증된 기록 →](records.md){{ .md-button .md-button--primary }}
@@ -188,12 +188,12 @@ de clasificación** y la prueba de **anclaje en Bitcoin**.
 **순위 규칙**, **Bitcoin 앵커링** 증명.
 
 ## 우리를 믿지 않고 검증
-1. **서명** — 각 패스포트는 정규형(JCS, RFC 8785)에 서명(ECDSA P-256).
-2. **벡터** — `vectors/*`에 공개 검증기 실행: 우리와 동일한 판정.
-3. **선후성** — 각 점수는 **OpenTimestamps로 Bitcoin에** 앵커.
+1. **서명** - 각 패스포트는 정규형(JCS, RFC 8785)에 서명(ECDSA P-256).
+2. **벡터** - `vectors/*`에 공개 검증기 실행: 우리와 동일한 판정.
+3. **선후성** - 각 점수는 **OpenTimestamps로 Bitcoin에** 앵커.
 
 ## 더 알아보기
-- [인증된 기록 — 전체 프로세스](records.md)
+- [인증된 기록 - 전체 프로세스](records.md)
 - [투명성: 무엇이 공개이고 무엇이 아닌가](transparence.md)
 - [직접 점수 검증](verifier-un-score.md)
 - [검증기 호스팅](heberger-le-verifieur.md)

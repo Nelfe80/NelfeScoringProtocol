@@ -5,7 +5,7 @@ Vous n'avez pas à nous croire sur parole. Trois vérifications, indépendantes.
 ## 1. Rejouer le vérifieur sur les vecteurs de test
 Les **vecteurs** (`vectors/*.json`) sont des couples **(passeport, verdict attendu)**.
 Le vérifieur public (`ref/`) doit donner **exactement** ces verdicts. Chaque
-implémentation (C#, PHP, C++…) doit produire le **même verdict, octet pour octet** —
+implémentation (C#, PHP, C++…) doit produire le **même verdict, octet pour octet** -
 c'est le critère de sortie du protocole.
 
 Exemple (implémentation de référence C#) :
@@ -14,7 +14,7 @@ cd ref/csharp/NelfeScoring.Vectors
 dotnet run -c Release
 # → 11/11 vecteurs au verdict attendu
 ```
-Si votre propre implémentation du vérifieur diverge d'un seul verdict, c'est un bug —
+Si votre propre implémentation du vérifieur diverge d'un seul verdict, c'est un bug -
 et il est public.
 
 ## 2. Vérifier la signature d'un passeport
@@ -29,13 +29,13 @@ La signature couvre **tout** : le score, les empreintes du core/contenu/MEM/list
 les checkpoints, le ticket. Un octet modifié après coup = signature invalide.
 
 ## 3. Vérifier l'antériorité (ancrage blockchain)
-Chaque score classé — et l'**ouverture** de chaque jeu — est regroupé dans un arbre de
+Chaque score classé - et l'**ouverture** de chaque jeu - est regroupé dans un arbre de
 Merkle dont la racine est ancrée via **OpenTimestamps sur Bitcoin**. Avec un client
 OpenTimestamps standard, n'importe qui peut vérifier, **sans nous**, que la donnée
 existait **avant l'inclusion dans un bloc Bitcoin donné**.
 
 - `Soumis le … UTC` = heure applicative (déclarative) ;
-- `Ancré — OpenTimestamps sur Bitcoin (bloc #NNN)` = **preuve d'antériorité**.
+- `Ancré - OpenTimestamps sur Bitcoin (bloc #NNN)` = **preuve d'antériorité**.
 
 L'ancrage prouve l'**antériorité**, pas la véracité : il garantit qu'un record n'a pas
 été antidaté avant l'ouverture du jeu, et qu'un retrait ultérieur est **lui aussi**
@@ -46,7 +46,7 @@ horodaté (l'histoire s'augmente, elle ne se réécrit pas).
 |---|---|
 | Vecteurs | Les **règles** appliquées sont exactement celles publiées. |
 | Signature | Le passeport n'a **pas été altéré** et vient de **cette machine**. |
-| Ancrage | La donnée **existait avant** un bloc Bitcoin — pas d'antidatage. |
+| Ancrage | La donnée **existait avant** un bloc Bitcoin - pas d'antidatage. |
 
 Ce qu'elles ne prouvent pas : que le listener fermé a *lu* la bonne adresse mémoire.
 Cette confiance-là vient de l'[homologation du listener](homologation.md).

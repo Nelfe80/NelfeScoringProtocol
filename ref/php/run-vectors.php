@@ -32,6 +32,6 @@ foreach ($index as $entry) {
 }
 $n = count($index);
 echo $fail === 0
-    ? "\n✅ {$n}/{$n} — verdicts PHP IDENTIQUES au C# (le vecteur 'valid' qui passe prouve un JCS byte-identique).\n"
+    ? "\n✅ {$n}/{$n} - verdicts PHP IDENTIQUES au C# (le vecteur 'valid' qui passe prouve un JCS byte-identique).\n"
     : "\n❌ {$fail} divergence(s) sur {$n}.\n";
 exit($fail === 0 ? 0 : 1);

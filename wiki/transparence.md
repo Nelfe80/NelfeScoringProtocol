@@ -23,13 +23,13 @@ il ne sait **pas** comment ils ont été obtenus.
 ## Pourquoi le listener est fermé
 La logique de lecture mémoire est un savoir-faire coûteux à produire (une définition
 par jeu, revalidée à chaque évolution de core). L'ouvrir la donnerait à la
-concurrence **et** faciliterait la triche. Nous la gardons donc fermée — comme le
+concurrence **et** faciliterait la triche. Nous la gardons donc fermée - comme le
 firmware d'un instrument de mesure.
 
 ## Ce que la fermeture N'EST PAS
 La fermeture **ne fait pas partie de la sécurité** (principe de Kerckhoffs). La
 sécurité du système ne repose **que** sur le secret de la **clé de signature de la
-machine** — jamais sur le secret des règles. Toutes les règles, tous les contrôles,
+machine** - jamais sur le secret des règles. Toutes les règles, tous les contrôles,
 tous les codes de refus sont **publics**. Si demain le code du listener fuitait, la
 garantie du système ne changerait pas d'un iota : elle vient de l'ouvert.
 
@@ -43,7 +43,7 @@ Le protocole ouvert **ne prouvera jamais mathématiquement** que le listener a
 - que le serveur a appliqué **publiquement les bonnes règles**.
 
 La confiance dans la *mesure* repose donc sur un listener **homologué, signé,
-versionné et audité** — pas sur du code secret. Voir [Homologation](homologation.md).
+versionné et audité** - pas sur du code secret. Voir [Homologation](homologation.md).
 
 ## Ce qui reste 100 % public
 Format du passeport · tickets · manifeste · règles des profils · empreintes
@@ -56,6 +56,6 @@ classement · **ancrage OpenTimestamps sur Bitcoin** · **codes de refus** · le
 > mémoire est réalisée par un listener propriétaire homologué, signé, versionné et
 > audité. »
 
-Pas « la triche est mathématiquement impossible » — ce serait faux pour un logiciel
+Pas « la triche est mathématiquement impossible » - ce serait faux pour un logiciel
 tournant sur le PC du joueur. Mais une garantie **précise et opposable**, c'est mieux
 qu'une promesse invérifiable.

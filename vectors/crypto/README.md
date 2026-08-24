@@ -3,7 +3,7 @@
 Ces vecteurs isolent les deux primitives qui **doivent** être byte-identiques entre
 tous les langages (C#, PHP, C++…), **indépendamment** des vecteurs de passeport.
 
-## `jcs/` — canonicalisation RFC 8785
+## `jcs/` - canonicalisation RFC 8785
 - `input.json` : une entrée avec clés dans le désordre, objet imbriqué, tableau,
   et une chaîne contenant `\n`, `\t`, `"`.
 - `expected.jcs.txt` : sa **forme canonique JCS attendue, octet pour octet** (pas de
@@ -13,7 +13,7 @@ tous les langages (C#, PHP, C++…), **indépendamment** des vecteurs de passepo
 contenu de `expected.jcs.txt`. Une divergence d'un octet ici = signatures qui ne
 vérifieront pas entre implémentations.
 
-## `signature/` — ECDSA P-256 (SPKI + ASN.1 DER)
+## `signature/` - ECDSA P-256 (SPKI + ASN.1 DER)
 - `message.txt` : un message figé (octets exacts, sans saut de ligne).
 - `signature.device.b64url` : sa signature ECDSA-P-256/SHA-256 (ASN.1 DER, base64url)
   par la **clé de test device** (`keys/device.pub.pem`, `key_id`

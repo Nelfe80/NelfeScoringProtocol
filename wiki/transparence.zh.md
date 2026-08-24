@@ -6,11 +6,11 @@
 ```
 RetroArch
    │  ▼
-NelfeMemoryListener  — CLOSED · HOMOLOGATED ————————————————
+NelfeMemoryListener  - CLOSED · HOMOLOGATED ----------------
    reads memory, resolves addresses, computes score+counters,
    emits raw checkpoints
    │  ▼  normalized event { score, counters, frame, time, event }
-Open protocol (this repo)  — PUBLIC ————————————————————————
+Open protocol (this repo)  - PUBLIC ------------------------
    ticket · JCS canonicalization · passport · signature · verify · submit
 ```
 公开代码知道如何验证这些事件的**连续性**与**一致性**；它**不知道**它们是如何获得的。
@@ -20,7 +20,7 @@ Open protocol (this repo)  — PUBLIC ——————————————
 让给竞争者，**并且**帮助作弊者。因此我们像计量仪器的固件一样将其闭源。
 
 ## 闭源“不是”什么
-闭源**不属于安全性**（柯克霍夫斯原则）。系统安全**仅**依赖**本机签名密钥**的保密——绝不依赖
+闭源**不属于安全性**（柯克霍夫斯原则）。系统安全**仅**依赖**本机签名密钥**的保密-绝不依赖
 秘密规则。所有规则、检查、拒绝码都是**公开**的。即便明天监听器代码泄露，保证也丝毫不变：它
 来自开放。
 
@@ -29,7 +29,7 @@ Open protocol (this repo)  — PUBLIC ——————————————
 哈希）**存在**、**绑定到正确进程**、会话期间**未被修改**；事件在发出后**未被篡改**（签名）；
 以及服务器应用了**公开规则**。
 
-因此对*测量*的信任，建立在一个**已认证、已签名、有版本、经审计**的监听器之上——见
+因此对*测量*的信任，建立在一个**已认证、已签名、有版本、经审计**的监听器之上-见
 [认证](homologation.md)。
 
 ## 保持 100% 公开的
@@ -41,5 +41,5 @@ Open protocol (this repo)  — PUBLIC ——————————————
 > “NelfePlay 的规则与验证是公开且可重放的。内存测量由一个已认证、已签名、有版本、经审计的
 > 专有监听器完成。”
 
-不是“作弊在数学上不可能”——对运行于玩家 PC 上的软件而言那是虚假的。但一个**精确、可追责**的
+不是“作弊在数学上不可能”-对运行于玩家 PC 上的软件而言那是虚假的。但一个**精确、可追责**的
 保证，胜过无法验证的承诺。

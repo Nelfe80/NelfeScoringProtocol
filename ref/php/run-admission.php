@@ -71,7 +71,7 @@ $cases = [
 ];
 
 $fail = 0;
-echo "── ServerAdmissionVerifier (§6.5) — cas à état ──\n";
+echo "── ServerAdmissionVerifier (§6.5) - cas à état ──\n";
 foreach ($cases as [$name, $expStatus, $expReason, $cfg, $passport]) {
     $state = new MemoryStateStore($devPem, $issPem);
     $cfg($state);
@@ -82,6 +82,6 @@ foreach ($cases as [$name, $expStatus, $expReason, $cfg, $passport]) {
         $ok ? 'OK ' : 'XX ', $name, $expStatus, $expReason, $r['status'], $r['reason']);
 }
 $n = count($cases);
-echo $fail === 0 ? "\n✅ {$n}/{$n} — verdicts serveur (published/held/refused/duplicate) conformes.\n"
+echo $fail === 0 ? "\n✅ {$n}/{$n} - verdicts serveur (published/held/refused/duplicate) conformes.\n"
                  : "\n❌ {$fail} divergence(s) sur {$n}.\n";
 exit($fail === 0 ? 0 : 1);

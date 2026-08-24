@@ -2,13 +2,13 @@
 <rect x="0" y="0" width="860" height="974" rx="20" fill="#0b1330"/>
 <rect x="0" y="0" width="860" height="974" rx="20" fill="none" stroke="#26386f"/>
 <text x="34" y="48" fill="#eaf0ff" font-size="26" font-weight="800">信頼の連鎖</text>
-<text x="34" y="76" fill="#9fb0d6" font-size="14.5">計測から Bitcoin まで — 誰でも検証可能</text>
+<text x="34" y="76" fill="#9fb0d6" font-size="14.5">計測から Bitcoin まで - 誰でも検証可能</text>
 <line x1="40" y1="110" x2="40" y2="870" stroke="#2c3f78" stroke-width="2"/>
 <circle cx="40" cy="166" r="15" fill="#ff9d3c"/>
 <text x="40" y="171" fill="#06121f" font-size="15" font-weight="900" text-anchor="middle">1</text>
 <rect x="84" y="118" width="736" height="96" rx="14" fill="#0e1838" stroke="#2c3f78"/>
 <rect x="84" y="118" width="5" height="96" rx="2.5" fill="#ff9d3c"/>
-<text x="106" y="156" fill="#eaf0ff" font-size="19" font-weight="800">ゲーム — RAM</text>
+<text x="106" y="156" fill="#eaf0ff" font-size="19" font-weight="800">ゲーム - RAM</text>
 <text x="106" y="184" fill="#a6b6da" font-size="14.5">認定リスナーがメモリからスコアを読む</text>
 <path d="M40 214 L40 250" stroke="#2c3f78" stroke-width="2"/>
 <path d="M35 242 L40 250 L45 242" fill="none" stroke="#2c3f78" stroke-width="2"/>
@@ -49,7 +49,7 @@
 <rect x="84" y="778" width="736" height="96" rx="14" fill="#0e1838" stroke="#2c3f78"/>
 <rect x="84" y="778" width="5" height="96" rx="2.5" fill="#39d353"/>
 <text x="106" y="816" fill="#eaf0ff" font-size="19" font-weight="800">誰でも</text>
-<text x="106" y="844" fill="#a6b6da" font-size="14.5">ブラウザで全てを再検証 — 誰も信用せずに</text>
+<text x="106" y="844" fill="#a6b6da" font-size="14.5">ブラウザで全てを再検証 - 誰も信用せずに</text>
 <text x="814" y="136" fill="#ff9d3c" font-size="12" font-weight="700" text-anchor="end">非公開 · 認定</text>
 <text x="814" y="268" fill="#39d353" font-size="12" font-weight="700" text-anchor="end">公開 · 誰でも再現可能</text>
 <text x="430" y="950" fill="#63739e" font-size="13.5" font-style="italic" text-anchor="middle">安全性は「秘密」ではなく「公開」に基づく。</text>

@@ -6,9 +6,9 @@ using System.Text.Json.Nodes;
 namespace NelfeScoring;
 
 /// <summary>
-/// Canonicalisation JSON — RFC 8785 (JCS), sous-ensemble suffisant pour le contrat :
+/// Canonicalisation JSON - RFC 8785 (JCS), sous-ensemble suffisant pour le contrat :
 /// tous les nombres du passeport sont des ENTIERS (les valeurs sensibles à la
-/// précision — score, temps — sont des chaînes). Les flottants sont donc refusés.
+/// précision - score, temps - sont des chaînes). Les flottants sont donc refusés.
 ///
 /// Règles : clés d'objet triées par unités de code UTF-16 (StringComparer.Ordinal),
 /// aucun blanc, chaînes échappées à la ECMAScript JSON.stringify (échappements courts

@@ -7,11 +7,11 @@
 ```
 RetroArch
    │  ▼
-NelfeMemoryListener  — CLOSED · HOMOLOGATED ————————————————
+NelfeMemoryListener  - CLOSED · HOMOLOGATED ----------------
    reads memory, resolves addresses, computes score+counters,
    emits raw checkpoints
    │  ▼  normalized event { score, counters, frame, time, event }
-Open protocol (this repo)  — PUBLIC ————————————————————————
+Open protocol (this repo)  - PUBLIC ------------------------
    ticket · JCS canonicalization · passport · signature · verify · submit
 ```
 공개 코드는 이 이벤트들의 **연속성**과 **일관성**을 검증할 줄 압니다. 그것들이 어떻게
@@ -33,7 +33,7 @@ Open protocol (this repo)  — PUBLIC ——————————————
 묶였으며**, 세션 중 **수정되지 않았고**; 이벤트가 발행 후 **변조되지 않았으며**(서명); 서버가
 **공개 규칙**을 적용했다는 것입니다.
 
-따라서 *측정*에 대한 신뢰는 **인증·서명·버전 관리·감사**된 리스너에 기반합니다 —
+따라서 *측정*에 대한 신뢰는 **인증·서명·버전 관리·감사**된 리스너에 기반합니다 -
 [인증](homologation.md) 참조.
 
 ## 100% 공개로 유지되는 것
@@ -45,5 +45,5 @@ Open protocol (this repo)  — PUBLIC ——————————————
 > “NelfePlay의 규칙과 검증은 공개·재현 가능하다. 메모리 측정은 인증·서명·버전 관리·감사된
 > 독점 리스너가 수행한다.”
 
-“부정행위가 수학적으로 불가능”이 아닙니다 — 플레이어 PC에서 도는 소프트웨어에는 거짓입니다.
+“부정행위가 수학적으로 불가능”이 아닙니다 - 플레이어 PC에서 도는 소프트웨어에는 거짓입니다.
 그러나 **정확하고 책임 있는** 보장이 검증 불가능한 약속보다 낫습니다.

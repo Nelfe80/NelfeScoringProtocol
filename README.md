@@ -1,10 +1,10 @@
-# NelfeScoringProtocol — scoring rétro certifié (composant OUVERT)
+# NelfeScoringProtocol - scoring rétro certifié (composant OUVERT)
 
 Implémentation **publique et auditable** du protocole de scoring certifié NelfePlay :
 format du passeport, vérification, tickets, manifeste, vecteurs de test, ancrage.
-La **mesure mémoire** (lecture du score) N'EST PAS ici — c'est le listener
+La **mesure mémoire** (lecture du score) N'EST PAS ici - c'est le listener
 propriétaire homologué (`NelfeMemoryListener`), séparé. Voir le contrat figé
-`APIExpose/docs/SPEC_PASSEPORT_SCORING_V1.md` (v1.0) — doc interne, non publiée.
+`APIExpose/docs/SPEC_PASSEPORT_SCORING_V1.md` (v1.0) - doc interne, non publiée.
 
 ## Frontière de confiance (rappel)
 ```
@@ -19,10 +19,10 @@ ont été appliquées.
 ## Arborescence
 ```
 schemas/        schémas JSON stricts (passport / ticket / profile)
-manifest/       manifeste public — profils de scoring signés, versionnés, immuables
+manifest/       manifeste public - profils de scoring signés, versionnés, immuables
   profiles/megadrive/sonic-the-hedgehog/1.json   ← V1 : Sonic 1cc
-vectors/        vecteurs de test (entrée → verdict attendu) — LE juge de paix
-keys/           clés ECDSA P-256 de TEST (device + issuer) — NE PAS utiliser en prod
+vectors/        vecteurs de test (entrée → verdict attendu) - LE juge de paix
+keys/           clés ECDSA P-256 de TEST (device + issuer) - NE PAS utiliser en prod
 ref/
   csharp/       implémentation de RÉFÉRENCE du CoreVerifier (C#) + générateur de vecteurs
   php/  cpp/    (à venir : les ports serveur PHP et listener/protocole C++)
@@ -46,11 +46,11 @@ signatures **ECDSA P-256**, clé **SPKI DER**, signature **ASN.1 DER**, encodage
 ```
 cd ref/csharp/NelfeScoring.Vectors && dotnet run -c Release      # → 11/11
 ```
-**PHP (NelfePlay) — rejoue les mêmes vecteurs :**
+**PHP (NelfePlay) - rejoue les mêmes vecteurs :**
 ```
 docker run --rm -v "$PWD:/app" php:8.4-cli php /app/ref/php/run-vectors.php   # → 11/11
 ```
-**C++ (listener) — build + run :**
+**C++ (listener) - build + run :**
 ```
 docker run --rm -v "$PWD:/app" -w /app gcc:14 sh -c \
   'apt-get update -qq >/dev/null 2>&1 && apt-get install -y -qq libssl-dev nlohmann-json3-dev >/dev/null 2>&1 \
@@ -75,7 +75,7 @@ d'interop (triplet clé/message/signature figé) et cas statistiques (§6.6b, c�
 ## Statut
 - **Lot 0 COMPLET** : CoreVerifier **C# ✅ + PHP ✅ + C++ ✅** (11/11 chacun, verdicts
   **identiques octet pour octet**), + vecteurs **crypto d'interop** (JCS + signature).
-- **ServerAdmissionVerifier (§6.5) ✅** — référence PHP (`ref/php/src/ServerAdmission.php`),
+- **ServerAdmissionVerifier (§6.5) ✅** - référence PHP (`ref/php/src/ServerAdmission.php`),
   la couche À ÉTAT au-dessus du CoreVerifier : idempotence, révocations
   (device/clé/listener/profil), ticket consommé, **statistique → `held`** (jamais un
   refus), verdict `published`/`held`/`refused`/`duplicate`. **8/8** cas :
@@ -84,7 +84,7 @@ d'interop (triplet clé/message/signature figé) et cas statistiques (§6.6b, c�
   ```
   L'état passe par une interface `StateStore` (en prod : NelfePlay / account_devices +
   tables scoring ; en test : magasin mémoire).
-- **Flux de soumission adossé à une base ✅** — `StateStore` implémenté sur **PDO**
+- **Flux de soumission adossé à une base ✅** - `StateStore` implémenté sur **PDO**
   (`ref/php/src/PdoStateStore.php`, SQLite en test / MariaDB en prod, schéma
   `ref/php/sql/schema.sql`) + `SubmissionService` (vérifie → **persiste** l'audit et le
   score publié → calcule le **rang**). L'idempotence (session), l'usage unique du ticket,

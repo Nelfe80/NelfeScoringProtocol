@@ -24,7 +24,7 @@ def records(lng):
     T = {
      'fr':f"""# Les records certifiés
 
-Un **classement public** de scores rétro que **personne ne peut truquer** — et que
+Un **classement public** de scores rétro que **personne ne peut truquer** - et que
 **n'importe qui peut vérifier**, sans nous faire confiance. Voici tout ce qui se passe,
 de la partie jouée jusqu'à la preuve sur Bitcoin.
 
@@ -36,7 +36,7 @@ de la partie jouée jusqu'à la preuve sur Bitcoin.
 {chain}
 
 Chaque étape est **soit publique et rejouable, soit homologuée et signée**. La sécurité
-ne repose **jamais** sur un secret (principe de Kerckhoffs) — seulement sur l'ouvert.
+ne repose **jamais** sur un secret (principe de Kerckhoffs) - seulement sur l'ouvert.
 
 ## 1 · Mesuré, pas déclaré
 Le score n'est **pas envoyé par le jeu**. Un **composant homologué** (le *listener*) lit
@@ -50,33 +50,33 @@ checkpoints, ticket) et le **signe** avec une clé matérielle **non exportable*
 
 ## 3 · Vérifié côté serveur
 Le serveur **ne rejoue pas le jeu** : il applique des **règles publiques** (le
-*CoreVerifier*, open source) — empreintes attendues, monotonie de la trajectoire, fin de
-partie, ticket valide — puis rend un verdict **publié**, **retenu** (anomalie statistique,
+*CoreVerifier*, open source) - empreintes attendues, monotonie de la trajectoire, fin de
+partie, ticket valide - puis rend un verdict **publié**, **retenu** (anomalie statistique,
 jamais un refus sec) ou **refusé**. Zéro arbitre humain.
 
 ## 4 · Publié dans un index signé
 Les scores publiés forment un **index signé** : la liste complète + une **empreinte
-SHA-256** signée par l'émetteur. C'est cet index qui reconstruit le classement — et qui
+SHA-256** signée par l'émetteur. C'est cet index qui reconstruit le classement - et qui
 rend une perte de base **sans conséquence** (il est reconstructible et miroitable).
 
 {shot_b}
 
 ## 5 · Scellé sur Bitcoin
 L'empreinte de l'index est **horodatée sur Bitcoin** via **OpenTimestamps**. Une fois
-confirmée, elle prouve que les records **existaient avant un bloc donné** — antériorité
+confirmée, elle prouve que les records **existaient avant un bloc donné** - antériorité
 **immuable**. Un score fraîchement scellé s'affiche en **or** ; la preuve `.ots` est
 téléchargeable et vérifiable avec le client OpenTimestamps standard.
 
 ## 6 · Le Certificat de record
 Chaque score a une page **immuable et partageable** : score, empreintes du dump
-(MD5 + SHA-256), signature ✓, et le **sceau Bitcoin** (bloc). Pas de rang dessus — le
+(MD5 + SHA-256), signature ✓, et le **sceau Bitcoin** (bloc). Pas de rang dessus - le
 rang vit sur le classement.
 
 {shot_c}
 
 ## 7 · Vérifiable sans nous faire confiance
 Le **vérifieur public** recalcule l'empreinte, **vérifie la signature** (Web Crypto) et
-lit l'état de scellement — **dans votre navigateur**. Il ne prend rien pour argent
+lit l'état de scellement - **dans votre navigateur**. Il ne prend rien pour argent
 comptant. Vous pouvez même l'**héberger vous-même**.
 
 {shot_v}
@@ -88,12 +88,12 @@ comptant. Vous pouvez même l'**héberger vous-même**.
 Le protocole ouvert **ne prouve pas mathématiquement** que le listener fermé a *lu* la
 bonne adresse. Il prouve que le **build homologué était présent, lié au bon processus,
 non modifié**, et que les **règles publiques ont été appliquées**. La confiance dans la
-*mesure* vient d'un listener **homologué, signé, versionné, audité** — voir
+*mesure* vient d'un listener **homologué, signé, versionné, audité** - voir
 [Transparence](transparence.md) et [Homologation](homologation.md).
 """,
      'en':f"""# Certified records
 
-A **public leaderboard** of retro scores that **nobody can fake** — and that **anyone
+A **public leaderboard** of retro scores that **nobody can fake** - and that **anyone
 can verify**, without trusting us. Here is everything that happens, from the game played
 to the proof on Bitcoin.
 
@@ -105,7 +105,7 @@ to the proof on Bitcoin.
 {chain}
 
 Every step is **either public and replayable, or homologated and signed**. Security
-**never** rests on a secret (Kerckhoffs' principle) — only on the open.
+**never** rests on a secret (Kerckhoffs' principle) - only on the open.
 
 ## 1 · Measured, not declared
 The score is **not sent by the game**. A **homologated component** (the *listener*) reads
@@ -119,33 +119,33 @@ checkpoints, ticket) and **signs** it with a **non-exportable** hardware key
 
 ## 3 · Verified server-side
 The server **does not replay the game**: it applies **public rules** (the open-source
-*CoreVerifier*) — expected fingerprints, trajectory monotonicity, game end, valid ticket
-— then returns a verdict: **published**, **held** (statistical anomaly, never a hard
+*CoreVerifier*) - expected fingerprints, trajectory monotonicity, game end, valid ticket
+- then returns a verdict: **published**, **held** (statistical anomaly, never a hard
 refusal) or **refused**. No human referee.
 
 ## 4 · Published in a signed index
 Published scores form a **signed index**: the full list + a **SHA-256 fingerprint**
-signed by the issuer. This index rebuilds the leaderboard — and makes a database loss
+signed by the issuer. This index rebuilds the leaderboard - and makes a database loss
 **inconsequential** (it is rebuildable and mirrorable).
 
 {shot_b}
 
 ## 5 · Sealed on Bitcoin
 The index fingerprint is **timestamped on Bitcoin** via **OpenTimestamps**. Once
-confirmed, it proves the records **existed before a given block** — **immutable**
+confirmed, it proves the records **existed before a given block** - **immutable**
 priority. A freshly sealed score shows in **gold**; the `.ots` proof is downloadable and
 verifiable with the standard OpenTimestamps client.
 
 ## 6 · The record certificate
 Each score has an **immutable, shareable** page: score, dump fingerprints
-(MD5 + SHA-256), signature ✓, and the **Bitcoin seal** (block). No rank on it — the rank
+(MD5 + SHA-256), signature ✓, and the **Bitcoin seal** (block). No rank on it - the rank
 lives on the leaderboard.
 
 {shot_c}
 
 ## 7 · Verifiable without trusting us
 The **public verifier** recomputes the fingerprint, **verifies the signature** (Web
-Crypto) and reads the seal state — **in your browser**. It takes nothing at face value.
+Crypto) and reads the seal state - **in your browser**. It takes nothing at face value.
 You can even **host it yourself**.
 
 {shot_v}
@@ -157,12 +157,12 @@ You can even **host it yourself**.
 The open protocol **does not mathematically prove** the closed listener *read* the right
 address. It proves the **homologated build was present, bound to the right process,
 unmodified**, and that the **public rules were applied**. Trust in the *measurement*
-comes from a listener that is **homologated, signed, versioned, audited** — see
+comes from a listener that is **homologated, signed, versioned, audited** - see
 [Transparency](transparence.md) and [Homologation](homologation.md).
 """,
      'es':f"""# Récords certificados
 
-Una **clasificación pública** de puntuaciones retro que **nadie puede falsificar** — y
+Una **clasificación pública** de puntuaciones retro que **nadie puede falsificar** - y
 que **cualquiera puede verificar**, sin confiar en nosotros. Esto es todo lo que ocurre,
 desde la partida jugada hasta la prueba en Bitcoin.
 
@@ -174,7 +174,7 @@ desde la partida jugada hasta la prueba en Bitcoin.
 {chain}
 
 Cada paso es **público y repetible, o homologado y firmado**. La seguridad **nunca** se
-basa en un secreto (principio de Kerckhoffs) — solo en lo abierto.
+basa en un secreto (principio de Kerckhoffs) - solo en lo abierto.
 
 ## 1 · Medido, no declarado
 La puntuación **no la envía el juego**. Un **componente homologado** (el *listener*) lee
@@ -188,33 +188,33 @@ checkpoints, ticket) y lo **firma** con una clave hardware **no exportable**
 
 ## 3 · Verificado en el servidor
 El servidor **no repite el juego**: aplica **reglas públicas** (el *CoreVerifier*, open
-source) — huellas esperadas, monotonía de la trayectoria, fin de partida, ticket válido
-— y emite un veredicto: **publicado**, **retenido** (anomalía estadística, nunca un
+source) - huellas esperadas, monotonía de la trayectoria, fin de partida, ticket válido
+- y emite un veredicto: **publicado**, **retenido** (anomalía estadística, nunca un
 rechazo seco) o **rechazado**. Sin árbitro humano.
 
 ## 4 · Publicado en un índice firmado
 Las puntuaciones publicadas forman un **índice firmado**: la lista completa + una
-**huella SHA-256** firmada por el emisor. Ese índice reconstruye la clasificación — y
+**huella SHA-256** firmada por el emisor. Ese índice reconstruye la clasificación - y
 hace que perder la base de datos sea **irrelevante** (es reconstruible y replicable).
 
 {shot_b}
 
 ## 5 · Sellado en Bitcoin
 La huella del índice se **sella en Bitcoin** vía **OpenTimestamps**. Una vez confirmada,
-prueba que los récords **existían antes de un bloque dado** — anterioridad **inmutable**.
+prueba que los récords **existían antes de un bloque dado** - anterioridad **inmutable**.
 Una puntuación recién sellada se muestra en **oro**; la prueba `.ots` es descargable y
 verificable con el cliente OpenTimestamps estándar.
 
 ## 6 · El certificado de récord
 Cada puntuación tiene una página **inmutable y compartible**: puntuación, huellas del
-dump (MD5 + SHA-256), firma ✓ y el **sello Bitcoin** (bloque). Sin rango — el rango vive
+dump (MD5 + SHA-256), firma ✓ y el **sello Bitcoin** (bloque). Sin rango - el rango vive
 en la clasificación.
 
 {shot_c}
 
 ## 7 · Verificable sin confiar en nosotros
 El **verificador público** recalcula la huella, **verifica la firma** (Web Crypto) y lee
-el estado del sello — **en tu navegador**. No da nada por sentado. Incluso puedes
+el estado del sello - **en tu navegador**. No da nada por sentado. Incluso puedes
 **alojarlo tú mismo**.
 
 {shot_v}
@@ -226,12 +226,12 @@ el estado del sello — **en tu navegador**. No da nada por sentado. Incluso pue
 El protocolo abierto **no prueba matemáticamente** que el listener cerrado *leyó* la
 dirección correcta. Prueba que el **build homologado estaba presente, ligado al proceso
 correcto, sin modificar**, y que se aplicaron las **reglas públicas**. La confianza en la
-*medición* viene de un listener **homologado, firmado, versionado, auditado** — ver
+*medición* viene de un listener **homologado, firmado, versionado, auditado** - ver
 [Transparencia](transparence.md) y [Homologación](homologation.md).
 """,
      'ja':f"""# 認証された記録
 
-**誰も改ざんできない**レトロスコアの**公開ランキング** — そして**誰でも検証**でき、私た
+**誰も改ざんできない**レトロスコアの**公開ランキング** - そして**誰でも検証**でき、私た
 ちを信用する必要はありません。プレイから Bitcoin 上の証明まで、起きることのすべてです。
 
 [ライブランキングを見る →]({RECORDS}){{ .md-button .md-button--primary }}
@@ -256,7 +256,7 @@ correcto, sin modificar**, y que se aplicaron las **reglas públicas**. La confi
 
 ## 3 · サーバーで検証
 サーバーは**ゲームを再実行しません**。**公開ルール**（オープンソースの *CoreVerifier*）
-—期待される指紋、軌跡の単調性、ゲーム終了、有効なチケット—を適用し、**公開** /
+-期待される指紋、軌跡の単調性、ゲーム終了、有効なチケット-を適用し、**公開** /
 **保留**（統計的異常。頭ごなしの却下はしない）/ **却下** の判定を返します。人間の審判は
 いません。
 
@@ -269,18 +269,18 @@ correcto, sin modificar**, y que se aplicaron las **reglas públicas**. La confi
 
 ## 5 · Bitcoin に封印
 インデックスの指紋を **OpenTimestamps** で **Bitcoin に刻印**します。確認されると、記録が
-**ある特定のブロック以前に存在した**ことを証明します — **不変**の先行性。封印直後のスコア
+**ある特定のブロック以前に存在した**ことを証明します - **不変**の先行性。封印直後のスコア
 は**金色**で表示され、`.ots` 証明はダウンロードでき、標準 OpenTimestamps クライアントで
 検証できます。
 
 ## 6 · 記録証明書
 各スコアには**不変で共有可能**なページがあります。スコア、ダンプ指紋（MD5 + SHA-256）、
-署名 ✓、そして **Bitcoin 封印**（ブロック）。順位は載せません — 順位はランキングにあります。
+署名 ✓、そして **Bitcoin 封印**（ブロック）。順位は載せません - 順位はランキングにあります。
 
 {shot_c}
 
 ## 7 · 私たちを信用せず検証可能
-**公開検証ツール**は指紋を再計算し、**署名を検証**（Web Crypto）し、封印状態を読みます —
+**公開検証ツール**は指紋を再計算し、**署名を検証**（Web Crypto）し、封印状態を読みます -
 **あなたのブラウザ内で**。何も鵜呑みにしません。**自分でホスト**することもできます。
 
 {shot_v}
@@ -292,11 +292,11 @@ correcto, sin modificar**, y que se aplicaron las **reglas públicas**. La confi
 オープンプロトコルは、閉じたリスナーが正しいアドレスを*読んだ*ことを**数学的には証明しま
 せん**。証明するのは、**認定ビルドが存在し、正しいプロセスに結び付き、改変されていない**
 こと、そして**公開ルールが適用された**ことです。*計測*への信頼は、**認定・署名・版管理・
-監査**されたリスナーに由来します — [透明性](transparence.md)・[認定](homologation.md)参照。
+監査**されたリスナーに由来します - [透明性](transparence.md)・[認定](homologation.md)参照。
 """,
      'zh':f"""# 认证记录
 
-一个**无人能造假**的复古分数**公开排行榜** —— 而且**任何人都能验证**，无需信任我们。以下
+一个**无人能造假**的复古分数**公开排行榜** - 而且**任何人都能验证**，无需信任我们。以下
 是从游玩到 Bitcoin 上证明的全过程。
 
 [查看实时排行榜 →]({RECORDS}){{ .md-button .md-button--primary }}
@@ -318,8 +318,8 @@ correcto, sin modificar**, y que se aplicaron las **reglas públicas**. La confi
 密钥（ECDSA P-256）**签名**。事后改动一个字节 = 签名无效。
 
 ## 3 · 服务器端校验
-服务器**不重放游戏**：它应用**公开规则**（开源的 *CoreVerifier*）——预期指纹、轨迹单调
-性、游戏结束、有效票据——然后给出裁决：**发布**、**保留**（统计异常，绝不硬性拒绝）或
+服务器**不重放游戏**：它应用**公开规则**（开源的 *CoreVerifier*）-预期指纹、轨迹单调
+性、游戏结束、有效票据-然后给出裁决：**发布**、**保留**（统计异常，绝不硬性拒绝）或
 **拒绝**。没有人工裁判。
 
 ## 4 · 发布进签名索引
@@ -330,17 +330,17 @@ correcto, sin modificar**, y que se aplicaron las **reglas públicas**. La confi
 
 ## 5 · 封印于 Bitcoin
 索引指纹通过 **OpenTimestamps** **盖时间戳于 Bitcoin**。一经确认，即证明记录**存在于某个
-区块之前** —— **不可变**的先后。刚封印的分数显示为**金色**；`.ots` 证明可下载，并用标准
+区块之前** - **不可变**的先后。刚封印的分数显示为**金色**；`.ots` 证明可下载，并用标准
 OpenTimestamps 客户端验证。
 
 ## 6 · 记录证书
 每个分数都有**不可变、可分享**的页面：分数、转储指纹（MD5 + SHA-256）、签名 ✓，以及
-**Bitcoin 封印**（区块）。上面没有排名 —— 排名在排行榜上。
+**Bitcoin 封印**（区块）。上面没有排名 - 排名在排行榜上。
 
 {shot_c}
 
 ## 7 · 无需信任我们即可验证
-**公开验证器**重算指纹、**验证签名**（Web Crypto）并读取封印状态 —— **在你的浏览器中**。
+**公开验证器**重算指纹、**验证签名**（Web Crypto）并读取封印状态 - **在你的浏览器中**。
 它绝不轻信。你甚至可以**自行托管**。
 
 {shot_v}
@@ -351,11 +351,11 @@ OpenTimestamps 客户端验证。
 ## 诚实的边界
 开放协议**不能在数学上证明**闭源监听器*读取了*正确地址。它证明的是**认证构建存在、绑定到
 正确进程、未被修改**，以及**应用了公开规则**。对*测量*的信任来自一个**已认证、已签名、有
-版本、经审计**的监听器 —— 见[透明度](transparence.md)与[认证](homologation.md)。
+版本、经审计**的监听器 - 见[透明度](transparence.md)与[认证](homologation.md)。
 """,
      'ko':f"""# 인증된 기록
 
-**누구도 조작할 수 없는** 레트로 점수 **공개 순위표** — 그리고 우리를 믿지 않고도 **누구나
+**누구도 조작할 수 없는** 레트로 점수 **공개 순위표** - 그리고 우리를 믿지 않고도 **누구나
 검증**할 수 있습니다. 플레이부터 Bitcoin 상의 증명까지, 일어나는 모든 것입니다.
 
 [실시간 순위 보기 →]({RECORDS}){{ .md-button .md-button--primary }}
@@ -378,8 +378,8 @@ OpenTimestamps 客户端验证。
 **비추출** 하드웨어 키(ECDSA P-256)로 **서명**합니다. 이후 1바이트라도 바뀌면 서명 무효.
 
 ## 3 · 서버에서 검증
-서버는 **게임을 재실행하지 않습니다**. **공개 규칙**(오픈소스 *CoreVerifier*) — 기대 지문,
-궤적 단조성, 게임 종료, 유효 티켓 — 을 적용하고 **게시** / **보류**(통계 이상, 즉시 거부는
+서버는 **게임을 재실행하지 않습니다**. **공개 규칙**(오픈소스 *CoreVerifier*) - 기대 지문,
+궤적 단조성, 게임 종료, 유효 티켓 - 을 적용하고 **게시** / **보류**(통계 이상, 즉시 거부는
 없음) / **거부** 판정을 내립니다. 사람 심판은 없습니다.
 
 ## 4 · 서명된 인덱스에 게시
@@ -391,17 +391,17 @@ OpenTimestamps 客户端验证。
 
 ## 5 · Bitcoin에 봉인
 인덱스 지문을 **OpenTimestamps**로 **Bitcoin에 타임스탬프**합니다. 확인되면 기록이 **특정
-블록 이전에 존재**했음을 증명합니다 — **불변**의 선후. 갓 봉인된 점수는 **금색**으로
+블록 이전에 존재**했음을 증명합니다 - **불변**의 선후. 갓 봉인된 점수는 **금색**으로
 표시되며, `.ots` 증명은 다운로드하여 표준 OpenTimestamps 클라이언트로 검증할 수 있습니다.
 
 ## 6 · 기록 증명서
 각 점수에는 **불변·공유 가능**한 페이지가 있습니다. 점수, 덤프 지문(MD5 + SHA-256),
-서명 ✓, 그리고 **Bitcoin 봉인**(블록). 순위는 없습니다 — 순위는 순위표에 있습니다.
+서명 ✓, 그리고 **Bitcoin 봉인**(블록). 순위는 없습니다 - 순위는 순위표에 있습니다.
 
 {shot_c}
 
 ## 7 · 우리를 믿지 않고 검증 가능
-**공개 검증기**는 지문을 재계산하고 **서명을 검증**(Web Crypto)하며 봉인 상태를 읽습니다 —
+**공개 검증기**는 지문을 재계산하고 **서명을 검증**(Web Crypto)하며 봉인 상태를 읽습니다 -
 **당신의 브라우저에서**. 아무것도 곧이곧대로 받아들이지 않습니다. **직접 호스팅**할 수도
 있습니다.
 
@@ -414,7 +414,7 @@ OpenTimestamps 客户端验证。
 오픈 프로토콜은 닫힌 리스너가 올바른 주소를 *읽었다*는 것을 **수학적으로 증명하지
 않습니다**. 증명하는 것은 **인증 빌드가 존재했고, 올바른 프로세스에 묶였으며, 수정되지
 않았고**, **공개 규칙이 적용**되었다는 것입니다. *측정*에 대한 신뢰는 **인증·서명·버전
-관리·감사**된 리스너에서 옵니다 — [투명성](transparence.md), [인증](homologation.md) 참조.
+관리·감사**된 리스너에서 옵니다 - [투명성](transparence.md), [인증](homologation.md) 참조.
 """,
     }
     return T[lng]

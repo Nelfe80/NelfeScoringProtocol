@@ -4,7 +4,7 @@ No tienes que creernos. Tres comprobaciones independientes.
 
 ## 1. Repetir el verificador sobre los vectores de prueba
 Los **vectores** (`vectors/*.json`) son pares **(pasaporte, veredicto esperado)**. El
-verificador público (`ref/`) debe devolver **exactamente** esos veredictos — el mismo
+verificador público (`ref/`) debe devolver **exactamente** esos veredictos - el mismo
 veredicto, byte a byte, en cada implementación (C#, PHP, C++…). Es el criterio de salida
 del protocolo.
 
@@ -26,7 +26,7 @@ La firma cubre **todo**: puntuación, huellas de core/contenido/MEM/listener, ch
 ticket. Un byte cambiado después = firma inválida.
 
 ## 3. Verificar la anterioridad (anclaje blockchain)
-Cada puntuación clasificada — y la **apertura** de cada juego — se agrupa en un árbol de
+Cada puntuación clasificada - y la **apertura** de cada juego - se agrupa en un árbol de
 Merkle cuya raíz se ancla vía **OpenTimestamps en Bitcoin**. Con un cliente estándar,
 cualquiera puede verificar, **sin nosotros**, que el dato existía **antes de un bloque de
 Bitcoin dado**.
@@ -40,7 +40,7 @@ historia crece, no se reescribe).
 |---|---|
 | Vectores | Las **reglas** aplicadas son exactamente las publicadas. |
 | Firma | El pasaporte **no fue alterado** y viene de **esa máquina**. |
-| Anclaje | El dato **existía antes** de un bloque Bitcoin — sin antedatar. |
+| Anclaje | El dato **existía antes** de un bloque Bitcoin - sin antedatar. |
 
 Lo que no prueban: que el listener cerrado *leyó* la dirección correcta. Esa confianza
 viene de la [homologación del listener](homologation.md).
