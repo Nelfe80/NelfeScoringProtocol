@@ -118,6 +118,7 @@ markdown_extensions:
 nav:
   - Accueil: index.md
   - Les records: records.md
+  - Règles de score: regles-de-score.md
   - Transparence: transparence.md
   - Vérifier un score: verifier-un-score.md
   - Héberger le vérifieur: heberger-le-verifieur.md
