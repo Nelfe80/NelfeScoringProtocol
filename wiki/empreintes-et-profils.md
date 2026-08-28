@@ -20,6 +20,20 @@ Vérification indépendante possible : `sha256sum <fichier>` pour listener/core/
 `unzip -p <rom.zip> \| sha256sum` pour la ROM. Les valeurs doivent être **identiques**
 à celles du passeport — c'est un SHA‑256 brut, sans normalisation.
 
+### Cas MAME (arcade, moteur `mame_standalone`)
+
+MAME **charge les ROMs lui‑même** (le jeu est un `.zip` de *set*, vérifié en interne
+contre son propre DAT) : le listener Lua ne voit **pas** de buffer `game->data` à
+hacher. L'identité ROM est donc le **SHA‑1 de la ROM programme principale du set**,
+lu dans la gamelist `roms/mame` (champ `sha1`), et le profil porte `content_sha1`
+(pas de `md5` côté MAME). Les autres empreintes restent des SHA‑256 de fichiers :
+`listener` = `init.lua`, `core` = `mame.exe`, `mem` = le `.MEM`.
+
+**Piège de jointure** : la ligne gamelist se relie au jeu par le **nom de set
+canonique** (`emu.romname()`, ex. `19xx` ; côté APIExpose `definition.RawRom`),
+**jamais** par le nom d'affichage du `.MEM` (`definition.Rom`, ex.
+`19xx-the-war-against-destiny`). Une jointure sur le nom d'affichage échoue.
+
 ## 2. LE piège : fixture de test ≠ profil de production
 
 - `manifest/profiles/**/<v>.json` est un **FIXTURE DE TEST généré** par
@@ -43,7 +57,8 @@ On ne recalcule jamais à la main : chaque valeur vient d'une **source**.
 
 | Empreinte | Source canonique |
 |---|---|
-| `content` (ROM) | identité **No‑Intro**. La gamelist `APIExpose/resources/gamelist/systems` porte `crc/md5/sha1` (pas de sha256). **Voie retenue** : le profil référence le `md5` No‑Intro (déjà dans la gamelist) et le wrapper émet `content_md5` — évite de régénérer les gamelists et de posséder toutes les ROMs. |
+| `content` (ROM, **RetroArch**) | identité **No‑Intro**. La gamelist `APIExpose/resources/gamelist/systems` porte `crc/md5/sha1` (pas de sha256). **Voie retenue** : le profil référence le `md5` No‑Intro (déjà dans la gamelist) et le wrapper émet `content_md5` — évite de régénérer les gamelists et de posséder toutes les ROMs. |
+| `content` (ROM, **arcade/MAME**) | la gamelist `roms/mame` n'a **pas** de md5 → le profil porte `content_sha1` (le `sha1` du set = ROM programme principale). Jointure par set canonique `RawRom` (voir §1). |
 | `core` | pas d'équivalent No‑Intro → **registre central de builds officiels** (SHA‑256 des cores distribués par RetroBat / buildbot libretro), à mettre à jour à chaque release de core. |
 | `mem` | donnée NelfePlay → **un SHA‑256 par révision** du `.MEM`. Doit rester cohérent avec `ram_definitions` (base distante). |
 | `listener` | **whitelist** des wrappers homologués (`allowed_listener_sha256`), additive à chaque version signée. |
@@ -51,8 +66,10 @@ On ne recalcule jamais à la main : chaque valeur vient d'une **source**.
 ## 4. Ce que le vérifieur applique réellement
 
 `CoreVerifier` (SPEC §6.3‑6.4) compare en **égalité stricte** :
-- empreintes : `core`, `content`, `mem`, `listener`, + `modules_digest` et les rôles
+- empreintes : `core`, `mem`, `listener`, + `modules_digest` et les rôles
   `listener`/`real_core`/`frontend`.
+- **contenu** : le champ comparé suit ce que déclare le profil : `allowed_content_md5`
+  (RetroArch) sinon `allowed_content_sha1` (MAME) sinon `allowed_content_sha256`.
 - règles `sensitive` : `save_state`, `cheats`, `continues`, **`rewind`, `runahead`,
   `fast_forward`** (ces trois branchés le 2026‑08‑28).
 - progression : monotonie, `game_end`, corrélations, `metric.value` == `result_source`.
