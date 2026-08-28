@@ -75,9 +75,15 @@ public static class CoreVerifier
         // Voie A : si le profil épingle la ROM par md5 (No-Intro/gamelist), on compare le md5
         // (le wrapper homologué DOIT l'émettre) ; sinon on retombe sur le sha256 (legacy).
         var allowedContentMd5 = profile["allowed_content_md5"] as JsonArray;
+        var allowedContentSha1 = profile["allowed_content_sha1"] as JsonArray;
         if (allowedContentMd5 is not null && allowedContentMd5.Count > 0)
         {
             if (!InArr(profile, Str(passport, "artifacts", "content", "md5"), "allowed_content_md5")) return F("profile.content_mismatch");
+        }
+        else if (allowedContentSha1 is not null && allowedContentSha1.Count > 0)
+        {
+            // MAME : identité = sha1 du set (gamelist), MAME vérifiant déjà le romset (DAT).
+            if (!InArr(profile, Str(passport, "artifacts", "content", "sha1"), "allowed_content_sha1")) return F("profile.content_mismatch");
         }
         else if (!InArr(profile, contentLoaded, "allowed_content_sha256"))
         {

@@ -56,8 +56,13 @@ final class CoreVerifier
         // Voie A : si le profil épingle la ROM par md5 (No-Intro/gamelist), on compare le md5
         // (le wrapper homologué DOIT l'émettre) ; sinon on retombe sur le sha256 (legacy).
         $allowedContentMd5 = $profile->allowed_content_md5 ?? null;
+        $allowedContentSha1 = $profile->allowed_content_sha1 ?? null;
         if (is_array($allowedContentMd5) && count($allowedContentMd5) > 0) {
             if (!self::inArr($profile, self::s($passport, 'artifacts', 'content', 'md5'), 'allowed_content_md5')) return self::f('profile.content_mismatch');
+        } elseif (is_array($allowedContentSha1) && count($allowedContentSha1) > 0) {
+            // MAME : le Lua ne mesure pas la ROM (MAME la charge en interne + la verifie
+            // contre son DAT). Identite = sha1 du set dans la gamelist MAME.
+            if (!self::inArr($profile, self::s($passport, 'artifacts', 'content', 'sha1'), 'allowed_content_sha1')) return self::f('profile.content_mismatch');
         } elseif (!self::inArr($profile, $contentLoaded, 'allowed_content_sha256')) {
             return self::f('profile.content_mismatch');
         }

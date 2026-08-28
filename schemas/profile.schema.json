@@ -8,7 +8,8 @@
   "required": ["system_id", "rom_group", "engine", "ruleset", "version", "manifest_epoch", "published_at", "opened_at", "metric", "trajectory_policy", "allowed_core_sha256", "allowed_listener_sha256", "mem_sha256", "bios", "rules", "correlation_rules"],
   "anyOf": [
     { "required": ["allowed_content_sha256"] },
-    { "required": ["allowed_content_md5"] }
+    { "required": ["allowed_content_md5"] },
+    { "required": ["allowed_content_sha1"] }
   ],
   "properties": {
     "system_id": { "type": "string" },
@@ -37,6 +38,7 @@
 
     "allowed_content_sha256": { "$ref": "#/$defs/sha256Array" },
     "allowed_content_md5": { "$ref": "#/$defs/md5Array" },
+    "allowed_content_sha1": { "$ref": "#/$defs/sha1Array" },
     "allowed_core_sha256": { "$ref": "#/$defs/sha256Array" },
     "allowed_listener_sha256": { "$ref": "#/$defs/sha256Array" },
     "allowed_modules": {
@@ -97,6 +99,8 @@
     "sha256Array": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/sha256hex" } },
     "md5hex": { "type": "string", "pattern": "^[0-9a-f]{32}$" },
     "md5Array": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/md5hex" } },
+    "sha1hex": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "sha1Array": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/sha1hex" } },
     "tokens": {
       "type": "array", "minItems": 1,
       "items": { "enum": ["score_delta", "rings_delta", "level_delta", "lives_delta", "time_checkpoint"] }

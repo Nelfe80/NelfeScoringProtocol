@@ -10,7 +10,7 @@
     "expires_at": "2026-07-30T20:00:00Z",
     "nonce": "n_abc123",
     "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEUCIEsAaNSwdUr-1bS8iNVBkEpxg-Rka3D-hxCROqS3Br7sAiEAraiG-cWxMGfefmp49EZXCJIOukAcCTmhcxLbus2dE4Q"
+    "signature": "MEQCIHYAcz5VQCvOITtwX8IrfKRFaXuY1KGudUq894nzwsHdAiBzU9VvAaLVgq_lQ-bOJ6xnCE_GJYUHHaeTmJBewbYhrw"
   },
   "game": {
     "system_id": "megadrive",
@@ -181,5 +181,5 @@
     "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
   },
   "local_check": "pass",
-  "signature": "MEYCIQCujIR0ZW6Lz5l3rlbMCxcKcdMJvt5kes0yhJsR3mqffwIhANAQS8Zw4dmX0CfrUDa2SWvhfScisddxtp7W4GgMg85s"
+  "signature": "MEUCIQDU05N7p-idXeRHhV6Aqd2fRGvNa6rMkQgzc-KHyFsj4wIgZOI93hII33qz5awx5-B8JGnRoeBLNTgyryVDts-Ap0o"
 }

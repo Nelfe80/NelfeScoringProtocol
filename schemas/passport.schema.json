@@ -179,6 +179,7 @@
   "$defs": {
     "sha256hex": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "md5hex": { "type": "string", "pattern": "^[0-9a-f]{32}$" },
+    "sha1hex": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
     "b64url": { "type": "string", "pattern": "^[A-Za-z0-9_-]+$" },
     "uuid": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$" },
     "decimalString": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
@@ -198,7 +199,8 @@
         "start_sha256": { "$ref": "#/$defs/sha256hex" },
         "loaded_sha256": { "$ref": "#/$defs/sha256hex" },
         "end_sha256": { "$ref": "#/$defs/sha256hex" },
-        "md5": { "$ref": "#/$defs/md5hex" }
+        "md5": { "$ref": "#/$defs/md5hex" },
+        "sha1": { "$ref": "#/$defs/sha1hex" }
       }
     }
   }
