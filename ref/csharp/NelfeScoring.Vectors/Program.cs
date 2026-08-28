@@ -33,6 +33,7 @@ string issuerKeyId = Crypto.KeyId(issuerSpki);
 string H(string label) => Crypto.Sha256Hex(label);
 string coreH = H("genesis_plus_gx_libretro.dll@v1");
 string contentH = H("Sonic The Hedgehog (USA, Europe).md");
+string contentMd5 = contentH[..32]; // fixture : md5 (32 hex) dérivé du libellé
 string memH = H("sonic_megadrive.mem@v1");
 string listenerH = H("NelfeMemoryListener@4.2.0");
 string frontendH = H("retroarch.exe@1.19");
@@ -54,6 +55,7 @@ var profile = new JsonObject
     ["metric"] = new JsonObject { ["type"] = "score", ["unit"] = "points", ["ranking_direction"] = "higher_better", ["result_source"] = "final" },
     ["trajectory_policy"] = new JsonObject { ["monotonicity"] = "non_decreasing" },
     ["allowed_content_sha256"] = new JsonArray { contentH },
+    ["allowed_content_md5"] = new JsonArray { contentMd5 },
     ["allowed_core_sha256"] = new JsonArray { coreH },
     ["allowed_listener_sha256"] = new JsonArray { listenerH },
     ["mem_sha256"] = memH,
@@ -61,7 +63,7 @@ var profile = new JsonObject
     ["rules"] = new JsonObject
     {
         ["save_state"] = "forbidden", ["cheats"] = "forbidden", ["rewind"] = "forbidden",
-        ["runahead"] = "forbidden", ["continues"] = "forbidden", ["players"] = 1
+        ["runahead"] = "forbidden", ["fast_forward"] = "forbidden", ["continues"] = "forbidden", ["players"] = 1
     },
     ["correlation_rules"] = new JsonArray
     {
@@ -69,6 +71,10 @@ var profile = new JsonObject
         new JsonObject { ["event"] = "level_complete", ["requires"] = new JsonArray { "level_delta", "time_checkpoint" } }
     }
 };
+// ⚠️ FIXTURE DE TEST — les empreintes ci-dessus sont des SHA de LIBELLÉS (coreH/contentH/…),
+// PAS des hachages de fichiers réels. Ce fichier alimente les vecteurs. NE JAMAIS le déposer
+// en production (voir manifest/profiles/README.md). Les vrais profils vivent dans
+// NelfePlay-Site/config/scoring-profiles/ avec de vraies empreintes mesurées.
 File.WriteAllText(Path.Combine(profileDir, "1.json"), Pretty(profile));
 
 // ── PASSEPORT valide (non signé) ──────────────────────────────────────────────
@@ -118,7 +124,7 @@ JsonObject BuildUnsigned()
         ["software"] = new JsonObject { ["modules"] = modules, ["modules_digest"] = Crypto.Sha256Hex(Jcs.Canonical(modules)) },
         ["artifacts"] = new JsonObject
         {
-            ["core"] = HashTriple(coreH), ["content"] = HashTriple(contentH), ["mem"] = HashTriple(memH),
+            ["core"] = HashTriple(coreH), ["content"] = ContentArtifact(contentH, contentMd5), ["mem"] = HashTriple(memH),
             ["core_options_digest"] = H("core-options@default"), ["bios"] = new JsonObject { ["mode"] = "none" }
         },
         ["process"] = new JsonObject
@@ -175,9 +181,13 @@ void Add(string name, string expected, Action<JsonObject> mutate, bool refreshDi
 Add("valid", "", _ => { });
 Add("fail_core_mismatch", "profile.core_mismatch", p => p["artifacts"]!["core"]!["loaded_sha256"] = H("wrong_core"));
 Add("fail_mem_mismatch", "profile.mem_mismatch", p => p["artifacts"]!["mem"]!["loaded_sha256"] = H("wrong_mem"));
+Add("fail_content_md5", "profile.content_mismatch", p => p["artifacts"]!["content"]!["md5"] = "ffffffffffffffffffffffffffffffff");
 Add("fail_listener_unauthorized", "profile.listener_unauthorized", p => p["listener"]!["loaded_sha256"] = H("rogue_listener"));
 Add("fail_save_state", "runtime.save_state_detected", p => p["sensitive"]!["save_state_loaded"] = true);
 Add("fail_continue", "runtime.continue_forbidden", p => p["sensitive"]!["continues"] = 1);
+Add("fail_rewind", "runtime.rewind_detected", p => p["sensitive"]!["rewind"] = true);
+Add("fail_runahead", "runtime.runahead_detected", p => p["sensitive"]!["runahead"] = true);
+Add("fail_fast_forward", "runtime.fast_forward_detected", p => p["sensitive"]!["fast_forward"] = true);
 Add("fail_monotonicity", "progression.monotonicity", p => p["progression"]!["checkpoints"]![2]!["metric"] = "20000"); // 28400 -> 20000
 Add("fail_correlation", "progression.invalid_correlation", p => p["progression"]!["checkpoints"]![1]!["counters"]!["level"] = 1); // level_complete sans level_delta
 Add("fail_digest_mismatch", "progression.digest_mismatch", p => p["progression"]!["checkpoints"]![0]!["metric"] = "999", refreshDigest: false);
@@ -188,6 +198,20 @@ Add("fail_signature_invalid", "session.signature_invalid", _ => { }, postSign: p
     s[0] = s[0] == 'A' ? 'B' : 'A';
     p["signature"] = new string(s);
 });
+
+// Couverture complète : un vecteur par code d'échec restant du vérifieur.
+Add("fail_cheat", "runtime.cheat_detected", p => p["sensitive"]!["cheats"] = true);
+Add("fail_profile_mismatch", "profile.mismatch", p => p["game"]!["system_id"] = "nes");
+Add("fail_module_unauthorized", "runtime.module_unauthorized", p => p["process"]!["executable_sha256"] = H("rogue_frontend"));
+Add("fail_modules_digest", "attestation.modules_digest", p => p["software"]!["modules_digest"] = new string('a', 64));
+Add("fail_ticket_invalid", "session.ticket_invalid", p => p["ticket"]!["device_id"] = "dev-999");
+Add("fail_ticket_missing", "session.ticket_missing", p => p.Remove("ticket"), sign: false);
+Add("fail_not_open", "profile.not_open", p => { p["timing"]!["started_at"] = "2026-06-01T10:00:00Z"; p["timing"]!["ended_at"] = "2026-06-01T10:05:00Z"; });
+Add("fail_timing", "timing.incoherent", p => p["timing"]!["started_at"] = "2026-07-30T18:45:00Z");
+Add("fail_no_game_end", "session.no_game_end", p => { var c = p["progression"]!["checkpoints"]!.AsArray(); ((JsonObject)c[c.Count - 1]!).Remove("event"); });
+Add("fail_out_of_bounds", "format.out_of_bounds", p => p["metric"]!["value"] = "999");
+Add("fail_protocol", "format.protocol", p => p["protocol"] = 2);
+Add("fail_schema", "format.schema", p => p.Remove("session_id"));
 
 // ── EXÉCUTION ─────────────────────────────────────────────────────────────────
 int failures = 0;
@@ -229,6 +253,7 @@ return failures == 0 ? 0 : 1;
 
 // ── utilitaires ───────────────────────────────────────────────────────────────
 static JsonObject HashTriple(string h) => new() { ["start_sha256"] = h, ["loaded_sha256"] = h, ["end_sha256"] = h };
+static JsonObject ContentArtifact(string sha, string md5) => new() { ["start_sha256"] = sha, ["loaded_sha256"] = sha, ["end_sha256"] = sha, ["md5"] = md5 };
 static JsonObject Cp(int tms, int frame, string metric, string ev, int lives, int level, int rings) => new()
 {
     ["t_ms"] = tms, ["frame"] = frame, ["metric"] = metric, ["event"] = ev,

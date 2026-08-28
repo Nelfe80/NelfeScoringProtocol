@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://nelfeplay.com/scoring/schemas/passport.schema.json",
   "title": "Passeport de scoring certifié (SPEC v1.0 §5.2)",
+  "$comment": "Empreintes = SHA-256 bruts : fichier pour core/mem/listener, buffer ROM game->data (ROM extraite) pour content. Méthode : wiki/empreintes-et-profils.md.",
   "type": "object",
   "additionalProperties": false,
   "required": ["protocol", "session_id", "ticket", "game", "device", "identity", "listener", "software", "artifacts", "process", "timing", "sensitive", "metric", "progression", "local_check", "signature"],
@@ -80,7 +81,7 @@
       "required": ["core", "content", "mem", "core_options_digest", "bios"],
       "properties": {
         "core": { "$ref": "#/$defs/hashTriple" },
-        "content": { "$ref": "#/$defs/hashTriple" },
+        "content": { "$ref": "#/$defs/contentArtifact" },
         "mem": { "$ref": "#/$defs/hashTriple" },
         "core_options_digest": { "$ref": "#/$defs/sha256hex" },
         "bios": {
@@ -177,6 +178,7 @@
 
   "$defs": {
     "sha256hex": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "md5hex": { "type": "string", "pattern": "^[0-9a-f]{32}$" },
     "b64url": { "type": "string", "pattern": "^[A-Za-z0-9_-]+$" },
     "uuid": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$" },
     "decimalString": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
@@ -187,6 +189,16 @@
         "start_sha256": { "$ref": "#/$defs/sha256hex" },
         "loaded_sha256": { "$ref": "#/$defs/sha256hex" },
         "end_sha256": { "$ref": "#/$defs/sha256hex" }
+      }
+    },
+    "contentArtifact": {
+      "type": "object", "additionalProperties": false,
+      "required": ["start_sha256", "loaded_sha256", "end_sha256"],
+      "properties": {
+        "start_sha256": { "$ref": "#/$defs/sha256hex" },
+        "loaded_sha256": { "$ref": "#/$defs/sha256hex" },
+        "end_sha256": { "$ref": "#/$defs/sha256hex" },
+        "md5": { "$ref": "#/$defs/md5hex" }
       }
     }
   }

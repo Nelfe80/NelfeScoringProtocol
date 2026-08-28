@@ -72,7 +72,17 @@ public static class CoreVerifier
         var listenerLoaded = Str(passport, "listener", "loaded_sha256");
 
         if (!InArr(profile, coreLoaded, "allowed_core_sha256")) return F("profile.core_mismatch");
-        if (!InArr(profile, contentLoaded, "allowed_content_sha256")) return F("profile.content_mismatch");
+        // Voie A : si le profil épingle la ROM par md5 (No-Intro/gamelist), on compare le md5
+        // (le wrapper homologué DOIT l'émettre) ; sinon on retombe sur le sha256 (legacy).
+        var allowedContentMd5 = profile["allowed_content_md5"] as JsonArray;
+        if (allowedContentMd5 is not null && allowedContentMd5.Count > 0)
+        {
+            if (!InArr(profile, Str(passport, "artifacts", "content", "md5"), "allowed_content_md5")) return F("profile.content_mismatch");
+        }
+        else if (!InArr(profile, contentLoaded, "allowed_content_sha256"))
+        {
+            return F("profile.content_mismatch");
+        }
         if (memLoaded != Str(profile, "mem_sha256")) return F("profile.mem_mismatch");
         if (!InArr(profile, listenerLoaded, "allowed_listener_sha256")) return F("profile.listener_unauthorized");
 
@@ -106,6 +116,12 @@ public static class CoreVerifier
             return F("runtime.cheat_detected");
         if (I(passport, "sensitive", "continues") > 0 && Str(rules, "continues") == "forbidden")
             return F("runtime.continue_forbidden");
+        if (Bool(passport, "sensitive", "rewind") && Str(rules, "rewind") == "forbidden")
+            return F("runtime.rewind_detected");
+        if (Bool(passport, "sensitive", "runahead") && Str(rules, "runahead") == "forbidden")
+            return F("runtime.runahead_detected");
+        if (Bool(passport, "sensitive", "fast_forward") && Str(rules, "fast_forward") == "forbidden")
+            return F("runtime.fast_forward_detected");
 
         var checkpoints = passport["progression"]?["checkpoints"] as JsonArray;
         if (checkpoints is null || checkpoints.Count == 0) return F("format.schema");

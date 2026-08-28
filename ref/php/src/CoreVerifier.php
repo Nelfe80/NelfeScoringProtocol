@@ -53,7 +53,14 @@ final class CoreVerifier
         $listenerLoaded = self::s($passport, 'listener', 'loaded_sha256');
 
         if (!self::inArr($profile, $coreLoaded, 'allowed_core_sha256')) return self::f('profile.core_mismatch');
-        if (!self::inArr($profile, $contentLoaded, 'allowed_content_sha256')) return self::f('profile.content_mismatch');
+        // Voie A : si le profil épingle la ROM par md5 (No-Intro/gamelist), on compare le md5
+        // (le wrapper homologué DOIT l'émettre) ; sinon on retombe sur le sha256 (legacy).
+        $allowedContentMd5 = $profile->allowed_content_md5 ?? null;
+        if (is_array($allowedContentMd5) && count($allowedContentMd5) > 0) {
+            if (!self::inArr($profile, self::s($passport, 'artifacts', 'content', 'md5'), 'allowed_content_md5')) return self::f('profile.content_mismatch');
+        } elseif (!self::inArr($profile, $contentLoaded, 'allowed_content_sha256')) {
+            return self::f('profile.content_mismatch');
+        }
         if ($memLoaded !== self::s($profile, 'mem_sha256')) return self::f('profile.mem_mismatch');
         if (!self::inArr($profile, $listenerLoaded, 'allowed_listener_sha256')) return self::f('profile.listener_unauthorized');
 
@@ -80,6 +87,9 @@ final class CoreVerifier
         if (self::bv($passport, 'sensitive', 'save_state_loaded') && self::s($rules, 'save_state') === 'forbidden') return self::f('runtime.save_state_detected');
         if (self::bv($passport, 'sensitive', 'cheats') && self::s($rules, 'cheats') === 'forbidden') return self::f('runtime.cheat_detected');
         if (self::iv($passport, 'sensitive', 'continues') > 0 && self::s($rules, 'continues') === 'forbidden') return self::f('runtime.continue_forbidden');
+        if (self::bv($passport, 'sensitive', 'rewind') && self::s($rules, 'rewind') === 'forbidden') return self::f('runtime.rewind_detected');
+        if (self::bv($passport, 'sensitive', 'runahead') && self::s($rules, 'runahead') === 'forbidden') return self::f('runtime.runahead_detected');
+        if (self::bv($passport, 'sensitive', 'fast_forward') && self::s($rules, 'fast_forward') === 'forbidden') return self::f('runtime.fast_forward_detected');
 
         $checkpoints = $passport->progression->checkpoints ?? null;
         if (!is_array($checkpoints) || count($checkpoints) === 0) return self::f('format.schema');

@@ -12,6 +12,10 @@
     "expected": "profile.mem_mismatch"
   },
   {
+    "vector": "fail_content_md5.passport.json",
+    "expected": "profile.content_mismatch"
+  },
+  {
     "vector": "fail_listener_unauthorized.passport.json",
     "expected": "profile.listener_unauthorized"
   },
@@ -22,6 +26,18 @@
   {
     "vector": "fail_continue.passport.json",
     "expected": "runtime.continue_forbidden"
+  },
+  {
+    "vector": "fail_rewind.passport.json",
+    "expected": "runtime.rewind_detected"
+  },
+  {
+    "vector": "fail_runahead.passport.json",
+    "expected": "runtime.runahead_detected"
+  },
+  {
+    "vector": "fail_fast_forward.passport.json",
+    "expected": "runtime.fast_forward_detected"
   },
   {
     "vector": "fail_monotonicity.passport.json",
@@ -42,5 +58,53 @@
   {
     "vector": "fail_signature_invalid.passport.json",
     "expected": "session.signature_invalid"
+  },
+  {
+    "vector": "fail_cheat.passport.json",
+    "expected": "runtime.cheat_detected"
+  },
+  {
+    "vector": "fail_profile_mismatch.passport.json",
+    "expected": "profile.mismatch"
+  },
+  {
+    "vector": "fail_module_unauthorized.passport.json",
+    "expected": "runtime.module_unauthorized"
+  },
+  {
+    "vector": "fail_modules_digest.passport.json",
+    "expected": "attestation.modules_digest"
+  },
+  {
+    "vector": "fail_ticket_invalid.passport.json",
+    "expected": "session.ticket_invalid"
+  },
+  {
+    "vector": "fail_ticket_missing.passport.json",
+    "expected": "session.ticket_missing"
+  },
+  {
+    "vector": "fail_not_open.passport.json",
+    "expected": "profile.not_open"
+  },
+  {
+    "vector": "fail_timing.passport.json",
+    "expected": "timing.incoherent"
+  },
+  {
+    "vector": "fail_no_game_end.passport.json",
+    "expected": "session.no_game_end"
+  },
+  {
+    "vector": "fail_out_of_bounds.passport.json",
+    "expected": "format.out_of_bounds"
+  },
+  {
+    "vector": "fail_protocol.passport.json",
+    "expected": "format.protocol"
+  },
+  {
+    "vector": "fail_schema.passport.json",
+    "expected": "format.schema"
   }
 ]

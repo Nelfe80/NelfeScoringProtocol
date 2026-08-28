@@ -19,6 +19,9 @@
   "allowed_content_sha256": [
     "7a1c2c99ed7e72d025f2e8768a5b7994d63548ef384c3128d45ddca99485077b"
   ],
+  "allowed_content_md5": [
+    "7a1c2c99ed7e72d025f2e8768a5b7994"
+  ],
   "allowed_core_sha256": [
     "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2"
   ],
@@ -34,6 +37,7 @@
     "cheats": "forbidden",
     "rewind": "forbidden",
     "runahead": "forbidden",
+    "fast_forward": "forbidden",
     "continues": "forbidden",
     "players": 1
   },

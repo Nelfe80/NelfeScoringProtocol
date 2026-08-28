@@ -1,17 +1,6 @@
 {
   "protocol": 1,
   "session_id": "b3f1c2a4-5d6e-4f80-9a1b-2c3d4e5f6071",
-  "ticket": {
-    "ticket_id": "t_9f2a3b",
-    "device_id": "dev-001",
-    "scope": "scoring_session",
-    "manifest_epoch": 12,
-    "issued_at": "2026-07-30T18:00:00Z",
-    "expires_at": "2026-07-30T20:00:00Z",
-    "nonce": "n_abc123",
-    "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEYCIQClARI_oRa0vq2qyoNJKDu4XRoHzrGT1nz2CDjfJBnCtgIhAMSN17OJMbezonnUERepoR_hQYqFILfXxvd0SuLsgTyB"
-  },
   "game": {
     "system_id": "megadrive",
     "rom_group": "sonic-the-hedgehog",
@@ -180,6 +169,5 @@
     ],
     "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
   },
-  "local_check": "pass",
-  "signature": "MEUCIQDMXL53eeY7xI1ATqDgARzDIwiNV9nrE1nKRA1Xed3NrwIgYpePoJXfLd8F4x5KLF0g_zB52ctNTfhwvo9K8wifQjA"
+  "local_check": "pass"
 }

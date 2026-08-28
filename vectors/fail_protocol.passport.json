@@ -1,5 +1,5 @@
 {
-  "protocol": 1,
+  "protocol": 2,
   "session_id": "b3f1c2a4-5d6e-4f80-9a1b-2c3d4e5f6071",
   "ticket": {
     "ticket_id": "t_9f2a3b",
@@ -10,7 +10,7 @@
     "expires_at": "2026-07-30T20:00:00Z",
     "nonce": "n_abc123",
     "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEYCIQClARI_oRa0vq2qyoNJKDu4XRoHzrGT1nz2CDjfJBnCtgIhAMSN17OJMbezonnUERepoR_hQYqFILfXxvd0SuLsgTyB"
+    "signature": "MEUCIEF2JGcXCRS8oJ1cij5gEducCFWxKU-IFt_N-hxhLiAeAiEAn__jcQkAcWWR-jW6d2hKJNmRIZbGVJqgdULNdCDvOH8"
   },
   "game": {
     "system_id": "megadrive",
@@ -181,5 +181,5 @@
     "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
   },
   "local_check": "pass",
-  "signature": "MEUCIQDMXL53eeY7xI1ATqDgARzDIwiNV9nrE1nKRA1Xed3NrwIgYpePoJXfLd8F4x5KLF0g_zB52ctNTfhwvo9K8wifQjA"
+  "signature": "MEQCIAWsWT1VUs_CcKc6nkkBp8uyutsGFErUXKxHhL5n4lx6AiA9lik4Dv6PiojFjneZ0ORZpK55EeRvx2PRx3G-byCXow"
 }

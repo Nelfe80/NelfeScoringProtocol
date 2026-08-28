@@ -1,0 +1,79 @@
+# Empreintes des artefacts, profils, et vérification
+
+Ce document fige **comment** chaque empreinte est calculée, **d'où** viennent les
+valeurs d'un profil, et **le piège** qui a produit des profils faux (des valeurs
+« placeholder » déposées en production). À lire avant de créer ou de déposer un
+profil de scoring.
+
+## 1. Méthode d'empreinte — source de vérité = le wrapper
+
+Toutes les empreintes du passeport sont des **SHA‑256**. Ce qui est haché :
+
+| Champ passeport | Haché sur | Référence code |
+|---|---|---|
+| `listener.loaded_sha256` | le **fichier DLL du wrapper** (`cores/<core>.dll`) | `Wrapper/wrapper.cpp` `Sha256FileHex(selfPath)` |
+| `artifacts.core.loaded_sha256` | le **fichier du vrai core** (`cores_real/<core>.dll`) | `Sha256FileHex(corePath)` |
+| `artifacts.mem.loaded_sha256` | le **fichier `.MEM`** | `Sha256FileHex(g_last_mem_path)` |
+| `artifacts.content.loaded_sha256` | le **buffer ROM `game->data`** (ROM **extraite** en mémoire = ROM décompressée) | `Sha256BufHex(game->data, game->size)` |
+
+Vérification indépendante possible : `sha256sum <fichier>` pour listener/core/mem ;
+`unzip -p <rom.zip> \| sha256sum` pour la ROM. Les valeurs doivent être **identiques**
+à celles du passeport — c'est un SHA‑256 brut, sans normalisation.
+
+## 2. LE piège : fixture de test ≠ profil de production
+
+- `manifest/profiles/**/<v>.json` est un **FIXTURE DE TEST généré** par
+  `ref/csharp/NelfeScoring.Vectors/Program.cs` (ligne ~72). Ses empreintes sont
+  des **SHA‑256 de libellés** (`H("genesis_plus_gx_libretro.dll@v1")`,
+  `H("Sonic The Hedgehog (USA, Europe).md")`, …). Elles ne correspondent à
+  **aucun** fichier réel — c'est voulu, pour tester la logique du vérifieur avec
+  les vecteurs. **Lancer `dotnet run` régénère ce fichier : ne jamais l'éditer à la main.**
+- **NE JAMAIS déposer ce fixture en production.** C'est exactement ce qui a produit
+  les faux `core_mismatch`/`content_mismatch`/`mem_mismatch` : le fixture (valeurs
+  bidon) avait été déposé comme profil réel.
+
+- Le **profil réel** se construit avec les **vraies** empreintes mesurées et se
+  dépose via `POST https://nelfeplay.com/_ops/scoring/deposit-profile?open=1`
+  (entête `X-Nelfeplay-Deploy-Token`). Il est stocké **privé** dans
+  `NelfePlay-Site/config/scoring-profiles/` (jamais dans le repo public).
+
+## 3. D'où viennent les valeurs d'un profil réel (registre, pas à la main)
+
+On ne recalcule jamais à la main : chaque valeur vient d'une **source**.
+
+| Empreinte | Source canonique |
+|---|---|
+| `content` (ROM) | identité **No‑Intro**. La gamelist `APIExpose/resources/gamelist/systems` porte `crc/md5/sha1` (pas de sha256). **Voie retenue** : le profil référence le `md5` No‑Intro (déjà dans la gamelist) et le wrapper émet `content_md5` — évite de régénérer les gamelists et de posséder toutes les ROMs. |
+| `core` | pas d'équivalent No‑Intro → **registre central de builds officiels** (SHA‑256 des cores distribués par RetroBat / buildbot libretro), à mettre à jour à chaque release de core. |
+| `mem` | donnée NelfePlay → **un SHA‑256 par révision** du `.MEM`. Doit rester cohérent avec `ram_definitions` (base distante). |
+| `listener` | **whitelist** des wrappers homologués (`allowed_listener_sha256`), additive à chaque version signée. |
+
+## 4. Ce que le vérifieur applique réellement
+
+`CoreVerifier` (SPEC §6.3‑6.4) compare en **égalité stricte** :
+- empreintes : `core`, `content`, `mem`, `listener`, + `modules_digest` et les rôles
+  `listener`/`real_core`/`frontend`.
+- règles `sensitive` : `save_state`, `cheats`, `continues`, **`rewind`, `runahead`,
+  `fast_forward`** (ces trois branchés le 2026‑08‑28).
+- progression : monotonie, `game_end`, corrélations, `metric.value` == `result_source`.
+
+À câbler (déclaré mais pas encore appliqué) :
+- **BIOS** : conditionnel à `bios.mode` (`none` / `vfs_observed` / `os_observed`).
+  `none` (cartouche) = pas de contrôle, normal. Les systèmes à BIOS (PSX, Saturn,
+  MegaCD, Neo Geo) demandent une mesure wrapper + un hash autorisé au schéma.
+- **frontend** : `process.executable_sha256` est `null` aujourd'hui → check neutralisé.
+- **core_options** (DIP/réglages) : `core_options_digest` est un placeholder (Phase E).
+
+## 5. Les deux vérifieurs JUMEAUX — garder synchro
+
+Le vérifieur existe en **deux copies qui doivent donner le même verdict** :
+- **Référence** (source de vérité) : `NelfeScoringProtocol/ref/php/src/CoreVerifier.php`
+  et `ref/csharp/NelfeScoring.Vectors/CoreVerifier.cs`, validés par `vectors/`.
+- **Production** (l'enforcer réel) : `NelfePlay-Site/app/Scoring/CoreVerifier.php`
+  (vendoré depuis la référence).
+
+Règle : toute correction se fait **d'abord dans la référence + un vecteur**, se
+valide avec `dotnet run` dans `ref/csharp/NelfeScoring.Vectors` (tous les vecteurs
+au verdict attendu), **puis** se re‑vendore dans `NelfePlay-Site` et se déploie
+(`.deploy/ftps.py upload app/Scoring/CoreVerifier.php /app/Scoring/CoreVerifier.php`,
+puis **relire depuis le serveur** — un rapport d'upload ne prouve rien).

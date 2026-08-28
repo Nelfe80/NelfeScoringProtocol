@@ -10,10 +10,10 @@
     "expires_at": "2026-07-30T20:00:00Z",
     "nonce": "n_abc123",
     "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEYCIQClARI_oRa0vq2qyoNJKDu4XRoHzrGT1nz2CDjfJBnCtgIhAMSN17OJMbezonnUERepoR_hQYqFILfXxvd0SuLsgTyB"
+    "signature": "MEYCIQDaUy7PxfG8KYb7xHgfovlT8a-CkG61U2fwBhwC_gwCBgIhAJVu0CrbLVA_ZYpHEGwoF4stZvV29skXUzPQjseypFPu"
   },
   "game": {
-    "system_id": "megadrive",
+    "system_id": "nes",
     "rom_group": "sonic-the-hedgehog",
     "engine": "libretro",
     "ruleset": "1cc",
@@ -181,5 +181,5 @@
     "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
   },
   "local_check": "pass",
-  "signature": "MEUCIQDMXL53eeY7xI1ATqDgARzDIwiNV9nrE1nKRA1Xed3NrwIgYpePoJXfLd8F4x5KLF0g_zB52ctNTfhwvo9K8wifQjA"
+  "signature": "MEYCIQDMrHKLsNRHqdcqKSf8m0_ogCgWI6KmeTj4BdG7JLhMUgIhAKX-zXvNnwpfF-EtiCLLmgJDuSft1BnXxQ3b8xu9kd06"
 }
