@@ -1,0 +1,19 @@
+/* Couleurs de NELFE VERIFIED, le sceau des scores homologues.
+
+   Material peint le bandeau avec la primaire : on y met l'or profond, sinon
+   le titre blanc n'y tiendrait pas. L'or vif va sur les liens. Le selecteur
+   vise [data-md-color-primary] et non :root, que le theme l'emporterait. */
+[data-md-color-primary] {
+  --md-primary-fg-color:        #8A6212;
+  --md-primary-fg-color--light: #F5B940;
+  --md-primary-fg-color--dark:  #8A6212;
+}
+[data-md-color-accent] {
+  --md-accent-fg-color: #F5B940;
+  --md-accent-fg-color--transparent: #F5B9401f;
+}
+[data-md-color-scheme="default"] { --md-typeset-a-color: #8A6212; }
+[data-md-color-scheme="slate"] {
+  --md-accent-fg-color: #FFD98A;
+  --md-typeset-a-color: #FFD98A;
+}

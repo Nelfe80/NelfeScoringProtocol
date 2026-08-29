@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/empreintes-et-profils/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/empreintes-et-profils/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/heberger-le-verifieur/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/heberger-le-verifieur/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/homologation/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/homologation/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/records/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/records/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/records/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/records/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/records/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/records/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/records/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/regles-de-score/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/regles-de-score/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/transparence/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/transparence/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/verifier-un-score/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/verifier-un-score/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/en/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/en/empreintes-et-profils/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/empreintes-et-profils/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/en/heberger-le-verifieur/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/heberger-le-verifieur/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/en/homologation/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/homologation/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/en/records/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/records/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/records/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/records/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/records/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/records/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/records/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/en/regles-de-score/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/regles-de-score/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/en/transparence/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/transparence/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/en/verifier-un-score/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/verifier-un-score/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/es/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/es/empreintes-et-profils/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/empreintes-et-profils/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/es/heberger-le-verifieur/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/heberger-le-verifieur/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/es/homologation/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/homologation/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/es/records/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/records/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/records/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/records/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/records/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/records/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/records/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/es/regles-de-score/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/regles-de-score/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/es/transparence/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/transparence/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/es/verifier-un-score/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/verifier-un-score/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ja/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ja/empreintes-et-profils/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/empreintes-et-profils/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ja/heberger-le-verifieur/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/heberger-le-verifieur/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ja/homologation/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/homologation/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ja/records/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/records/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/records/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/records/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/records/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/records/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/records/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ja/regles-de-score/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/regles-de-score/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ja/transparence/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/transparence/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ja/verifier-un-score/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/verifier-un-score/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/zh/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/zh/empreintes-et-profils/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/empreintes-et-profils/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/zh/heberger-le-verifieur/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/heberger-le-verifieur/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/zh/homologation/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/homologation/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/zh/records/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/records/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/records/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/records/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/records/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/records/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/records/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/zh/regles-de-score/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/regles-de-score/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/zh/transparence/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/transparence/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/zh/verifier-un-score/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/verifier-un-score/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ko/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ko/empreintes-et-profils/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/empreintes-et-profils/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/empreintes-et-profils/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ko/heberger-le-verifieur/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/heberger-le-verifieur/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/heberger-le-verifieur/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ko/homologation/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/homologation/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/homologation/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ko/records/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/records/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/records/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/records/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/records/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/records/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/records/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ko/regles-de-score/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/regles-de-score/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/regles-de-score/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ko/transparence/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/transparence/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/transparence/"/>
+    </url>
+    <url>
+        <loc>https://nelfe80.github.io/NelfeScoringProtocol/ko/verifier-un-score/</loc>
+        <lastmod>2026-08-29</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ko" href="https://nelfe80.github.io/NelfeScoringProtocol/ko/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nelfe80.github.io/NelfeScoringProtocol/en/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://nelfe80.github.io/NelfeScoringProtocol/es/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://nelfe80.github.io/NelfeScoringProtocol/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://nelfe80.github.io/NelfeScoringProtocol/ja/verifier-un-score/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nelfe80.github.io/NelfeScoringProtocol/zh/verifier-un-score/"/>
+    </url>
+</urlset>

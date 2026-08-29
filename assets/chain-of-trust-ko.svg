@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 974" font-family="Segoe UI,system-ui,-apple-system,Roboto,sans-serif">
+<rect x="0" y="0" width="860" height="974" rx="20" fill="#0b1330"/>
+<rect x="0" y="0" width="860" height="974" rx="20" fill="none" stroke="#26386f"/>
+<text x="34" y="48" fill="#eaf0ff" font-size="26" font-weight="800">신뢰의 사슬</text>
+<text x="34" y="76" fill="#9fb0d6" font-size="14.5">측정에서 Bitcoin까지 - 누구나 검증 가능</text>
+<line x1="40" y1="110" x2="40" y2="870" stroke="#2c3f78" stroke-width="2"/>
+<circle cx="40" cy="166" r="15" fill="#ff9d3c"/>
+<text x="40" y="171" fill="#06121f" font-size="15" font-weight="900" text-anchor="middle">1</text>
+<rect x="84" y="118" width="736" height="96" rx="14" fill="#0e1838" stroke="#2c3f78"/>
+<rect x="84" y="118" width="5" height="96" rx="2.5" fill="#ff9d3c"/>
+<text x="106" y="156" fill="#eaf0ff" font-size="19" font-weight="800">게임 - RAM</text>
+<text x="106" y="184" fill="#a6b6da" font-size="14.5">인증된 리스너가 메모리에서 점수를 읽음</text>
+<path d="M40 214 L40 250" stroke="#2c3f78" stroke-width="2"/>
+<path d="M35 242 L40 250 L45 242" fill="none" stroke="#2c3f78" stroke-width="2"/>
+<circle cx="40" cy="298" r="15" fill="#2a7de1"/>
+<text x="40" y="303" fill="#06121f" font-size="15" font-weight="900" text-anchor="middle">2</text>
+<rect x="84" y="250" width="736" height="96" rx="14" fill="#0e1838" stroke="#2c3f78"/>
+<rect x="84" y="250" width="5" height="96" rx="2.5" fill="#2a7de1"/>
+<text x="106" y="288" fill="#eaf0ff" font-size="19" font-weight="800">기기</text>
+<text x="106" y="316" fill="#a6b6da" font-size="14.5">세션 패스포트 서명 (ECDSA P-256, 하드웨어 키)</text>
+<path d="M40 346 L40 382" stroke="#2c3f78" stroke-width="2"/>
+<path d="M35 374 L40 382 L45 374" fill="none" stroke="#2c3f78" stroke-width="2"/>
+<circle cx="40" cy="430" r="15" fill="#2a7de1"/>
+<text x="40" y="435" fill="#06121f" font-size="15" font-weight="900" text-anchor="middle">3</text>
+<rect x="84" y="382" width="736" height="96" rx="14" fill="#0e1838" stroke="#2c3f78"/>
+<rect x="84" y="382" width="5" height="96" rx="2.5" fill="#2a7de1"/>
+<text x="106" y="420" fill="#eaf0ff" font-size="19" font-weight="800">서버</text>
+<text x="106" y="448" fill="#a6b6da" font-size="14.5">공개 규칙 검증 → 게시 / 보류 / 거부</text>
+<path d="M40 478 L40 514" stroke="#2c3f78" stroke-width="2"/>
+<path d="M35 506 L40 514 L45 506" fill="none" stroke="#2c3f78" stroke-width="2"/>
+<circle cx="40" cy="562" r="15" fill="#ffd24a"/>
+<text x="40" y="567" fill="#06121f" font-size="15" font-weight="900" text-anchor="middle">4</text>
+<rect x="84" y="514" width="736" height="96" rx="14" fill="#0e1838" stroke="#2c3f78"/>
+<rect x="84" y="514" width="5" height="96" rx="2.5" fill="#ffd24a"/>
+<text x="106" y="552" fill="#eaf0ff" font-size="19" font-weight="800">서명된 인덱스</text>
+<text x="106" y="580" fill="#a6b6da" font-size="14.5">전체 기록 목록 + 서명된 SHA-256 지문</text>
+<path d="M40 610 L40 646" stroke="#2c3f78" stroke-width="2"/>
+<path d="M35 638 L40 646 L45 638" fill="none" stroke="#2c3f78" stroke-width="2"/>
+<circle cx="40" cy="694" r="15" fill="#f7931a"/>
+<text x="40" y="699" fill="#06121f" font-size="15" font-weight="900" text-anchor="middle">5</text>
+<rect x="84" y="646" width="736" height="96" rx="14" fill="#0e1838" stroke="#2c3f78"/>
+<rect x="84" y="646" width="5" height="96" rx="2.5" fill="#f7931a"/>
+<text x="106" y="684" fill="#eaf0ff" font-size="19" font-weight="800">OpenTimestamps → Bitcoin</text>
+<text x="106" y="712" fill="#a6b6da" font-size="14.5">지문 타임스탬프: 선후 증명, 불변</text>
+<path d="M40 742 L40 778" stroke="#2c3f78" stroke-width="2"/>
+<path d="M35 770 L40 778 L45 770" fill="none" stroke="#2c3f78" stroke-width="2"/>
+<circle cx="40" cy="826" r="15" fill="#39d353"/>
+<text x="40" y="831" fill="#06121f" font-size="15" font-weight="900" text-anchor="middle">6</text>
+<rect x="84" y="778" width="736" height="96" rx="14" fill="#0e1838" stroke="#2c3f78"/>
+<rect x="84" y="778" width="5" height="96" rx="2.5" fill="#39d353"/>
+<text x="106" y="816" fill="#eaf0ff" font-size="19" font-weight="800">누구나</text>
+<text x="106" y="844" fill="#a6b6da" font-size="14.5">브라우저에서 모든 것을 재검증 - 아무도 믿지 않고</text>
+<text x="814" y="136" fill="#ff9d3c" font-size="12" font-weight="700" text-anchor="end">비공개 · 인증됨</text>
+<text x="814" y="268" fill="#39d353" font-size="12" font-weight="700" text-anchor="end">공개 · 누구나 재현 가능</text>
+<text x="430" y="950" fill="#63739e" font-size="13.5" font-style="italic" text-anchor="middle">보안은 비밀이 아니라 공개에 기반합니다.</text>
+</svg>
