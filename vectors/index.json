@@ -96,6 +96,10 @@
     "expected": "session.no_game_end"
   },
   {
+    "vector": "fail_core_options.passport.json",
+    "expected": "profile.core_options_mismatch"
+  },
+  {
     "vector": "fail_out_of_bounds.passport.json",
     "expected": "format.out_of_bounds"
   },

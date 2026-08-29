@@ -10,7 +10,7 @@
     "expires_at": "2026-07-30T20:00:00Z",
     "nonce": "n_abc123",
     "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEYCIQDocbK0z_axpnlJFJdmJHmkY-5U6J640koPTcju3DMDdgIhAKT-kyuc8HJ1sZZRGiw4xP6OPX0s0KmmOjqUhbIZXsjt"
+    "signature": "MEYCIQCGrQQ1irMoKSwAfiuTmaMhcygcFMfXqgv0vrpnoKW34gIhAJS5qPrFDZ5zqAWrdu4NMafPY07960T8uCxDB8Q0ZMPO"
   },
   "game": {
     "system_id": "nes",
@@ -19,7 +19,7 @@
     "ruleset": "1cc",
     "profile_version": 1,
     "manifest_commit": "a1b2c3d4e5f6",
-    "profile_document_sha256": "8ae3910fa1483d4567263c524017cc7e45e831d10197bfb0fdfa96a67048e948"
+    "profile_document_sha256": "a286a8f2a32baea10567828c6e7a592b6bfdafd44c4e25c0a48a2441b3608e7d"
   },
   "device": {
     "device_id": "dev-001",
@@ -181,5 +181,5 @@
     "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
   },
   "local_check": "pass",
-  "signature": "MEUCIQCwnmbktfabWMc_uSdELymCvkFty-IPz4mKi-X0Uu6yqgIgcekNCLtIJ_HU0mnFjGlpJqzmPlG75zPWHi6cs4fQzkc"
+  "signature": "MEQCIE2yf8MhLzIXCTKqbd1EgMOEvZbpKqTKZw_37hcJwZPjAiAfMStRUmbCoW9pAmhKQoHjCd4jVe31-t5qmt3u-52bBg"
 }

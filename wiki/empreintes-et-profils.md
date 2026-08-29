@@ -72,6 +72,8 @@ On ne recalcule jamais à la main : chaque valeur vient d'une **source**.
   (RetroArch) sinon `allowed_content_sha1` (MAME) sinon `allowed_content_sha256`.
 - règles `sensitive` : `save_state`, `cheats`, `continues`, **`rewind`, `runahead`,
   `fast_forward`** (ces trois branchés le 2026‑08‑28).
+- **réglages** (Phase E, 2026‑08‑30) : `core_options_digest` ∈ `allowed_core_options_digest`,
+  en **opt‑in** (contrôlé seulement si le profil épingle la clé). Voir §5.
 - progression : monotonie, `game_end`, corrélations, `metric.value` == `result_source`.
 
 À câbler (déclaré mais pas encore appliqué) :
@@ -79,9 +81,34 @@ On ne recalcule jamais à la main : chaque valeur vient d'une **source**.
   `none` (cartouche) = pas de contrôle, normal. Les systèmes à BIOS (PSX, Saturn,
   MegaCD, Neo Geo) demandent une mesure wrapper + un hash autorisé au schéma.
 - **frontend** : `process.executable_sha256` est `null` aujourd'hui → check neutralisé.
-- **core_options** (DIP/réglages) : `core_options_digest` est un placeholder (Phase E).
 
-## 5. Les deux vérifieurs JUMEAUX — garder synchro
+## 5. Réglages « usine » — le `core_options_digest` (Phase E)
+
+Un score n'est comparable qu'à **réglages égaux** (difficulté, vies, région…). Le profil
+épingle donc, en option, l'empreinte des réglages de référence : `allowed_core_options_digest`
+(SHA‑256 d'une chaîne canonique triée `clé=valeur;…`). Contrôle **opt‑in** : un profil sans
+cette clé ne vérifie pas les réglages (rétro‑compatible).
+
+**Ce qui est digéré = seulement le GAMEPLAY**, pas le cosmétique (audio, filtres vidéo, ratio).
+La capture dépend du backend :
+
+| Backend | Source des réglages | Filtre |
+|---|---|---|
+| RetroArch (wrapper) | `RETRO_ENVIRONMENT_GET_VARIABLE` — le core lit ses options (DIP arcade pour fbneo, région/etc. pour la console) | **allowlist par core** dans le reporter (chaque core a ses clés préfixées : `genesis_plus_gx_*`, `fbneo-*`…) ; ajouter un core = une entrée, partagée par ses jeux |
+| MAME standalone (Lua) | `manager.machine.ioport` — les DIP switches | **denylist** dans le plugin Lua (écarte monnayage/service/flip/cabinet/demo/unused) |
+
+Le **digest est calculé côté APIExpose** (le backend émet le brut, le reporter filtre puis hache) :
+mécanisme centralisé, et une clé d'un backend non filtré passe inchangée (donc un digest déjà
+épinglé ne bouge pas si on ajoute un core à l'allowlist).
+
+**Épinglage d'un jeu** : jouer une fois en réglages usine → lire le digest dans le log APIExpose
+(`Scoring Phase E : réglages … → core_options_digest=…`) → le mettre dans `allowed_core_options_digest`
+→ redéposer. Un réglage gameplay différent donne alors `profile.core_options_mismatch`.
+
+**Limite** : les jeux configurés par **EEPROM/nvram** (CPS‑2, Neo‑Geo) n'exposent pas leurs
+réglages en DIP — le digest y fingerprinte des DIP inertes, pas la vraie difficulté (capture nvram = futur).
+
+## 6. Les deux vérifieurs JUMEAUX — garder synchro
 
 Le vérifieur existe en **deux copies qui doivent donner le même verdict** :
 - **Référence** (source de vérité) : `NelfeScoringProtocol/ref/php/src/CoreVerifier.php`

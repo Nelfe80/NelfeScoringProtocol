@@ -69,6 +69,14 @@ final class CoreVerifier
         if ($memLoaded !== self::s($profile, 'mem_sha256')) return self::f('profile.mem_mismatch');
         if (!self::inArr($profile, $listenerLoaded, 'allowed_listener_sha256')) return self::f('profile.listener_unauthorized');
 
+        // Phase E : epinglage des reglages (DIP/vies/difficulte). Additif : on ne controle
+        // QUE si le profil epingle allowed_core_options_digest (sinon on saute, retro-compatible).
+        $allowedCoreOpts = $profile->allowed_core_options_digest ?? null;
+        if (is_array($allowedCoreOpts) && count($allowedCoreOpts) > 0) {
+            if (!self::inArr($profile, self::s($passport, 'artifacts', 'core_options_digest'), 'allowed_core_options_digest'))
+                return self::f('profile.core_options_mismatch');
+        }
+
         $modules = $passport->software->modules ?? null;
         if (!is_array($modules)) return self::f('format.schema');
         $roleHash = function (string $role) use ($modules): ?string {

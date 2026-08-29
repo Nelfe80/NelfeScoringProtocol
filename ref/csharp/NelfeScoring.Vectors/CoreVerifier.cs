@@ -92,6 +92,15 @@ public static class CoreVerifier
         if (memLoaded != Str(profile, "mem_sha256")) return F("profile.mem_mismatch");
         if (!InArr(profile, listenerLoaded, "allowed_listener_sha256")) return F("profile.listener_unauthorized");
 
+        // Phase E : épinglage des réglages (DIP/vies/difficulté). Additif : on ne contrôle
+        // QUE si le profil épingle allowed_core_options_digest (sinon skip, rétro-compatible).
+        var allowedCoreOpts = profile["allowed_core_options_digest"] as JsonArray;
+        if (allowedCoreOpts is not null && allowedCoreOpts.Count > 0)
+        {
+            if (!InArr(profile, Str(passport, "artifacts", "core_options_digest"), "allowed_core_options_digest"))
+                return F("profile.core_options_mismatch");
+        }
+
         // modules par rôle + digest (§6.3-10, §5.5)
         var modules = passport["software"]?["modules"] as JsonArray;
         if (modules is null) return F("format.schema");

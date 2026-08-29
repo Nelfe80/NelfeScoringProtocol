@@ -53,6 +53,7 @@
     },
 
     "core_options_policy": { "type": "object" },
+    "allowed_core_options_digest": { "$ref": "#/$defs/sha256Array" },
 
     "rules": {
       "type": "object", "additionalProperties": false,

@@ -60,6 +60,8 @@ var profile = new JsonObject
     ["allowed_listener_sha256"] = new JsonArray { listenerH },
     ["mem_sha256"] = memH,
     ["bios"] = new JsonObject { ["mode"] = "none" },
+    // Phase E : le profil épingle le digest des réglages usine (ici = fixture du passeport).
+    ["allowed_core_options_digest"] = new JsonArray { H("core-options@default") },
     ["rules"] = new JsonObject
     {
         ["save_state"] = "forbidden", ["cheats"] = "forbidden", ["rewind"] = "forbidden",
@@ -209,6 +211,7 @@ Add("fail_ticket_missing", "session.ticket_missing", p => p.Remove("ticket"), si
 Add("fail_not_open", "profile.not_open", p => { p["timing"]!["started_at"] = "2026-06-01T10:00:00Z"; p["timing"]!["ended_at"] = "2026-06-01T10:05:00Z"; });
 Add("fail_timing", "timing.incoherent", p => p["timing"]!["started_at"] = "2026-07-30T18:45:00Z");
 Add("fail_no_game_end", "session.no_game_end", p => { var c = p["progression"]!["checkpoints"]!.AsArray(); ((JsonObject)c[c.Count - 1]!).Remove("event"); });
+Add("fail_core_options", "profile.core_options_mismatch", p => p["artifacts"]!["core_options_digest"] = H("tampered-options"));
 Add("fail_out_of_bounds", "format.out_of_bounds", p => p["metric"]!["value"] = "999");
 Add("fail_protocol", "format.protocol", p => p["protocol"] = 2);
 Add("fail_schema", "format.schema", p => p.Remove("session_id"));

@@ -32,6 +32,9 @@
   "bios": {
     "mode": "none"
   },
+  "allowed_core_options_digest": [
+    "9d029d5af69ff8a858d5db6c073038edd4642d463c691d7923e62fad00da6430"
+  ],
   "rules": {
     "save_state": "forbidden",
     "cheats": "forbidden",

@@ -10,7 +10,7 @@
     "expires_at": "2026-07-30T20:00:00Z",
     "nonce": "n_abc123",
     "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEQCICC3g8Jht9AAVhRK25uS3KcOF3lZxSY4EIeQ-pU0rRa3AiBebAowcdB5p26GMhAXBfnhJPwJf0jx7Y_4MfVZKE9Umw"
+    "signature": "MEUCIQDh9x9z6AP2Bl8_milOo_-Dk9wwskElwscrMlmjEywF7QIgXdyYCT0efhYzMc-v4wa-Ie_TnN6IcbowlXGBl2o8Sn0"
   },
   "game": {
     "system_id": "megadrive",
@@ -19,7 +19,7 @@
     "ruleset": "1cc",
     "profile_version": 1,
     "manifest_commit": "a1b2c3d4e5f6",
-    "profile_document_sha256": "8ae3910fa1483d4567263c524017cc7e45e831d10197bfb0fdfa96a67048e948"
+    "profile_document_sha256": "a286a8f2a32baea10567828c6e7a592b6bfdafd44c4e25c0a48a2441b3608e7d"
   },
   "device": {
     "device_id": "dev-001",
@@ -181,5 +181,5 @@
     "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
   },
   "local_check": "pass",
-  "signature": "MEUCIQCkPr-VpBE9nUZghmOUuCjXx1P54bWt9qWQyRyw6jt5jgIgPGWg7ZgUnBy6Ox_4blSOUAIRtDwlUd_7xXkZsLoPN88"
+  "signature": "MEYCIQCwRKajmO4HWMyWlre-ArlqBiDHyitmd_Gb3TRBQssDMQIhAIq2hS4ZkNae0URsVnAEFSr5vUk9q2WKtwXKtUWmzqX4"
 }
