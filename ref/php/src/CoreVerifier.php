@@ -53,19 +53,32 @@ final class CoreVerifier
         $listenerLoaded = self::s($passport, 'listener', 'loaded_sha256');
 
         if (!self::inArr($profile, $coreLoaded, 'allowed_core_sha256')) return self::f('profile.core_mismatch');
-        // Voie A : si le profil épingle la ROM par md5 (No-Intro/gamelist), on compare le md5
-        // (le wrapper homologué DOIT l'émettre) ; sinon on retombe sur le sha256 (legacy).
-        $allowedContentMd5 = $profile->allowed_content_md5 ?? null;
-        $allowedContentSha1 = $profile->allowed_content_sha1 ?? null;
-        if (is_array($allowedContentMd5) && count($allowedContentMd5) > 0) {
-            if (!self::inArr($profile, self::s($passport, 'artifacts', 'content', 'md5'), 'allowed_content_md5')) return self::f('profile.content_mismatch');
-        } elseif (is_array($allowedContentSha1) && count($allowedContentSha1) > 0) {
-            // MAME : le Lua ne mesure pas la ROM (MAME la charge en interne + la verifie
-            // contre son DAT). Identite = sha1 du set dans la gamelist MAME.
-            if (!self::inArr($profile, self::s($passport, 'artifacts', 'content', 'sha1'), 'allowed_content_sha1')) return self::f('profile.content_mismatch');
-        } elseif (!self::inArr($profile, $contentLoaded, 'allowed_content_sha256')) {
-            return self::f('profile.content_mismatch');
+        // Identité du contenu : chaque moteur ne sait prouver que CERTAINES formes.
+        // Le pont Lua MAME ne mesure pas la ROM - MAME la charge et la vérifie contre
+        // son DAT - et n'apporte que le sha1 du set. Le wrapper libretro, lui, mesure
+        // ce qu'il charge et donne un md5, parfois un sha256, jamais ce sha1.
+        //
+        // Une cascade exclusive rendait donc un profil ouvert aux DEUX moteurs
+        // impossible à satisfaire : épingler le md5 pour RetroArch faisait échouer
+        // MAME, et l'inverse. On raisonne en union.
+        //
+        // Règle : au moins une forme à la fois ÉPINGLÉE et PRÉSENTÉE doit correspondre,
+        // et aucune forme épinglée et présentée ne doit contredire. Un passeport muet
+        // sur toutes les formes épinglées est refusé - l'absence ne vaut pas identité.
+        $formes = [
+            ['allowed_content_md5', self::s($passport, 'artifacts', 'content', 'md5')],
+            ['allowed_content_sha1', self::s($passport, 'artifacts', 'content', 'sha1')],
+            ['allowed_content_sha256', $contentLoaded],
+        ];
+        $contenuReconnu = false;
+        foreach ($formes as [$cle, $presentee]) {
+            $epinglee = $profile->{$cle} ?? null;
+            if (!is_array($epinglee) || count($epinglee) === 0) continue;   // forme non épinglée
+            if ($presentee === null || $presentee === '') continue;         // forme non présentée
+            if (!self::inArr($profile, $presentee, $cle)) return self::f('profile.content_mismatch');
+            $contenuReconnu = true;
         }
+        if (!$contenuReconnu) return self::f('profile.content_mismatch');
         if ($memLoaded !== self::s($profile, 'mem_sha256')) return self::f('profile.mem_mismatch');
         if (!self::inArr($profile, $listenerLoaded, 'allowed_listener_sha256')) return self::f('profile.listener_unauthorized');
 
