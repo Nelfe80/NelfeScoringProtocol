@@ -34,6 +34,36 @@ canonique** (`emu.romname()`, ex. `19xx` ; côté APIExpose `definition.RawRom`)
 **jamais** par le nom d'affichage du `.MEM` (`definition.Rom`, ex.
 `19xx-the-war-against-destiny`). Une jointure sur le nom d'affichage échoue.
 
+### L'arcade en général, pas seulement MAME
+
+Ce qui précède a longtemps été présenté comme une particularité de MAME. C'en est une de
+l'**arcade**, et elle vaut aussi quand le jeu tourne sous RetroArch avec un cœur comme
+FBNeo.
+
+La raison tient à la nature du référentiel. Les DAT d'arcade décrivent un **set**, pas un
+fichier : ils donnent le SHA-1 de la ROM programme, jamais l'empreinte du `.zip` qui la
+transporte. Mesuré sur le référentiel arcade complet, la couverture est de **0 % de md5**
+pour environ 4 000 entrées, contre 100 % sur une console dont les DAT No-Intro empreintent
+le fichier lui-même. Une empreinte **mesurée** du `.zip` ne peut donc jamais résoudre vers
+un jeu d'arcade : elle est correcte, et sans emploi.
+
+Conséquence pratique : sur le chemin RetroArch, l'identité du contenu arcade se **lit**
+dans la gamelist comme du côté MAME, et le passeport porte les **deux formes** :
+
+| Forme | Origine | Ce qu'elle établit |
+|---|---|---|
+| `content_sha1` | déclarée, issue des DAT via la gamelist | de quel jeu il s'agit |
+| `content_md5`, `content_sha256` | mesurées par le wrapper sur les octets chargés | ce qui a réellement été exécuté |
+
+L'intégrité réelle du romset n'est pas perdue pour autant : elle est garantie par
+l'émulateur, qui vérifie le set contre son propre DAT au chargement, et refuse de démarrer
+sinon.
+
+Le vérifieur en tire une règle d'**union** plutôt que de cascade : au moins une forme
+épinglée par le profil et présentée par le passeport doit correspondre, et aucune ne doit
+contredire. Sans cela, le même jeu était certifiable sous MAME et refusé sous FBNeo avec
+un « ROM non reconnue » trompeur, alors que la ROM était la bonne.
+
 ## 2. LE piège : fixture de test ≠ profil de production
 
 - `manifest/profiles/**/<v>.json` est un **FIXTURE DE TEST généré** par

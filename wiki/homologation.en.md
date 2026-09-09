@@ -30,6 +30,44 @@ The **passport** carries the listener hash **before / loaded / after** - measure
 **independently by the open component** (not by the listener itself, to avoid
 self-attestation).
 
+## Homologation at publication time
+
+A build sheet is worthless until the platform knows about it. As long as homologation was a
+manual step, **every new listener build invalidated the fleet** until someone remembered to
+register it: up-to-date cabinets had their scores refused for an unknown build, which is the
+exact opposite of the intended effect.
+
+The manifest is therefore **published alongside the binary**, signed, and the platform goes
+and reads it:
+
+```json
+{
+  "built_at": "2026-09-05T21:13:53Z",
+  "sha256": "1bd08a9d5d9aaac16692eab6f52278b3f072a143c20436271883d28025034e75",
+  "signature": "MEUCIQD5QTn8FMBbiLBZKXLL9P_-1_f6cQAtiLFv9vphxYmqtQIgGdTPvOkMoF5EbwCiSCsBNu_IMJY94d6vGr_Fl60WPRI",
+  "subject": "CN=nelfeTech",
+  "version": "0.334.0.0"
+}
+```
+
+The signature is **ECDSA P-256 / SHA-256** over the canonicalised body (RFC 8785), carried as
+base64url. The platform verifies it against a **public key pinned in its own code**, never
+against a key supplied by the manifest: without that anchor, anyone publishing a file in the
+right format would get their own binary homologated.
+
+Three properties of this design are worth stating:
+
+- **The manifest is pulled, not pushed.** The platform polls a public URL. Anyone can read the
+  same file and redo the same verification, which makes homologation observable from outside.
+- **A build never disappears on its own.** The automation adds, it does not remove.
+- **Revocation stays a deliberate act** (see below), and it takes precedence over publication:
+  a withdrawn build is not re-homologated just because it is still online.
+
+Since this file is the anchor for the whole fleet, it must be **produced by the signing chain
+itself**, never written by hand: a manifest announcing a version that does not match the signed
+binary would homologate a hash that does not exist, and every up-to-date cabinet would fall at
+once.
+
 ## Homologation suite (black box, public)
 Behavior can be proven **without revealing the algorithm**:
 > ROM X + scenario Y → the on-screen score is **12,500** → the official listener must
