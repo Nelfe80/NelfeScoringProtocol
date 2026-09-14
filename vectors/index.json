@@ -84,6 +84,10 @@
     "expected": "profile.nvram_mismatch"
   },
   {
+    "vector": "pass_nvram_autre_coeur.passport.json",
+    "expected": "pass"
+  },
+  {
     "vector": "fail_modules_digest.passport.json",
     "expected": "attestation.modules_digest"
   },

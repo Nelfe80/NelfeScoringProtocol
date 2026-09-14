@@ -23,7 +23,8 @@
     "7a1c2c99ed7e72d025f2e8768a5b7994"
   ],
   "allowed_core_sha256": [
-    "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2"
+    "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2",
+    "fd9f6af74f6d96601439e2bb49427eed14beb2d55115380d164461d077e89530"
   ],
   "allowed_listener_sha256": [
     "e85685fad0aa07543472e65c941b5caac4b74e1bdb8df854d59b18c8c1330376"
@@ -48,7 +49,10 @@
           16
         ]
       ],
-      "sha256": "5b8377016b92c4d3ee530e1b3016bc9095cf2050b49e433b3e2f29b001426be1"
+      "sha256": "5b8377016b92c4d3ee530e1b3016bc9095cf2050b49e433b3e2f29b001426be1",
+      "cores": [
+        "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2"
+      ]
     }
   ],
   "rules": {

@@ -95,8 +95,12 @@ final class CoreVerifier
         $pins = $profile->nvram_pins ?? null;
         if (is_array($pins) && count($pins) > 0) {
             $nvram = $passport->artifacts->nvram ?? null;
-            if (!is_array($nvram)) return self::f('profile.nvram_mismatch');
             foreach ($pins as $pin) {
+                // Une epingle limitee a des coeurs ne concerne pas les autres moteurs du profil.
+                $coeurs = $pin->cores ?? null;
+                if (is_array($coeurs) && count($coeurs) > 0
+                    && !in_array(strtolower((string) $coreLoaded), array_map(static fn($c) => strtolower((string) $c), $coeurs), true)) continue;
+                if (!is_array($nvram)) return self::f('profile.nvram_mismatch');
                 $fichier = str_replace('\\', '/', (string) ($pin->file ?? ''));
                 $attendu = strtolower((string) ($pin->sha256 ?? ''));
                 $plages = $pin->ranges ?? null;

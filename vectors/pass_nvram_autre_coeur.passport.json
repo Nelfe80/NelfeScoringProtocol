@@ -10,7 +10,7 @@
     "expires_at": "2026-07-30T20:00:00Z",
     "nonce": "n_abc123",
     "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEYCIQCCJNsrloaufioUVNdO8K52n94Nz_lBeIJVJDRBVWlkhwIhAM_ReEg2MySfFbQS96HHiIeU5wdE6JWf1H6oqjmRpftA"
+    "signature": "MEYCIQD3hKTxDIzOrTTe1Ps6mojpWXj2Hb-FVMAtMqcrzblgrwIhAPRJY_opyXkxxV_soXqW3fJj6yBvLPw9YpSEBm5CoiYJ"
   },
   "game": {
     "system_id": "megadrive",
@@ -49,7 +49,7 @@
       },
       {
         "role": "real_core",
-        "sha256": "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2"
+        "sha256": "fd9f6af74f6d96601439e2bb49427eed14beb2d55115380d164461d077e89530"
       },
       {
         "role": "apiexpose",
@@ -64,13 +64,13 @@
         "sha256": "32176ce2fc21a9426b533f91a9193bc3491e0b91670fd0a406589ab2215e4c60"
       }
     ],
-    "modules_digest": "a4623dae321a629ff135f70fe5efbd96e040b4ad1929b49b82f5eec447da834b"
+    "modules_digest": "f5b03defa9f8c66f6861745e160b097da5eb012539ff171bb895b2623304570c"
   },
   "artifacts": {
     "core": {
-      "start_sha256": "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2",
-      "loaded_sha256": "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2",
-      "end_sha256": "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2"
+      "start_sha256": "fd9f6af74f6d96601439e2bb49427eed14beb2d55115380d164461d077e89530",
+      "loaded_sha256": "fd9f6af74f6d96601439e2bb49427eed14beb2d55115380d164461d077e89530",
+      "end_sha256": "fd9f6af74f6d96601439e2bb49427eed14beb2d55115380d164461d077e89530"
     },
     "content": {
       "start_sha256": "7a1c2c99ed7e72d025f2e8768a5b7994d63548ef384c3128d45ddca99485077b",
@@ -86,15 +86,7 @@
     "core_options_digest": "9d029d5af69ff8a858d5db6c073038edd4642d463c691d7923e62fad00da6430",
     "bios": {
       "mode": "none"
-    },
-    "nvram": [
-      {
-        "file": "saves/arcade/fixture/settings.nv",
-        "size": 16,
-        "start": "AQMDAAMAAQEAAQCWAQQIGQ==",
-        "end": "AQMDAAMAAQEYAQCWAQQIGQ=="
-      }
-    ]
+    }
   },
   "process": {
     "pid": 12345,
@@ -124,7 +116,7 @@
   },
   "sensitive": {
     "cheats": false,
-    "save_state_loaded": true,
+    "save_state_loaded": false,
     "resets": 0,
     "rewind": false,
     "runahead": false,
@@ -189,5 +181,5 @@
     "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
   },
   "local_check": "pass",
-  "signature": "MEYCIQCWlj43IwBPXWGIxrWxWXHIGkZ2RSPdT18C-s6mMdzDRAIhAKh0wDe6Qv4HfmNJ_6Quj_AptMxrnVOPtc8BUz2YdNRf"
+  "signature": "MEQCICDIGhNqhoQjTlx1P1Etw4ulAg4r78qpcKucDK1MssDpAiBQmPOJ6x5fYrOv2JrdwEcrX_1bVNS0n_jF7GpChwfoxw"
 }

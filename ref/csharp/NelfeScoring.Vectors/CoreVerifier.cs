@@ -107,9 +107,12 @@ public static class CoreVerifier
         if (pins is not null && pins.Count > 0)
         {
             var nvram = passport["artifacts"]?["nvram"] as JsonArray;
-            if (nvram is null) return F("profile.nvram_mismatch");
             foreach (var pin in pins)
             {
+                // Une epingle limitee a des coeurs ne concerne pas les autres moteurs du profil.
+                if (pin?["cores"] is JsonArray coeurs && coeurs.Count > 0
+                    && !coeurs.Any(c => string.Equals(c?.GetValue<string>(), coreLoaded, StringComparison.OrdinalIgnoreCase))) continue;
+                if (nvram is null) return F("profile.nvram_mismatch");
                 var fichier = (pin?["file"]?.GetValue<string>() ?? "").Replace('\\', '/');
                 var attendu = pin?["sha256"]?.GetValue<string>()?.ToLowerInvariant();
                 var plages = pin?["ranges"] as JsonArray;

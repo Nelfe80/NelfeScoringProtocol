@@ -56,7 +56,7 @@ var profile = new JsonObject
     ["trajectory_policy"] = new JsonObject { ["monotonicity"] = "non_decreasing" },
     ["allowed_content_sha256"] = new JsonArray { contentH },
     ["allowed_content_md5"] = new JsonArray { contentMd5 },
-    ["allowed_core_sha256"] = new JsonArray { coreH },
+    ["allowed_core_sha256"] = new JsonArray { coreH, H("other_core") },   // 2e moteur : sans epingle NVRAM
     ["allowed_listener_sha256"] = new JsonArray { listenerH },
     ["mem_sha256"] = memH,
     ["bios"] = new JsonObject { ["mode"] = "none" },
@@ -64,7 +64,8 @@ var profile = new JsonObject
     ["allowed_core_options_digest"] = new JsonArray { H("core-options@default") },
     // Epinglage NVRAM : 16 octets de reglages, l'octet 8 est un compteur (hors plages).
     ["nvram_pins"] = new JsonArray { new JsonObject { ["file"] = "fixture/settings.nv",
-        ["ranges"] = new JsonArray { new JsonArray { 0, 8 }, new JsonArray { 9, 16 } }, ["sha256"] = "5b8377016b92c4d3ee530e1b3016bc9095cf2050b49e433b3e2f29b001426be1" } },
+        ["ranges"] = new JsonArray { new JsonArray { 0, 8 }, new JsonArray { 9, 16 } }, ["sha256"] = "5b8377016b92c4d3ee530e1b3016bc9095cf2050b49e433b3e2f29b001426be1",
+        ["cores"] = new JsonArray { coreH } } },
     ["rules"] = new JsonObject
     {
         ["save_state"] = "forbidden", ["cheats"] = "forbidden", ["rewind"] = "forbidden",
@@ -220,6 +221,15 @@ Add("fail_module_unauthorized", "runtime.module_unauthorized", p =>
 Add("pass_frontend_libre", "", p => p["process"]!["executable_sha256"] = null);   // la version du frontend est libre
 Add("fail_nvram_settings", "profile.nvram_mismatch", p => p["artifacts"]!["nvram"]![0]!["end"] = "AQMDBwMAAQEAAQCWAQQIGQ==");
 Add("fail_nvram_missing", "profile.nvram_mismatch", p => p["artifacts"]!.AsObject().Remove("nvram"));
+Add("pass_nvram_autre_coeur", "", p =>
+{
+    // L'autre moteur du profil n'a pas le fichier epingle pour FBNeo : l'epingle ne le concerne pas.
+    p["artifacts"]!["core"] = HashTriple(H("other_core"));
+    var mods = p["software"]!["modules"]!.AsArray();
+    foreach (var m in mods) if (m?["role"]?.GetValue<string>() == "real_core") ((JsonObject) m)["sha256"] = H("other_core");
+    p["software"]!["modules_digest"] = Crypto.Sha256Hex(Jcs.Canonical(mods));
+    p["artifacts"]!.AsObject().Remove("nvram");
+});
 Add("fail_modules_digest", "attestation.modules_digest", p => p["software"]!["modules_digest"] = new string('a', 64));
 Add("fail_ticket_invalid", "session.ticket_invalid", p => p["ticket"]!["device_id"] = "dev-999");
 Add("fail_ticket_missing", "session.ticket_missing", p => p.Remove("ticket"), sign: false);
