@@ -101,6 +101,40 @@ public static class CoreVerifier
                 return F("profile.core_options_mismatch");
         }
 
+        // Epinglage de la NVRAM (reglages des jeux sans DIP switches). Additif : on ne controle
+        // QUE si le profil epingle nvram_pins. Les plages viennent du profil, jamais de la borne.
+        var pins = profile["nvram_pins"] as JsonArray;
+        if (pins is not null && pins.Count > 0)
+        {
+            var nvram = passport["artifacts"]?["nvram"] as JsonArray;
+            if (nvram is null) return F("profile.nvram_mismatch");
+            foreach (var pin in pins)
+            {
+                var fichier = (pin?["file"]?.GetValue<string>() ?? "").Replace('\\', '/');
+                var attendu = pin?["sha256"]?.GetValue<string>()?.ToLowerInvariant();
+                var plages = pin?["ranges"] as JsonArray;
+                if (fichier.Length == 0 || attendu is null || plages is null || plages.Count == 0) return F("profile.nvram_mismatch");
+                var entree = nvram.FirstOrDefault(n => (n?["file"]?.GetValue<string>() ?? "").Replace('\\', '/')
+                    .EndsWith(fichier, StringComparison.OrdinalIgnoreCase));
+                if (entree is null) return F("profile.nvram_mismatch");
+                foreach (var moment in new[] { "start", "end" })
+                {
+                    byte[] octets;
+                    try { octets = Convert.FromBase64String(entree[moment]?.GetValue<string>() ?? ""); }
+                    catch (FormatException) { return F("profile.nvram_mismatch"); }
+                    var zone = new List<byte>();
+                    foreach (var plage in plages)
+                    {
+                        var a = plage?[0]?.GetValue<int>() ?? -1;
+                        var b = plage?[1]?.GetValue<int>() ?? -1;
+                        if (a < 0 || b < a || b > octets.Length) return F("profile.nvram_mismatch");
+                        zone.AddRange(octets.AsSpan(a, b - a).ToArray());
+                    }
+                    if (Crypto.Sha256Hex(zone.ToArray()) != attendu) return F("profile.nvram_mismatch");
+                }
+            }
+        }
+
         // modules par rôle + digest (§6.3-10, §5.5)
         var modules = passport["software"]?["modules"] as JsonArray;
         if (modules is null) return F("format.schema");
@@ -112,8 +146,6 @@ public static class CoreVerifier
         // égalités d'indépendance (§5.5)
         if (RoleHash("listener") != listenerLoaded) return F("runtime.module_unauthorized");
         if (RoleHash("real_core") != coreLoaded) return F("runtime.module_unauthorized");
-        if (RoleHash("frontend") != Str(passport, "process", "executable_sha256"))
-            return F("runtime.module_unauthorized");
 
         // le jeu était ouvert à la fin (borne statique du profil)
         var opened = DateStr(Str(profile, "opened_at"));

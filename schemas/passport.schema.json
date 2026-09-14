@@ -87,6 +87,19 @@
         "bios": {
           "type": "object", "additionalProperties": false, "required": ["mode"],
           "properties": { "mode": { "enum": ["none", "vfs_observed", "os_observed"] } }
+        },
+        "nvram": {
+          "description": "Fichiers NVRAM du jeu, octets bruts : au lancement (start) et apres la fermeture (end).",
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["file", "size", "start", "end"],
+            "properties": {
+              "file": { "type": "string", "minLength": 1, "maxLength": 200 },
+              "size": { "type": "integer", "minimum": 0, "maximum": 65536 },
+              "start": { "type": "string", "contentEncoding": "base64" },
+              "end": { "type": "string", "contentEncoding": "base64" }
+            }
+          }
         }
       }
     },
@@ -96,7 +109,7 @@
       "required": ["pid", "executable_sha256", "parent_pid", "created_at", "open_files"],
       "properties": {
         "pid": { "type": "integer", "minimum": 0 },
-        "executable_sha256": { "$ref": "#/$defs/sha256hex" },
+        "executable_sha256": { "description": "Informatif : la version du frontend n'entre pas dans la validite d'un score.", "anyOf": [ { "$ref": "#/$defs/sha256hex" }, { "type": "null" } ] },
         "parent_pid": { "type": "integer", "minimum": 0 },
         "created_at": { "type": "string", "format": "date-time" },
         "open_files": {

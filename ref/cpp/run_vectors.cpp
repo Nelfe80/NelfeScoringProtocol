@@ -163,7 +163,6 @@ static Result verify(const json& p, const json& profile, EVP_PKEY* devKey, EVP_P
     if (S(p, {"software", "modules_digest"}) != sha256hex(jcs(*modules))) return F("attestation.modules_digest");
     if (roleHash("listener") != listL) return F("runtime.module_unauthorized");
     if (roleHash("real_core") != coreL) return F("runtime.module_unauthorized");
-    if (roleHash("frontend") != S(p, {"process", "executable_sha256"})) return F("runtime.module_unauthorized");
 
     std::string opened = S(profile, {"opened_at"});
     if (!opened.empty() && !ended.empty() && ended < opened) return F("profile.not_open");

@@ -10,7 +10,7 @@
     "expires_at": "2026-07-30T20:00:00Z",
     "nonce": "n_abc123",
     "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEQCIDTgp9sD5p3BfQd-QopsI_6pDd7wa9TJe9DLb9pi5qwfAiB-YoUFygzKNUUfMVaKEB5Z2nm7-kmf6rIXSxT1HYINAQ"
+    "signature": "MEYCIQCgt8Z6UvlDybq5WvaditchyqKkZur6jEw5qNO4qvITggIhAKycEoLFEmz9-L1dEpxt97zcPzC6plyRC-1gAZB4eS0t"
   },
   "game": {
     "system_id": "megadrive",
@@ -86,15 +86,7 @@
     "core_options_digest": "9d029d5af69ff8a858d5db6c073038edd4642d463c691d7923e62fad00da6430",
     "bios": {
       "mode": "none"
-    },
-    "nvram": [
-      {
-        "file": "saves/arcade/fixture/settings.nv",
-        "size": 16,
-        "start": "AQMDAAMAAQEAAQCWAQQIGQ==",
-        "end": "AQMDAAMAAQEYAQCWAQQIGQ=="
-      }
-    ]
+    }
   },
   "process": {
     "pid": 12345,
@@ -117,7 +109,7 @@
     ]
   },
   "timing": {
-    "started_at": "2026-07-30T18:45:00Z",
+    "started_at": "2026-07-30T18:40:12Z",
     "ended_at": "2026-07-30T18:42:07Z",
     "monotonic_ms": 115000,
     "frame_count": 6900
@@ -189,5 +181,5 @@
     "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
   },
   "local_check": "pass",
-  "signature": "MEUCIAwcxAQuCEJY7BbRT5sA3-QZj6qZp-04uSqhsd0DAX3bAiEA2tFM8xTShRmHIhpwoRwdR1SuA3qU_ZjFTDL1OuCLLmw"
+  "signature": "MEYCIQDR1xZaFgZ4GhIw1rTMWbI-hptUbJNMklgigLhSv97sjwIhAPF30rq1x4cgswH8bZWF8qPbXRW7xlKK00as9hB1BKWt"
 }

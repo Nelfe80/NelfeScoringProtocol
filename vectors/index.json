@@ -72,6 +72,18 @@
     "expected": "runtime.module_unauthorized"
   },
   {
+    "vector": "pass_frontend_libre.passport.json",
+    "expected": "pass"
+  },
+  {
+    "vector": "fail_nvram_settings.passport.json",
+    "expected": "profile.nvram_mismatch"
+  },
+  {
+    "vector": "fail_nvram_missing.passport.json",
+    "expected": "profile.nvram_mismatch"
+  },
+  {
     "vector": "fail_modules_digest.passport.json",
     "expected": "attestation.modules_digest"
   },

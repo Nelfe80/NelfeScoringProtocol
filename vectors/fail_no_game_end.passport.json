@@ -10,7 +10,7 @@
     "expires_at": "2026-07-30T20:00:00Z",
     "nonce": "n_abc123",
     "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEYCIQCDqe3B2Kl3pKN1ksMrMafiM9e1aP7E5ya3TIxc7VvWwgIhAN-wkoNA2XTbnbPgHHmwQeJYhaXlHnxiY99q0DxnV5Kv"
+    "signature": "MEQCIHPJYcF-wLMtll_2DalLMjFnQUEb6criRuDTQg2ErpJAAiBmDEkakDW6H1Zmany7d3gESREY1wQsWPIbPecmBhvK5Q"
   },
   "game": {
     "system_id": "megadrive",
@@ -19,7 +19,7 @@
     "ruleset": "1cc",
     "profile_version": 1,
     "manifest_commit": "a1b2c3d4e5f6",
-    "profile_document_sha256": "a286a8f2a32baea10567828c6e7a592b6bfdafd44c4e25c0a48a2441b3608e7d"
+    "profile_document_sha256": "7ef0f795c1015921af091d202203fa7561ddc59531903e702fefd29b231c02ca"
   },
   "device": {
     "device_id": "dev-001",
@@ -86,7 +86,15 @@
     "core_options_digest": "9d029d5af69ff8a858d5db6c073038edd4642d463c691d7923e62fad00da6430",
     "bios": {
       "mode": "none"
-    }
+    },
+    "nvram": [
+      {
+        "file": "saves/arcade/fixture/settings.nv",
+        "size": 16,
+        "start": "AQMDAAMAAQEAAQCWAQQIGQ==",
+        "end": "AQMDAAMAAQEYAQCWAQQIGQ=="
+      }
+    ]
   },
   "process": {
     "pid": 12345,
@@ -180,5 +188,5 @@
     "checkpoints_digest": "48701dae37ea7c025b790d7d2e87ffc5ed878a0aa5464f0802a6959cd4473ce4"
   },
   "local_check": "pass",
-  "signature": "MEQCIB2DLC6XVnzggGIEN7haQG4v47GzsnXF0RMoYkhZgxc1AiA9iSMGCruQ-Lf-45v393aT9OWDQixfiuR4aaPhvCtg2Q"
+  "signature": "MEQCIFHdfMhFNdMs5UfiV0z42HLulBjz8r68A8N4q_KF7sYCAiAWLVq4DX1EDlxjYWQ2eemy_3MfZXP1jG6w-UKKBAJ6Zg"
 }

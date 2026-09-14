@@ -62,6 +62,9 @@ var profile = new JsonObject
     ["bios"] = new JsonObject { ["mode"] = "none" },
     // Phase E : le profil épingle le digest des réglages usine (ici = fixture du passeport).
     ["allowed_core_options_digest"] = new JsonArray { H("core-options@default") },
+    // Epinglage NVRAM : 16 octets de reglages, l'octet 8 est un compteur (hors plages).
+    ["nvram_pins"] = new JsonArray { new JsonObject { ["file"] = "fixture/settings.nv",
+        ["ranges"] = new JsonArray { new JsonArray { 0, 8 }, new JsonArray { 9, 16 } }, ["sha256"] = "5b8377016b92c4d3ee530e1b3016bc9095cf2050b49e433b3e2f29b001426be1" } },
     ["rules"] = new JsonObject
     {
         ["save_state"] = "forbidden", ["cheats"] = "forbidden", ["rewind"] = "forbidden",
@@ -127,7 +130,10 @@ JsonObject BuildUnsigned()
         ["artifacts"] = new JsonObject
         {
             ["core"] = HashTriple(coreH), ["content"] = ContentArtifact(contentH, contentMd5), ["mem"] = HashTriple(memH),
-            ["core_options_digest"] = H("core-options@default"), ["bios"] = new JsonObject { ["mode"] = "none" }
+            ["core_options_digest"] = H("core-options@default"), ["bios"] = new JsonObject { ["mode"] = "none" },
+            // Le compteur (octet 8) a bouge entre le lancement et la fin : c'est permis.
+            ["nvram"] = new JsonArray { new JsonObject { ["file"] = "saves/arcade/fixture/settings.nv", ["size"] = 16,
+                ["start"] = "AQMDAAMAAQEAAQCWAQQIGQ==", ["end"] = "AQMDAAMAAQEYAQCWAQQIGQ==" } }
         },
         ["process"] = new JsonObject
         {
@@ -204,7 +210,16 @@ Add("fail_signature_invalid", "session.signature_invalid", _ => { }, postSign: p
 // Couverture complète : un vecteur par code d'échec restant du vérifieur.
 Add("fail_cheat", "runtime.cheat_detected", p => p["sensitive"]!["cheats"] = true);
 Add("fail_profile_mismatch", "profile.mismatch", p => p["game"]!["system_id"] = "nes");
-Add("fail_module_unauthorized", "runtime.module_unauthorized", p => p["process"]!["executable_sha256"] = H("rogue_frontend"));
+Add("fail_module_unauthorized", "runtime.module_unauthorized", p =>
+{
+    // Le frontend n'est plus controle (decision du 2026-09-14) : un module non autorise se prouve sur le coeur.
+    var mods = p["software"]!["modules"]!.AsArray();
+    ((JsonObject) mods[2]!)["sha256"] = H("rogue_core");
+    p["software"]!["modules_digest"] = Crypto.Sha256Hex(Jcs.Canonical(mods));
+});
+Add("pass_frontend_libre", "", p => p["process"]!["executable_sha256"] = null);   // la version du frontend est libre
+Add("fail_nvram_settings", "profile.nvram_mismatch", p => p["artifacts"]!["nvram"]![0]!["end"] = "AQMDBwMAAQEAAQCWAQQIGQ==");
+Add("fail_nvram_missing", "profile.nvram_mismatch", p => p["artifacts"]!.AsObject().Remove("nvram"));
 Add("fail_modules_digest", "attestation.modules_digest", p => p["software"]!["modules_digest"] = new string('a', 64));
 Add("fail_ticket_invalid", "session.ticket_invalid", p => p["ticket"]!["device_id"] = "dev-999");
 Add("fail_ticket_missing", "session.ticket_missing", p => p.Remove("ticket"), sign: false);

@@ -10,7 +10,7 @@
     "expires_at": "2026-07-30T20:00:00Z",
     "nonce": "n_abc123",
     "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEUCIQCYDYPbLuPB1PXE2h3jPJTHN4vZ7kufsik9LXM4_bfN5AIgb0J-N-9SKIOYbp6tTttDzlmifDuBQQZvQ9Uj7_1VV3A"
+    "signature": "MEQCIET6tK9e7vW3Lr7GbdFeSuHO2Z48p-tBRnOZNO5LkD1-AiBq4PWLZgt85UHYdC2Y80njP02m4eFp5Ev-O4MYg3UrIQ"
   },
   "game": {
     "system_id": "megadrive",
@@ -19,7 +19,7 @@
     "ruleset": "1cc",
     "profile_version": 1,
     "manifest_commit": "a1b2c3d4e5f6",
-    "profile_document_sha256": "a286a8f2a32baea10567828c6e7a592b6bfdafd44c4e25c0a48a2441b3608e7d"
+    "profile_document_sha256": "7ef0f795c1015921af091d202203fa7561ddc59531903e702fefd29b231c02ca"
   },
   "device": {
     "device_id": "dev-001",
@@ -49,7 +49,7 @@
       },
       {
         "role": "real_core",
-        "sha256": "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2"
+        "sha256": "4b8ef60104247f956d5d9ba868be6c2fbcb2f4a0114410f5003e8ff34b85ef7c"
       },
       {
         "role": "apiexpose",
@@ -64,7 +64,7 @@
         "sha256": "32176ce2fc21a9426b533f91a9193bc3491e0b91670fd0a406589ab2215e4c60"
       }
     ],
-    "modules_digest": "a4623dae321a629ff135f70fe5efbd96e040b4ad1929b49b82f5eec447da834b"
+    "modules_digest": "ef9447475559c1e2942b270912ffdf020ff69586dbec70d1fa0d6af1316a89fa"
   },
   "artifacts": {
     "core": {
@@ -86,11 +86,19 @@
     "core_options_digest": "9d029d5af69ff8a858d5db6c073038edd4642d463c691d7923e62fad00da6430",
     "bios": {
       "mode": "none"
-    }
+    },
+    "nvram": [
+      {
+        "file": "saves/arcade/fixture/settings.nv",
+        "size": 16,
+        "start": "AQMDAAMAAQEAAQCWAQQIGQ==",
+        "end": "AQMDAAMAAQEYAQCWAQQIGQ=="
+      }
+    ]
   },
   "process": {
     "pid": 12345,
-    "executable_sha256": "87e07213aaa2967cdf251cbed2242494f01b8c8a495abfc4e6275be091aca47f",
+    "executable_sha256": "8b68e4c9f7f5c3cfd386ddbae19b58b1266b28d7fb2bfe615126e3046ab72192",
     "parent_pid": 6789,
     "created_at": "2026-07-30T18:40:11Z",
     "open_files": [
@@ -181,5 +189,5 @@
     "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
   },
   "local_check": "pass",
-  "signature": "MEUCIQCehEtoeC2TXQDDFI0G4dgYu1tUCgZ69creCZPV4K1mewIgS9cbJ58xZamCiUvX8f8pE3PmWxr0vk0XuS8YSQXENFs"
+  "signature": "MEUCIGOVvDCO358bsev_9m4ni1E9AHBVINUAJXv-o8fMxaDjAiEApolW8jq7jtTJaHuI2v72aJLBgxEpT1XVpkk4VvyzE7E"
 }

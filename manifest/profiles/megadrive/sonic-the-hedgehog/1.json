@@ -35,6 +35,22 @@
   "allowed_core_options_digest": [
     "9d029d5af69ff8a858d5db6c073038edd4642d463c691d7923e62fad00da6430"
   ],
+  "nvram_pins": [
+    {
+      "file": "fixture/settings.nv",
+      "ranges": [
+        [
+          0,
+          8
+        ],
+        [
+          9,
+          16
+        ]
+      ],
+      "sha256": "5b8377016b92c4d3ee530e1b3016bc9095cf2050b49e433b3e2f29b001426be1"
+    }
+  ],
   "rules": {
     "save_state": "forbidden",
     "cheats": "forbidden",

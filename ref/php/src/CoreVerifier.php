@@ -90,6 +90,38 @@ final class CoreVerifier
                 return self::f('profile.core_options_mismatch');
         }
 
+        // Epinglage de la NVRAM (reglages des jeux sans DIP switches). Additif : on ne controle
+        // QUE si le profil epingle nvram_pins. Les plages viennent du profil, jamais de la borne.
+        $pins = $profile->nvram_pins ?? null;
+        if (is_array($pins) && count($pins) > 0) {
+            $nvram = $passport->artifacts->nvram ?? null;
+            if (!is_array($nvram)) return self::f('profile.nvram_mismatch');
+            foreach ($pins as $pin) {
+                $fichier = str_replace('\\', '/', (string) ($pin->file ?? ''));
+                $attendu = strtolower((string) ($pin->sha256 ?? ''));
+                $plages = $pin->ranges ?? null;
+                if ($fichier === '' || $attendu === '' || !is_array($plages) || count($plages) === 0) return self::f('profile.nvram_mismatch');
+                $entree = null;
+                foreach ($nvram as $n) {
+                    $nom = str_replace('\\', '/', (string) ($n->file ?? ''));
+                    if (strlen($nom) >= strlen($fichier) && strcasecmp(substr($nom, -strlen($fichier)), $fichier) === 0) { $entree = $n; break; }
+                }
+                if ($entree === null) return self::f('profile.nvram_mismatch');
+                foreach (['start', 'end'] as $moment) {
+                    $octets = base64_decode((string) ($entree->$moment ?? ''), true);
+                    if ($octets === false) return self::f('profile.nvram_mismatch');
+                    $zone = '';
+                    foreach ($plages as $plage) {
+                        $a = is_array($plage) && isset($plage[0]) ? (int) $plage[0] : -1;
+                        $b = is_array($plage) && isset($plage[1]) ? (int) $plage[1] : -1;
+                        if ($a < 0 || $b < $a || $b > strlen($octets)) return self::f('profile.nvram_mismatch');
+                        $zone .= substr($octets, $a, $b - $a);
+                    }
+                    if (hash('sha256', $zone) !== $attendu) return self::f('profile.nvram_mismatch');
+                }
+            }
+        }
+
         $modules = $passport->software->modules ?? null;
         if (!is_array($modules)) return self::f('format.schema');
         $roleHash = function (string $role) use ($modules): ?string {
@@ -100,7 +132,6 @@ final class CoreVerifier
             return self::f('attestation.modules_digest');
         if ($roleHash('listener') !== $listenerLoaded) return self::f('runtime.module_unauthorized');
         if ($roleHash('real_core') !== $coreLoaded) return self::f('runtime.module_unauthorized');
-        if ($roleHash('frontend') !== self::s($passport, 'process', 'executable_sha256')) return self::f('runtime.module_unauthorized');
 
         $opened = self::ts(self::s($profile, 'opened_at'));
         if ($opened !== null && $ended !== null && $ended < $opened) return self::f('profile.not_open');
