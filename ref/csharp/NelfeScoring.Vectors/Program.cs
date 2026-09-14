@@ -59,7 +59,9 @@ var profile = new JsonObject
     ["allowed_core_sha256"] = new JsonArray { coreH, H("other_core") },   // 2e moteur : sans epingle NVRAM
     ["allowed_listener_sha256"] = new JsonArray { listenerH },
     ["mem_sha256"] = memH,
-    ["bios"] = new JsonObject { ["mode"] = "none" },
+    // Le BIOS du fixture, exige pour le coeur de reference seulement.
+    ["bios"] = new JsonObject { ["mode"] = "files", ["files"] = new JsonArray { new JsonObject {
+        ["name"] = "fixture_bios.zip", ["allowed_sha256"] = new JsonArray { H("bios@fixture") }, ["cores"] = new JsonArray { coreH } } } },
     // Phase E : le profil épingle le digest des réglages usine (ici = fixture du passeport).
     ["allowed_core_options_digest"] = new JsonArray { H("core-options@default") },
     // Epinglage NVRAM : 16 octets de reglages, l'octet 8 est un compteur (hors plages).
@@ -131,7 +133,8 @@ JsonObject BuildUnsigned()
         ["artifacts"] = new JsonObject
         {
             ["core"] = HashTriple(coreH), ["content"] = ContentArtifact(contentH, contentMd5), ["mem"] = HashTriple(memH),
-            ["core_options_digest"] = H("core-options@default"), ["bios"] = new JsonObject { ["mode"] = "none" },
+            ["core_options_digest"] = H("core-options@default"),
+            ["bios"] = new JsonObject { ["mode"] = "files", ["files"] = new JsonArray { new JsonObject { ["name"] = "fixture_bios.zip", ["sha256"] = H("bios@fixture") } } },
             // Le compteur (octet 8) a bouge entre le lancement et la fin : c'est permis.
             ["nvram"] = new JsonArray { new JsonObject { ["file"] = "saves/arcade/fixture/settings.nv", ["size"] = 16,
                 ["start"] = "AQMDAAMAAQEAAQCWAQQIGQ==", ["end"] = "AQMDAAMAAQEYAQCWAQQIGQ==" } }
@@ -229,7 +232,10 @@ Add("pass_nvram_autre_coeur", "", p =>
     foreach (var m in mods) if (m?["role"]?.GetValue<string>() == "real_core") ((JsonObject) m)["sha256"] = H("other_core");
     p["software"]!["modules_digest"] = Crypto.Sha256Hex(Jcs.Canonical(mods));
     p["artifacts"]!.AsObject().Remove("nvram");
+    p["artifacts"]!["bios"] = new JsonObject { ["mode"] = "none" };   // ni le BIOS du coeur de reference
 });
+Add("fail_bios_modified", "profile.bios_mismatch", p => p["artifacts"]!["bios"]!["files"]![0]!["sha256"] = H("bios@patched"));
+Add("fail_bios_missing", "profile.bios_mismatch", p => p["artifacts"]!["bios"] = new JsonObject { ["mode"] = "none" });
 Add("fail_modules_digest", "attestation.modules_digest", p => p["software"]!["modules_digest"] = new string('a', 64));
 Add("fail_ticket_invalid", "session.ticket_invalid", p => p["ticket"]!["device_id"] = "dev-999");
 Add("fail_ticket_missing", "session.ticket_missing", p => p.Remove("ticket"), sign: false);

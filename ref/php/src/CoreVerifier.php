@@ -126,6 +126,29 @@ final class CoreVerifier
             }
         }
 
+        // BIOS declare par le profil. « none » : le jeu n'en utilise pas, rien a controler. « files » :
+        // chaque BIOS exige doit avoir ete hache par la borne, avec une empreinte autorisee.
+        if ((string) ($profile->bios->mode ?? 'none') === 'files') {
+            $exiges = $profile->bios->files ?? null;
+            if (!is_array($exiges) || count($exiges) === 0) return self::f('profile.bios_mismatch');
+            $mesures = $passport->artifacts->bios->files ?? null;
+            foreach ($exiges as $exige) {
+                $coeurs = $exige->cores ?? null;
+                if (is_array($coeurs) && count($coeurs) > 0
+                    && !in_array(strtolower((string) $coreLoaded), array_map(static fn($c) => strtolower((string) $c), $coeurs), true)) continue;
+                $nom = basename(str_replace('\\', '/', (string) ($exige->name ?? '')));
+                $autorises = array_map(static fn($h) => strtolower((string) $h), is_array($exige->allowed_sha256 ?? null) ? $exige->allowed_sha256 : []);
+                if ($nom === '' || count($autorises) === 0 || !is_array($mesures)) return self::f('profile.bios_mismatch');
+                $trouve = false;
+                foreach ($mesures as $m) {
+                    if (strcasecmp(basename(str_replace('\\', '/', (string) ($m->name ?? ''))), $nom) !== 0) continue;
+                    $trouve = in_array(strtolower((string) ($m->sha256 ?? '')), $autorises, true);
+                    break;
+                }
+                if (!$trouve) return self::f('profile.bios_mismatch');
+            }
+        }
+
         $modules = $passport->software->modules ?? null;
         if (!is_array($modules)) return self::f('format.schema');
         $roleHash = function (string $role) use ($modules): ?string {

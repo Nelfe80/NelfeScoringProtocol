@@ -138,6 +138,26 @@ public static class CoreVerifier
             }
         }
 
+        // BIOS declare par le profil. « none » : le jeu n'en utilise pas, rien a controler. « files » :
+        // chaque BIOS exige doit avoir ete hache par la borne, avec une empreinte autorisee.
+        if ((Str(profile, "bios", "mode") ?? "none") == "files")
+        {
+            if (profile["bios"]?["files"] is not JsonArray exiges || exiges.Count == 0) return F("profile.bios_mismatch");
+            var mesures = passport["artifacts"]?["bios"]?["files"] as JsonArray;
+            static string Nom(string? chemin) => Path.GetFileName((chemin ?? "").Replace('\\', '/'));
+            foreach (var exige in exiges)
+            {
+                if (exige?["cores"] is JsonArray coeurs && coeurs.Count > 0
+                    && !coeurs.Any(c => string.Equals(c?.GetValue<string>(), coreLoaded, StringComparison.OrdinalIgnoreCase))) continue;
+                var nom = Nom(exige?["name"]?.GetValue<string>());
+                var autorises = (exige?["allowed_sha256"] as JsonArray)?.Select(h => h?.GetValue<string>()?.ToLowerInvariant()).ToList();
+                if (nom.Length == 0 || autorises is null || autorises.Count == 0 || mesures is null) return F("profile.bios_mismatch");
+                var mesure = mesures.FirstOrDefault(m => string.Equals(Nom(m?["name"]?.GetValue<string>()), nom, StringComparison.OrdinalIgnoreCase));
+                var empreinte = mesure?["sha256"]?.GetValue<string>()?.ToLowerInvariant();
+                if (empreinte is null || !autorises.Contains(empreinte)) return F("profile.bios_mismatch");
+            }
+        }
+
         // modules par rôle + digest (§6.3-10, §5.5)
         var modules = passport["software"]?["modules"] as JsonArray;
         if (modules is null) return F("format.schema");

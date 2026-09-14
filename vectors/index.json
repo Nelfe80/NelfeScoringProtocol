@@ -88,6 +88,14 @@
     "expected": "pass"
   },
   {
+    "vector": "fail_bios_modified.passport.json",
+    "expected": "profile.bios_mismatch"
+  },
+  {
+    "vector": "fail_bios_missing.passport.json",
+    "expected": "profile.bios_mismatch"
+  },
+  {
     "vector": "fail_modules_digest.passport.json",
     "expected": "attestation.modules_digest"
   },

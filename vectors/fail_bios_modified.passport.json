@@ -3,14 +3,14 @@
   "session_id": "b3f1c2a4-5d6e-4f80-9a1b-2c3d4e5f6071",
   "ticket": {
     "ticket_id": "t_9f2a3b",
-    "device_id": "dev-999",
+    "device_id": "dev-001",
     "scope": "scoring_session",
     "manifest_epoch": 12,
     "issued_at": "2026-07-30T18:00:00Z",
     "expires_at": "2026-07-30T20:00:00Z",
     "nonce": "n_abc123",
     "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEUCIF7hlpQDMxF94K7eZEYzsteeGkrQ2YgtrIhhhIamJparAiEAjP3lAeF3o5f-u78ddIvtF8SkYkb_vLMhlqybX_DrJVA"
+    "signature": "MEUCIQCxxZChOyVedQnNXe0S0Kfl6Odl5-4aNXKE8klNg-AiKQIgZQs66VmLiX-LxRKWjuVYpuhIDstA9aoIqnP0ze2LZmg"
   },
   "game": {
     "system_id": "megadrive",
@@ -89,7 +89,7 @@
       "files": [
         {
           "name": "fixture_bios.zip",
-          "sha256": "21b40e10d670a383a32aed8b02054b8f1574ff1a78c69ce991f0158191f55560"
+          "sha256": "ea783c13d549b179d01f77b0164d1d243ce6a3d10af846be4308a5fd8d9a04e0"
         }
       ]
     },
@@ -195,5 +195,5 @@
     "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
   },
   "local_check": "pass",
-  "signature": "MEYCIQCGIQp1F0X5jqqtYZ5I3e0dfb5j8jVwpooF5u5qm7_IgwIhALqSf5Sa_dCNsq4v-vcbg1STfc_KSR0ThE47imy862Yk"
+  "signature": "MEUCIQCV0tT1fCy7fqU_RRyy_pkkJdLa42U8m4199iyGovarpQIgMLzv9blVsIK7oH0D5siRVHFzIJwOGkyfyHXo4U7kK2M"
 }

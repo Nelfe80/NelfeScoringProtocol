@@ -10,7 +10,7 @@
     "expires_at": "2026-07-30T18:41:00Z",
     "nonce": "n_abc123",
     "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEUCIBrynj6smhz0QQwnKw6Q75BwV_IZRmspX_3WcDKGD8a_AiEAzLF-9PplLI7VJSolxx40UOpnzsH_YBUCaOYCOGPjnNo"
+    "signature": "MEYCIQCdZtLA0J9PTUWE8j513U2IkwgdsihGmduDhIXMwXCYtQIhAKSKVAyHe63M5_-eJ_MDjkxpaf3IksO6Uwm0yTkHKjBF"
   },
   "game": {
     "system_id": "megadrive",
@@ -19,7 +19,7 @@
     "ruleset": "1cc",
     "profile_version": 1,
     "manifest_commit": "a1b2c3d4e5f6",
-    "profile_document_sha256": "9d388ff6f6718a2b859b16c5475f73bfdd4cda7aa0b5de0c880650c1977fb01c"
+    "profile_document_sha256": "dee1800e1e233b76bb370b200623bd9635c1a5dd080abfdc84873e1ce82f43f9"
   },
   "device": {
     "device_id": "dev-001",
@@ -85,7 +85,13 @@
     },
     "core_options_digest": "9d029d5af69ff8a858d5db6c073038edd4642d463c691d7923e62fad00da6430",
     "bios": {
-      "mode": "none"
+      "mode": "files",
+      "files": [
+        {
+          "name": "fixture_bios.zip",
+          "sha256": "21b40e10d670a383a32aed8b02054b8f1574ff1a78c69ce991f0158191f55560"
+        }
+      ]
     },
     "nvram": [
       {
@@ -189,5 +195,5 @@
     "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
   },
   "local_check": "pass",
-  "signature": "MEYCIQCt38gGB7YvMUrfvgUfBPEbkpmljGn49y4TcGAdv1SIzwIhAKRiy3Fvcrfj2MQEoy1gIP4uIrwsLBuTokNn27PTjBOS"
+  "signature": "MEUCIQDrl3rPZZy_oPHABT3AAUQZQofOPIwMVIMTjQMiyYgiJQIgalxH0Pz-vGGhZ9jCsm1fAk9Ghf2ncxpSiVt1j3ZDOIo"
 }

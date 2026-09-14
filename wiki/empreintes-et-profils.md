@@ -106,11 +106,17 @@ On ne recalcule jamais à la main : chaque valeur vient d'une **source**.
   en **opt‑in** (contrôlé seulement si le profil épingle la clé). Voir §5.
 - progression : monotonie, `game_end`, corrélations, `metric.value` == `result_source`.
 
-À câbler (déclaré mais pas encore appliqué) :
-- **BIOS** : conditionnel à `bios.mode` (`none` / `vfs_observed` / `os_observed`).
-  `none` (cartouche) = pas de contrôle, normal. Les systèmes à BIOS (PSX, Saturn,
-  MegaCD, Neo Geo) demandent une mesure wrapper + un hash autorisé au schéma.
-- **frontend** : `process.executable_sha256` est `null` aujourd'hui → check neutralisé.
+- **NVRAM** (2026‑09‑14) : `nvram_pins`, en **opt‑in**, pour les jeux sans DIP switches dont
+  les réglages vivent dans l'EEPROM (CPS‑2…). Plages d'octets calibrées par jeu ; une épingle
+  peut être limitée à des cœurs (`cores`) quand le profil sert plusieurs moteurs.
+- **BIOS** (2026‑09‑14) : `bios.mode = none` quand le jeu n'utilise pas de BIOS (rien à
+  contrôler) ; `bios.mode = files` liste les BIOS exigés (`name`, `allowed_sha256`, `cores`
+  optionnel). La borne hache ces fichiers là où le cœur les charge ; un BIOS absent ou
+  modifié donne `profile.bios_mismatch`.
+
+Non contrôlé, par décision :
+- **frontend** : `process.executable_sha256` est informatif. Le frontend ne touche pas au
+  jeu ; seuls le cœur, le contenu, les réglages et le BIOS font la validité d'un score.
 
 ## 5. Réglages « usine » — le `core_options_digest` (Phase E)
 

@@ -85,8 +85,21 @@
         "mem": { "$ref": "#/$defs/hashTriple" },
         "core_options_digest": { "$ref": "#/$defs/sha256hex" },
         "bios": {
+          "description": "Les BIOS que le profil exige, haches la ou le coeur les charge. none quand le profil n'en exige pas.",
           "type": "object", "additionalProperties": false, "required": ["mode"],
-          "properties": { "mode": { "enum": ["none", "vfs_observed", "os_observed"] } }
+          "properties": {
+            "mode": { "enum": ["none", "files", "vfs_observed", "os_observed"] },
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "object", "additionalProperties": false, "required": ["name", "sha256"],
+                "properties": {
+                  "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+                  "sha256": { "anyOf": [ { "$ref": "#/$defs/sha256hex" }, { "type": "null" } ] }
+                }
+              }
+            }
+          }
         },
         "nvram": {
           "description": "Fichiers NVRAM du jeu, octets bruts : au lancement (start) et apres la fermeture (end).",

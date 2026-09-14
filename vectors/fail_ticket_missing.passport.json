@@ -8,7 +8,7 @@
     "ruleset": "1cc",
     "profile_version": 1,
     "manifest_commit": "a1b2c3d4e5f6",
-    "profile_document_sha256": "9d388ff6f6718a2b859b16c5475f73bfdd4cda7aa0b5de0c880650c1977fb01c"
+    "profile_document_sha256": "dee1800e1e233b76bb370b200623bd9635c1a5dd080abfdc84873e1ce82f43f9"
   },
   "device": {
     "device_id": "dev-001",
@@ -74,7 +74,13 @@
     },
     "core_options_digest": "9d029d5af69ff8a858d5db6c073038edd4642d463c691d7923e62fad00da6430",
     "bios": {
-      "mode": "none"
+      "mode": "files",
+      "files": [
+        {
+          "name": "fixture_bios.zip",
+          "sha256": "21b40e10d670a383a32aed8b02054b8f1574ff1a78c69ce991f0158191f55560"
+        }
+      ]
     },
     "nvram": [
       {

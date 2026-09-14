@@ -31,7 +31,18 @@
   ],
   "mem_sha256": "08eef0fe36803e828e36278937a055d5514f612ffed383273e72e563249709d9",
   "bios": {
-    "mode": "none"
+    "mode": "files",
+    "files": [
+      {
+        "name": "fixture_bios.zip",
+        "allowed_sha256": [
+          "21b40e10d670a383a32aed8b02054b8f1574ff1a78c69ce991f0158191f55560"
+        ],
+        "cores": [
+          "77b84ec7f22b0e866968f9c6bdbb11c94cc108ff56709aae75c64ffec1f873f2"
+        ]
+      }
+    ]
   },
   "allowed_core_options_digest": [
     "9d029d5af69ff8a858d5db6c073038edd4642d463c691d7923e62fad00da6430"

@@ -48,8 +48,24 @@
     "mem_sha256": { "$ref": "#/$defs/sha256hex" },
 
     "bios": {
+      "description": "none : le jeu n'utilise pas de BIOS, rien a controler. files : les BIOS exiges, par nom de fichier, et leurs empreintes autorisees.",
       "type": "object", "additionalProperties": false, "required": ["mode"],
-      "properties": { "mode": { "enum": ["none", "vfs_observed", "os_observed"] } }
+      "properties": {
+        "mode": { "enum": ["none", "files", "vfs_observed", "os_observed"] },
+        "files": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["name", "allowed_sha256"],
+            "properties": {
+              "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+              "allowed_sha256": { "$ref": "#/$defs/sha256Array" },
+              "cores": { "description": "Coeurs concernes (sha256 du coeur charge). Absent : tous.", "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/sha256hex" } }
+            }
+          }
+        }
+      },
+      "if": { "properties": { "mode": { "const": "files" } } },
+      "then": { "required": ["mode", "files"] }
     },
 
     "core_options_policy": { "type": "object" },
