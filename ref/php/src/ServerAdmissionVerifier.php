@@ -38,6 +38,7 @@ final class ServerAdmissionVerifier
         // Socle déterministe, sans état.
         $core = CoreVerifier::verify($passport, $profile, $devPem, $issPem);
         if (!$core['ok']) return self::r('refused', $core['reason']);
+        $flags = self::informationFlags($passport, $core['flags'] ?? []);
 
         // Contrôles à état qui refusent (déterministes).
         if ($state->ticketConsumed($tid)) return self::r('refused', 'session.ticket_reused');
@@ -47,15 +48,43 @@ final class ServerAdmissionVerifier
         // Anomalie UNIQUEMENT statistique → retenue (pas un refus).
         if ($state->statisticalAnomaly($passport)) {
             $state->markConsumed($sid, $tid);
-            return self::r('held', 'plausibility.statistical_hold');
+            return self::r('held', 'plausibility.statistical_hold', $flags);
         }
 
         $state->markConsumed($sid, $tid);
-        return self::r('published', '');
+        return self::r('published', '', $flags);
     }
 
-    private static function r(string $status, string $reason): array
+    /**
+     * Ce que le score dit de lui sans etre refuse (decisions du 2026-09-17) :
+     *   interrupted     pas de fin de jeu, le score reste celui que les checkpoints prouvent ;
+     *   autofire        des appuis d'une regularite mecanique. Une information, pas une anomalie :
+     *                   des manettes d'epoque le faisaient, et bien des jeux l'ont d'origine ;
+     *   forced_options  la borne s'est alignee sur les reglages du profil au chargement.
+     *
+     * @param list<string> $core
+     * @return list<string>
+     */
+    private static function informationFlags(\stdClass $passport, array $core): array
     {
-        return ['status' => $status, 'reason' => $reason];
+        $flags = array_values(array_filter($core, 'is_string'));
+        $sensitive = $passport->sensitive ?? null;
+        $n = (int) ($sensitive->press_count ?? 0);
+        if ($n >= 50) {
+            // Variance des durees d'appui, en images carrees, sans avoir garde la serie.
+            $sum = (float) ($sensitive->press_frames_sum ?? 0);
+            $sq = (float) ($sensitive->press_frames_sq ?? 0);
+            $moyenne = $sum / $n;
+            $variance = $sq / $n - $moyenne * $moyenne;
+            if ($variance < 0.25) $flags[] = 'autofire';
+        }
+        if ((string) ($passport->artifacts->forced_options ?? '') !== '') $flags[] = 'forced_options';
+        return array_values(array_unique($flags));
+    }
+
+    /** @param list<string> $flags */
+    private static function r(string $status, string $reason, array $flags = []): array
+    {
+        return ['status' => $status, 'reason' => $reason, 'flags' => $flags];
     }
 }
