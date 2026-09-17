@@ -171,7 +171,12 @@
         },
         "press_count": { "description": "Appuis releves sur le port 1 (duree connue). Information, jamais un motif de refus.", "type": "integer", "minimum": 0 },
         "press_frames_sum": { "description": "Somme des durees d'appui, en images.", "type": "integer", "minimum": 0 },
-        "press_frames_sq": { "description": "Somme des carres des durees d'appui : la dispersion se calcule cote plateforme, sans conserver la serie.", "type": "integer", "minimum": 0 }
+        "press_frames_sq": { "description": "Somme des carres des durees d'appui : la dispersion se calcule cote plateforme, sans conserver la serie.", "type": "integer", "minimum": 0 },
+        "macro_repeats": {
+          "description": "Le plus grand nombre de fois qu'une meme seconde d'entrees (64 images, au moins 6 changements et deux directions ou deux boutons d'action) a ete rejouee a l'identique sans chevauchement. Un joueur ne depasse pas 2 ou 3 ; un boitier programmable monte sans limite. A partir de 5, le score est SIGNALE (plausibility.macro_detected) : garde, visible du seul joueur, jamais classe ni ancre.",
+          "type": "integer", "minimum": 0
+        },
+        "macro_windows": { "description": "Nombre de fenetres distinctes rejouees au moins cinq fois.", "type": "integer", "minimum": 0 }
       }
     },
 

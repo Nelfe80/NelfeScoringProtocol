@@ -45,6 +45,13 @@ final class ServerAdmissionVerifier
         if ($state->listenerRevoked($passport->listener->loaded_sha256 ?? '')) return self::r('refused', 'profile.listener_revoked');
         if ($state->profileSuspended($passport->game->rom_group ?? '', $passport->game->ruleset ?? '')) return self::r('refused', 'profile.not_open');
 
+        // Anomalie : le score est SIGNALE, pas refuse. Il reste au joueur, ne classe pas, ne
+        // s'ancre pas (decision du 2026-09-17). Une macro d'abord : une meme seconde d'entrees
+        // rejouee cinq fois a l'identique, ce qu'aucune main ne fait.
+        if ((int) ($passport->sensitive->macro_repeats ?? 0) >= self::MacroRepeatsHeld) {
+            $state->markConsumed($sid, $tid);
+            return self::r('held', 'plausibility.macro_detected', $flags);
+        }
         // Anomalie UNIQUEMENT statistique → retenue (pas un refus).
         if ($state->statisticalAnomaly($passport)) {
             $state->markConsumed($sid, $tid);
@@ -81,6 +88,9 @@ final class ServerAdmissionVerifier
         if ((string) ($passport->artifacts->forced_options ?? '') !== '') $flags[] = 'forced_options';
         return array_values(array_unique($flags));
     }
+
+    /** Repetitions a l'identique d'une meme seconde d'entrees a partir desquelles on signale. */
+    public const MacroRepeatsHeld = 5;
 
     /** @param list<string> $flags */
     private static function r(string $status, string $reason, array $flags = []): array

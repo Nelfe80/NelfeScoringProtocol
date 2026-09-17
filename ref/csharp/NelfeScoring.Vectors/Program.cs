@@ -248,6 +248,9 @@ Add("pass_interrupted", "", p => { var c = p["progression"]!["checkpoints"]!.AsA
 Add("fail_impossible_inputs", "runtime.impossible_inputs", p => p["sensitive"]!["impossible_inputs"] = 120);
 // Trois images de directions opposees : un rebond de contact, tolere.
 Add("pass_input_bounce", "", p => p["sensitive"]!["impossible_inputs"] = 3);
+// Une meme seconde d'entrees rejouee sept fois a l'identique : le socle l'accepte (rien
+// d'invalide), c'est l'admission serveur qui SIGNALE (held, plausibility.macro_detected).
+Add("pass_macro_repeats", "", p => p["sensitive"]!["macro_repeats"] = 7);
 Add("fail_core_options", "profile.core_options_mismatch", p => p["artifacts"]!["core_options_digest"] = H("tampered-options"));
 Add("fail_out_of_bounds", "format.out_of_bounds", p => p["metric"]!["value"] = "999");
 Add("fail_protocol", "format.protocol", p => p["protocol"] = 2);

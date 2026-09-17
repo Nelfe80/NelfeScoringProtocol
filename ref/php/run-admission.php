@@ -55,6 +55,7 @@ $devPem = (string) file_get_contents($root . '/keys/device.pub.pem');
 $issPem = (string) file_get_contents($root . '/keys/issuer.pub.pem');
 $valid = json_decode((string) file_get_contents($root . '/vectors/valid.passport.json'));
 $coreFail = json_decode((string) file_get_contents($root . '/vectors/fail_core_mismatch.passport.json'));
+$macro = json_decode((string) file_get_contents($root . '/vectors/pass_macro_repeats.passport.json'));
 $listenerSha = $valid->listener->loaded_sha256;
 
 /** @var array<array{0:string,1:string,2:string,3:callable,4:object}> $cases */
@@ -67,6 +68,7 @@ $cases = [
     ['listener_revoked', 'refused', 'profile.listener_revoked', fn(MemoryStateStore $s) => $s->revokedListeners[] = $listenerSha, $valid],
     ['profile_suspended', 'refused', 'profile.not_open', fn(MemoryStateStore $s) => $s->suspendedProfiles[] = 'sonic-the-hedgehog|1cc', $valid],
     ['statistical_held', 'held', 'plausibility.statistical_hold', fn(MemoryStateStore $s) => $s->statAnomaly = true, $valid],
+    ['macro_held', 'held', 'plausibility.macro_detected', fn(MemoryStateStore $s) => null, $macro],
     ['core_failure_surfaced', 'refused', 'profile.core_mismatch', fn(MemoryStateStore $s) => null, $coreFail],
 ];
 
