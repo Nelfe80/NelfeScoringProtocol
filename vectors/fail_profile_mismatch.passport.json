@@ -10,7 +10,7 @@
     "expires_at": "2026-07-30T20:00:00Z",
     "nonce": "n_abc123",
     "issuer_key_id": "24a78797c7626a01debb3e234c5d5627d612053aacccaaa65c05d1ada6c542d7",
-    "signature": "MEUCICB2m7WMHLf2xty6FIwinrKiUN0zDI7TeCvoQNSEQh8PAiEA7sCd6BnpsDng8JqHX2J_ffAVgyO06DHf5H5Z9H3M3r4"
+    "signature": "MEUCIQDyr5Tw0y5p-XtYGqlHJvzTNo8HEBvekNkaXdsZ1SWaAwIgf6HnAKfQCdVGqDPqSNAwzKIcwpDS2lnlOh3TJDiSd-M"
   },
   "game": {
     "system_id": "nes",
@@ -195,5 +195,5 @@
     "checkpoints_digest": "fa64051bf07999d438ec7103c83c99f18aafa5c0ddb0922665cf59eea743a7a3"
   },
   "local_check": "pass",
-  "signature": "MEUCIGBdpniidEI2iiJ1VuVSHzfm_Lc6ZNivZ_ihGjtyh0ePAiEAmT8GVpX9KCdd3aohA-Ndkq6MP540iQdG2Of6ma1hC_E"
+  "signature": "MEUCIQCLYK8myEUiseBxh5Smu8lcTS7ljzDVL_LKzjXJIy5BGgIgSNYmMOnmhKk7sT1TGgFNFFTPEuislRw6myhIm5bLWk8"
 }

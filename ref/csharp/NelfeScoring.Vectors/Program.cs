@@ -241,7 +241,13 @@ Add("fail_ticket_invalid", "session.ticket_invalid", p => p["ticket"]!["device_i
 Add("fail_ticket_missing", "session.ticket_missing", p => p.Remove("ticket"), sign: false);
 Add("fail_not_open", "profile.not_open", p => { p["timing"]!["started_at"] = "2026-06-01T10:00:00Z"; p["timing"]!["ended_at"] = "2026-06-01T10:05:00Z"; });
 Add("fail_timing", "timing.incoherent", p => p["timing"]!["started_at"] = "2026-07-30T18:45:00Z");
-Add("fail_no_game_end", "session.no_game_end", p => { var c = p["progression"]!["checkpoints"]!.AsArray(); ((JsonObject)c[c.Count - 1]!).Remove("event"); });
+// Une partie interrompue (pas de game_end) est ACCEPTEE depuis le 2026-09-17 : une coupure ne
+// coute pas un record. Le score reste celui que les checkpoints prouvent.
+Add("pass_interrupted", "", p => { var c = p["progression"]!["checkpoints"]!.AsArray(); ((JsonObject)c[c.Count - 1]!).Remove("event"); });
+// Deux directions opposees tenues ensemble pendant deux secondes : aucun levier ne le fait.
+Add("fail_impossible_inputs", "runtime.impossible_inputs", p => p["sensitive"]!["impossible_inputs"] = 120);
+// Trois images de directions opposees : un rebond de contact, tolere.
+Add("pass_input_bounce", "", p => p["sensitive"]!["impossible_inputs"] = 3);
 Add("fail_core_options", "profile.core_options_mismatch", p => p["artifacts"]!["core_options_digest"] = H("tampered-options"));
 Add("fail_out_of_bounds", "format.out_of_bounds", p => p["metric"]!["value"] = "999");
 Add("fail_protocol", "format.protocol", p => p["protocol"] = 2);

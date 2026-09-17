@@ -116,8 +116,16 @@
     "expected": "timing.incoherent"
   },
   {
-    "vector": "fail_no_game_end.passport.json",
-    "expected": "session.no_game_end"
+    "vector": "pass_interrupted.passport.json",
+    "expected": "pass"
+  },
+  {
+    "vector": "fail_impossible_inputs.passport.json",
+    "expected": "runtime.impossible_inputs"
+  },
+  {
+    "vector": "pass_input_bounce.passport.json",
+    "expected": "pass"
   },
   {
     "vector": "fail_core_options.passport.json",

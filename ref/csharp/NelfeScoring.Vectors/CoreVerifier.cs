@@ -12,10 +12,12 @@ namespace NelfeScoring;
 /// Entrées : le passeport, le profil signé, et les clés publiques (SPKI DER) fournies
 /// - le CoreVerifier ne connaît pas d'annuaire. Sortie : Ok + reason_code (§8ter).
 /// </summary>
-public sealed record VerifyResult(bool Ok, string ReasonCode)
+public sealed record VerifyResult(bool Ok, string ReasonCode, IReadOnlyList<string> Flags)
 {
-    public static readonly VerifyResult Pass = new(true, "");
-    public static VerifyResult Fail(string code) => new(false, code);
+    public static readonly VerifyResult Pass = new(true, "", Array.Empty<string>());
+    public static VerifyResult Fail(string code) => new(false, code, Array.Empty<string>());
+    /// <summary>Accepte, avec ce qui merite d'etre dit sans refuser (« interrupted »).</summary>
+    public static VerifyResult PassWith(params string[] flags) => new(true, "", flags);
 }
 
 public static class CoreVerifier
@@ -192,6 +194,11 @@ public static class CoreVerifier
             return F("runtime.runahead_detected");
         if (Bool(passport, "sensitive", "fast_forward") && Str(rules, "fast_forward") == "forbidden")
             return F("runtime.fast_forward_detected");
+        // Deux directions opposees tenues ensemble : aucun levier ne le fait. Quelques images
+        // passent (rebond de contact au changement de direction), pas une partie.
+        var impossible = I(passport, "sensitive", "impossible_inputs");
+        if (impossible != long.MinValue && impossible > ImpossibleInputsTolerance)
+            return F("runtime.impossible_inputs");
 
         var checkpoints = passport["progression"]?["checkpoints"] as JsonArray;
         if (checkpoints is null || checkpoints.Count == 0) return F("format.schema");
@@ -216,7 +223,9 @@ public static class CoreVerifier
 
             prev = cp; prevMetric = metric;
         }
-        if (!sawGameEnd) return F("session.no_game_end");
+        // Une partie sans fin de jeu n'est plus refusee (decision du 2026-09-17) : une coupure, un
+        // plantage, une fermeture ne doivent pas couter un record. L'interruption se dit.
+        var flags = sawGameEnd ? Array.Empty<string>() : new[] { "interrupted" };
 
         // metric.value cohérente avec result_source
         var resultSource = Str(profile, "metric", "result_source") ?? "final";
@@ -230,7 +239,7 @@ public static class CoreVerifier
         };
         if (declared != expected) return F("format.out_of_bounds");
 
-        return VerifyResult.Pass;
+        return flags.Length == 0 ? VerifyResult.Pass : VerifyResult.PassWith(flags);
     }
 
     // ── corrélations ──────────────────────────────────────────────────────────
@@ -263,6 +272,9 @@ public static class CoreVerifier
     }
 
     // ── helpers d'accès JsonNode ───────────────────────────────────────────────
+    /// <summary>Images a directions opposees tolerees par partie : un rebond de contact, pas un stick SOCD.</summary>
+    public const long ImpossibleInputsTolerance = 3;
+
     private static VerifyResult F(string code) => VerifyResult.Fail(code);
 
     private static JsonNode? Nav(JsonNode? n, string[] path)

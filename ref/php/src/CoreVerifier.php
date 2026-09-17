@@ -174,6 +174,9 @@ final class CoreVerifier
         if (self::bv($passport, 'sensitive', 'rewind') && self::s($rules, 'rewind') === 'forbidden') return self::f('runtime.rewind_detected');
         if (self::bv($passport, 'sensitive', 'runahead') && self::s($rules, 'runahead') === 'forbidden') return self::f('runtime.runahead_detected');
         if (self::bv($passport, 'sensitive', 'fast_forward') && self::s($rules, 'fast_forward') === 'forbidden') return self::f('runtime.fast_forward_detected');
+        // Deux directions opposees tenues ensemble : aucun levier ne le fait. Quelques images
+        // passent (rebond de contact au changement de direction), pas une partie.
+        if (self::iv($passport, 'sensitive', 'impossible_inputs') > self::ImpossibleInputsTolerance) return self::f('runtime.impossible_inputs');
 
         $checkpoints = $passport->progression->checkpoints ?? null;
         if (!is_array($checkpoints) || count($checkpoints) === 0) return self::f('format.schema');
@@ -193,7 +196,10 @@ final class CoreVerifier
                 return self::f('progression.invalid_correlation');
             $prev = $cp; $prevMetric = $metric;
         }
-        if (!$sawGameEnd) return self::f('session.no_game_end');
+        // Une partie sans fin de jeu n'est plus refusee (decision du 2026-09-17) : une coupure, un
+        // plantage, une fermeture ne doivent pas couter un record. Le score soumis reste celui que
+        // les checkpoints prouvent. L'interruption se dit, pour l'affichage.
+        $flags = $sawGameEnd ? [] : ['interrupted'];
 
         $resultSource = self::s($profile, 'metric', 'result_source') ?? 'final';
         $declared = self::s($passport, 'metric', 'value');
@@ -206,7 +212,7 @@ final class CoreVerifier
         };
         if ($declared !== $expected) return self::f('format.out_of_bounds');
 
-        return ['ok' => true, 'reason' => ''];
+        return ['ok' => true, 'reason' => '', 'flags' => $flags];
     }
 
     // ── corrélations ───────────────────────────────────────────────────────────
@@ -240,7 +246,10 @@ final class CoreVerifier
     }
 
     // ── helpers ─────────────────────────────────────────────────────────────────
-    private static function f(string $code): array { return ['ok' => false, 'reason' => $code]; }
+    /** Images a directions opposees tolerees par partie : un rebond de contact, pas un stick SOCD. */
+    public const ImpossibleInputsTolerance = 3;
+
+    private static function f(string $code): array { return ['ok' => false, 'reason' => $code, 'flags' => []]; }
 
     private static function nav(mixed $n, array $path): mixed
     {
