@@ -70,6 +70,25 @@
 
     "core_options_policy": { "type": "object" },
     "allowed_core_options_digest": { "$ref": "#/$defs/sha256Array" },
+    "core_options_expected": {
+      "description": "Les reglages certifies EN CLAIR, par moteur. Une empreinte ne se remonte pas : sans les valeurs, la borne ne peut ni dire au joueur ce qui cloche, ni le corriger avant la partie. Le listener repond ces valeurs au coeur au chargement quand la borne force la certification ; l'empreinte reste le controle.",
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["values"],
+        "properties": {
+          "values": {
+            "description": "cle d'option (libretro) ou nom de DIP switch (MAME autonome) -> valeur attendue.",
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": { "type": "string", "maxLength": 200 }
+          },
+          "cores": {
+            "description": "Coeurs auxquels ces valeurs s'appliquent (sha256 du coeur charge). Absent : tous.",
+            "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/sha256hex" }
+          }
+        }
+      }
+    },
     "nvram_pins": {
       "description": "Reglages des jeux sans DIP switches (EEPROM, RAM de sauvegarde) : plages d'octets calibrees par jeu et leur empreinte. Opt-in.",
       "type": "array",
