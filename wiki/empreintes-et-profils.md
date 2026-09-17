@@ -125,17 +125,25 @@ Un score n'est comparable qu'à **réglages égaux** (difficulté, vies, région
 (SHA‑256 d'une chaîne canonique triée `clé=valeur;…`). Contrôle **opt‑in** : un profil sans
 cette clé ne vérifie pas les réglages (rétro‑compatible).
 
-**Ce qui est digéré = seulement le GAMEPLAY**, pas le cosmétique (audio, filtres vidéo, ratio).
+**Ce qui est digéré = seulement ce qui change la PARTIE.**
+
+> **Règle : un réglage d'affichage ou de manette ne compte jamais.** Résolution, format
+> d'image, filtres, rotation, flip, cabinet, zone morte, sensibilité analogique, résolution
+> gauche+droite (SOCD), tir automatique, souris, pistolet : le frontend les écrit selon l'écran
+> et les manettes de chaque borne. Les compter refuserait une borne d'usine. Entrent dans
+> l'empreinte : vitesse (overclock, 60 Hz), matériel émulé et région, ROM patchée, cheats,
+> reprise de partie, DIP switches de jeu (vies, difficulté, bonus).
+
 La capture dépend du backend :
 
 | Backend | Source des réglages | Filtre |
 |---|---|---|
-| RetroArch (wrapper) | `RETRO_ENVIRONMENT_GET_VARIABLE` — le core lit ses options (DIP arcade pour fbneo, région/etc. pour la console) | **allowlist par core** dans le reporter (chaque core a ses clés préfixées : `genesis_plus_gx_*`, `fbneo-*`…) ; ajouter un core = une entrée, partagée par ses jeux |
-| MAME standalone (Lua) | `manager.machine.ioport` — les DIP switches | **denylist** dans le plugin Lua (écarte monnayage/service/flip/cabinet/demo/unused) |
+| RetroArch (wrapper) | `RETRO_ENVIRONMENT_GET_VARIABLE` : les options que le cœur lit | **liste par cœur** dans le reporter (`genesis_plus_gx_*`, `fbneo-*`, `mame_*`). Un cœur **sans liste ne verse rien** (depuis APIExpose 1.8.12 ; avant, il versait toutes ses options, affichage compris). Les DIP FBNeo (`fbneo-dipswitch-<jeu>-<nom>`) passent le même filtre de noms que MAME autonome |
+| MAME autonome (Lua) | `manager.machine.ioport` : les DIP switches | **noms écartés** : monnayage, free play, service, test mode, demo sounds, unused, flip, cabinet, screen, monitor, controls, joystick, trackball (plugin Lua, complété côté APIExpose) |
 
-Le **digest est calculé côté APIExpose** (le backend émet le brut, le reporter filtre puis hache) :
-mécanisme centralisé, et une clé d'un backend non filtré passe inchangée (donc un digest déjà
-épinglé ne bouge pas si on ajoute un core à l'allowlist).
+Le **digest est calculé côté APIExpose** (le backend émet le brut, le reporter filtre puis hache),
+dans un mécanisme centralisé. Changer le filtre change les empreintes des jeux déjà épinglés :
+les nouvelles s'ajoutent aux profils avant la version qui les produit.
 
 **Épinglage d'un jeu** : jouer une fois en réglages usine → lire le digest dans le log APIExpose
 (`Scoring Phase E : réglages … → core_options_digest=…`) → le mettre dans `allowed_core_options_digest`
