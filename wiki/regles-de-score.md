@@ -48,11 +48,17 @@ format d'image, filtres, zone morte, sensibilité, tir automatique du frontend. 
 dépendent de l'écran et des manettes de chacun, pas du jeu.
 
 ### La borne applique les réglages avant la partie
-Depuis APIExpose 1.8.12, tu n'as plus à connaître les réglages de référence : le profil
+Depuis APIExpose 1.8.12 (1.8.13 pour le rembobinage), tu n'as plus à connaître les réglages de référence : le profil
 du jeu les publie en clair, et la borne les **applique au chargement** pour un jeu ouvert
 au scoring (option « Force certified settings », allumée par défaut). Rien n'est réécrit
 dans tes fichiers : le listener répond la valeur certifiée quand le cœur lit ses options,
 et tout revient à la normale sur un jeu qui n'est pas ouvert.
+
+La borne neutralise aussi, pour ce jeu seulement, ce que RetroBat active par défaut et qui
+ferait refuser le score : le **rembobinage** (Rewind vaut « auto », c'est-à-dire allumé pour
+presque tous les cœurs), le **run-ahead** et la **sauvegarde d'état automatique**. Elle écrit
+les réglages RetroBat du jeu dès sa sélection dans le menu ; rien ne change pour les autres
+jeux ni pour tes réglages globaux. Forçage éteint, elle te le dit avant la partie.
 
 Au chargement, la borne demande aussi à la plateforme un **verdict avant la partie**, avec
 exactement le code du verdict final : « partie certifiable », ou la raison pour laquelle

@@ -154,11 +154,20 @@ réglages certifiés. L'empreinte reste le contrôle ; les valeurs servent à de
   et le listener répond la valeur certifiée quand le cœur lit ses options (`GET_VARIABLE`).
   Aucun fichier de configuration n'est réécrit. Ce qui a réellement changé part dans le
   passeport (`artifacts.forced_options`) et se voit sur le record ;
+- **le frontend** (1.8.13) : rembobinage, run‑ahead et sauvegarde d'état automatique ne sont pas
+  des options de cœur ; la borne les met à zéro par les réglages RetroBat du jeu
+  (`<système>["<rom>"].rewind|runahead|autosave` dans es_settings.cfg) dès la sélection, pour
+  que le lanceur les lise. RetroBat allume le rewind en « auto » : sans cela, chaque nouveau
+  joueur était refusé pour rembobinage ;
 - **le verdict avant la partie** : à son attestation, la borne envoie à `scores/preflight` ce
   qu'elle a mesuré (cœur, contenu, MEM, listener, empreinte des réglages, BIOS) ; la plateforme
   répond « certifiable » ou la raison, par `CoreVerifier::profileArtifacts`, le code même du
   verdict final, après les mêmes élargissements. Sans NVRAM présentée, les épingles NVRAM
-  attendent la fin de partie.
+  attendent la fin de partie. La borne y ajoute ce que la plateforme ne voit pas : ce que
+  RetroArch a réellement chargé (retroarch.cfg), pour prévenir d'un rembobinage actif.
+
+Une session **sans aucun appui** (`press_count = 0`, listener 0.336) n'est jamais soumise : c'est
+la démo d'attract, ou un jeu lancé et laissé là.
 
 **Épinglage d'un jeu** : déposer les valeurs dans `core_options_expected` et l'empreinte qu'elles
 produisent dans `allowed_core_options_digest`. Depuis le forçage, toutes les bornes convergent
