@@ -41,6 +41,51 @@ Un score certifié n'est donc valable **qu'aux réglages de référence** (par d
 que la ROM, l'émulateur et le listener homologué. Un score joué avec des réglages
 modifiés reste ton score, mais il n'entre pas au classement certifié de référence.
 
+**Ce qui compte comme réglage** : ce qui change la partie, et rien d'autre. Vies,
+difficulté, bonus, vitesse du processeur, ROM patchée, cheats, reprise de partie. Un
+réglage d'affichage ou de manette n'entre **jamais** en ligne de compte : résolution,
+format d'image, filtres, zone morte, sensibilité, tir automatique du frontend. Ils
+dépendent de l'écran et des manettes de chacun, pas du jeu.
+
+### La borne applique les réglages avant la partie
+Depuis APIExpose 1.8.12, tu n'as plus à connaître les réglages de référence : le profil
+du jeu les publie en clair, et la borne les **applique au chargement** pour un jeu ouvert
+au scoring (option « Force certified settings », allumée par défaut). Rien n'est réécrit
+dans tes fichiers : le listener répond la valeur certifiée quand le cœur lit ses options,
+et tout revient à la normale sur un jeu qui n'est pas ouvert.
+
+Au chargement, la borne demande aussi à la plateforme un **verdict avant la partie**, avec
+exactement le code du verdict final : « partie certifiable », ou la raison pour laquelle
+elle ne l'est pas (émulateur non reconnu, ROM, BIOS). Tu le sais avant de jouer, pas après.
+Ce qui ne se voit qu'en jouant (cheats, rembobinage, entrées) reste vérifié à la fin.
+
+## Ce qui refuse, ce qui signale, ce qui informe
+Un score n'a que trois sorts, décidés au dépôt, par des règles publiques :
+
+| Sort | Ce qui le déclenche | Conséquence |
+|---|---|---|
+| **Certifié** | passeport valide, rien à signaler | classé, certificat, scellé sur Bitcoin |
+| **Signalé** | une **macro** : une même seconde d'entrées rejouée à l'identique, image par image, cinq fois ou plus | gardé sur ton compte, visible de toi seul, jamais classé ni scellé |
+| **Refusé** | triche logicielle (cheats, rembobinage, avance rapide, sauvegarde d'état), **entrées impossibles** (deux directions opposées tenues ensemble), émulateur, ROM, réglages ou listener non conformes, passeport invalide | rien de publié |
+
+Un score signalé ou refusé n'existe nulle part ailleurs que sur ton compte, avec le motif
+en clair. Le classement ne contient que du certifié.
+
+Certaines choses se disent sans rien retirer au record, par un repère ⓘ à côté du score :
+- **partie interrompue** : pas de fin de jeu (coupure, plantage, fermeture). Le score
+  reste celui que les points de passage prouvent ; une interruption ne coûte jamais un record ;
+- **tir automatique** : des appuis d'une régularité mécanique. C'est une information, pas
+  une anomalie : des manettes d'époque le faisaient, et bien des jeux l'ont d'origine ;
+- **réglages appliqués** : la borne s'est alignée sur le profil au lancement.
+
+### Pourquoi une macro est une anomalie et pas le tir automatique
+Un tir automatique, c'est **un** bouton répété à période fixe, sans direction : un matériel
+d'époque savait le faire. Une macro, c'est une **séquence** de boutons ou de directions
+différents, rejouée à l'identique à l'image près : il faut un appareil programmable, et
+aucun jeu ne l'a jamais permis. La borne compte l'une et l'autre sans rien coûter à la
+partie ; la plateforme tranche au dépôt. Une routine apprise par un joueur ne tombe pas
+dans le filet : ses durées varient toujours d'une image ou deux.
+
 ## Tous les jeux ne sont pas éligibles au 1cc strict
 La finesse du jugement dépend de ce que le jeu **laisse voir** :
 
@@ -57,6 +102,8 @@ un travail de données, jeu par jeu, pas un interrupteur global.
 ## En résumé
 - Le **run** (un crédit) est l'unité ; le **meilleur run** gagne.
 - **1cc = zéro continue**, gelé à la première mort — arcade et console, même règle.
-- **Réglages de référence** obligatoires ; sinon, hors classement certifié.
+- **Réglages de référence** obligatoires ; la borne les applique elle-même avant la partie.
+- **Trois sorts** : certifié, signalé (macro : gardé pour toi, jamais classé), refusé.
+- Une **partie interrompue** garde son score ; le **tir automatique** est une information.
 - **Meilleur** score, jamais le dernier.
 - L'éligibilité au 1cc strict dépend des repères que le jeu expose.

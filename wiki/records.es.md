@@ -27,8 +27,10 @@ checkpoints, ticket) y lo **firma** con una clave hardware **no exportable**
 ## 3 · Verificado en el servidor
 El servidor **no repite el juego**: aplica **reglas públicas** (el *CoreVerifier*, open
 source) - huellas esperadas, monotonía de la trayectoria, fin de partida, ticket válido
-- y emite un veredicto: **publicado**, **retenido** (anomalía estadística, nunca un
-rechazo seco) o **rechazado**. Sin árbitro humano.
+- y emite un veredicto: **publicado**, **señalado** (una macro repetida de forma idéntica:
+la puntuación queda con el jugador, nunca clasificada ni sellada) o **rechazado** (trampas
+de software, entradas imposibles, artefactos no conformes). Una partida interrumpida
+conserva su puntuación. Sin árbitro humano.
 
 ## 4 · Publicado en un índice firmado
 Las puntuaciones publicadas forman un **índice firmado**: la lista completa + una

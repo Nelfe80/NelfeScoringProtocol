@@ -145,12 +145,50 @@ Le **digest est calculé côté APIExpose** (le backend émet le brut, le report
 dans un mécanisme centralisé. Changer le filtre change les empreintes des jeux déjà épinglés :
 les nouvelles s'ajoutent aux profils avant la version qui les produit.
 
-**Épinglage d'un jeu** : jouer une fois en réglages usine → lire le digest dans le log APIExpose
-(`Scoring Phase E : réglages … → core_options_digest=…`) → le mettre dans `allowed_core_options_digest`
-→ redéposer. Un réglage gameplay différent donne alors `profile.core_options_mismatch`.
+**Les valeurs en clair : `core_options_expected`** (2026‑09‑17). Une empreinte ne se remonte
+pas : sans les valeurs, une borne ne pouvait ni nommer au joueur le réglage fautif ni le
+corriger. Le profil publie donc, par moteur (`cores` optionnel), la liste `clé = valeur` des
+réglages certifiés. L'empreinte reste le contrôle ; les valeurs servent à deux choses :
+
+- **le forçage** : la borne dépose les valeurs dans `wrapper\certified.txt` avant le lancement,
+  et le listener répond la valeur certifiée quand le cœur lit ses options (`GET_VARIABLE`).
+  Aucun fichier de configuration n'est réécrit. Ce qui a réellement changé part dans le
+  passeport (`artifacts.forced_options`) et se voit sur le record ;
+- **le verdict avant la partie** : à son attestation, la borne envoie à `scores/preflight` ce
+  qu'elle a mesuré (cœur, contenu, MEM, listener, empreinte des réglages, BIOS) ; la plateforme
+  répond « certifiable » ou la raison, par `CoreVerifier::profileArtifacts`, le code même du
+  verdict final, après les mêmes élargissements. Sans NVRAM présentée, les épingles NVRAM
+  attendent la fin de partie.
+
+**Épinglage d'un jeu** : déposer les valeurs dans `core_options_expected` et l'empreinte qu'elles
+produisent dans `allowed_core_options_digest`. Depuis le forçage, toutes les bornes convergent
+vers les mêmes valeurs : une seule empreinte par jeu et par moteur, au lieu d'une par borne.
 
 **Limite** : les jeux configurés par **EEPROM/nvram** (CPS‑2, Neo‑Geo) n'exposent pas leurs
 réglages en DIP — le digest y fingerprinte des DIP inertes, pas la vraie difficulté (capture nvram = futur).
+
+## 5 bis. Les entrées : ce que le passeport dit du jeu de la main (2026‑09‑17)
+
+Le listener observe les entrées du port 1 sans rien coûter à la partie (bits et compteurs de
+taille fixe, repliés une fois par image, émis en fin de session) :
+
+| Champ (`sensitive`) | Ce qu'il compte | Ce qu'en fait la plateforme |
+|---|---|---|
+| `impossible_inputs` | images où deux directions opposées étaient tenues ensemble | **refus** `runtime.impossible_inputs` au‑delà de 3 images (un rebond de contact) |
+| `macro_repeats` | le plus grand nombre de fois qu'une même seconde d'entrées (64 images, avec de la matière : 6 changements et deux directions ou deux boutons d'action) a été rejouée à l'identique sans chevauchement | **signalé** `plausibility.macro_detected` à partir de 5 : gardé pour le joueur, jamais classé ni ancré |
+| `press_count`, `press_frames_sum`, `press_frames_sq` | nombre, somme et somme des carrés des durées d'appui | **information** `autofire` si la variance est nulle sur 50 appuis ou plus |
+
+Un tir automatique sur un seul bouton, direction tenue, n'entre pas dans la fenêtre d'une
+macro ; une routine humaine varie d'une image ou deux et ne se répète pas cinq fois à
+l'identique. Une macro à qui l'on ajoute du bruit n'est pas détectée : c'est assumé.
+
+**Partie interrompue** : `session.no_game_end` n'est plus un refus. Le score soumis est déjà le
+meilleur segment croissant ; le verdict porte le drapeau `interrupted`, rien n'est perdu.
+
+**Trois sorts au dépôt** : `published` (classé, certificat, ancré), `held` (signalé : gardé,
+visible du seul joueur, jamais dans `scores` ni dans l'arbre ancré ; un signalement levé
+rejoint une génération suivante), `refused`. Les drapeaux d'information (`interrupted`,
+`autofire`, `forced_options`) voyagent avec le score et s'affichent par un repère ⓘ.
 
 ## 6. Les deux vérifieurs JUMEAUX — garder synchro
 

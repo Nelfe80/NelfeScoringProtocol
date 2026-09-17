@@ -27,8 +27,10 @@ checkpoints, ticket) et le **signe** avec une clé matérielle **non exportable*
 ## 3 · Vérifié côté serveur
 Le serveur **ne rejoue pas le jeu** : il applique des **règles publiques** (le
 *CoreVerifier*, open source) - empreintes attendues, monotonie de la trajectoire, fin de
-partie, ticket valide - puis rend un verdict **publié**, **retenu** (anomalie statistique,
-jamais un refus sec) ou **refusé**. Zéro arbitre humain.
+partie, ticket valide - puis rend un verdict **publié**, **signalé** (une macro rejouée à l'identique : le score
+reste au joueur, jamais classé ni scellé) ou **refusé** (triche logicielle, entrées
+impossibles, artefacts non conformes). Une partie interrompue garde son score. Zéro
+arbitre humain.
 
 ## 4 · Publié dans un index signé
 Les scores publiés forment un **index signé** : la liste complète + une **empreinte

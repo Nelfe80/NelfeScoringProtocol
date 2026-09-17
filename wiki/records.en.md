@@ -27,8 +27,10 @@ checkpoints, ticket) and **signs** it with a **non-exportable** hardware key
 ## 3 · Verified server-side
 The server **does not replay the game**: it applies **public rules** (the open-source
 *CoreVerifier*) - expected fingerprints, trajectory monotonicity, game end, valid ticket
-- then returns a verdict: **published**, **held** (statistical anomaly, never a hard
-refusal) or **refused**. No human referee.
+- then returns a verdict: **published**, **flagged** (a macro replayed identically: the
+score stays with the player, never ranked nor sealed) or **refused** (software cheats,
+impossible inputs, non-compliant artifacts). An interrupted run keeps its score. No
+human referee.
 
 ## 4 · Published in a signed index
 Published scores form a **signed index**: the full list + a **SHA-256 fingerprint**
