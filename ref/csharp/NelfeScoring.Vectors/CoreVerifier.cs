@@ -69,96 +69,11 @@ public static class CoreVerifier
             return F("profile.mismatch");
 
         var coreLoaded = Str(passport, "artifacts", "core", "loaded_sha256");
-        var contentLoaded = Str(passport, "artifacts", "content", "loaded_sha256");
-        var memLoaded = Str(passport, "artifacts", "mem", "loaded_sha256");
         var listenerLoaded = Str(passport, "listener", "loaded_sha256");
-
-        if (!InArr(profile, coreLoaded, "allowed_core_sha256")) return F("profile.core_mismatch");
-        // Voie A : si le profil épingle la ROM par md5 (No-Intro/gamelist), on compare le md5
-        // (le wrapper homologué DOIT l'émettre) ; sinon on retombe sur le sha256 (legacy).
-        var allowedContentMd5 = profile["allowed_content_md5"] as JsonArray;
-        var allowedContentSha1 = profile["allowed_content_sha1"] as JsonArray;
-        if (allowedContentMd5 is not null && allowedContentMd5.Count > 0)
-        {
-            if (!InArr(profile, Str(passport, "artifacts", "content", "md5"), "allowed_content_md5")) return F("profile.content_mismatch");
-        }
-        else if (allowedContentSha1 is not null && allowedContentSha1.Count > 0)
-        {
-            // MAME : identité = sha1 du set (gamelist), MAME vérifiant déjà le romset (DAT).
-            if (!InArr(profile, Str(passport, "artifacts", "content", "sha1"), "allowed_content_sha1")) return F("profile.content_mismatch");
-        }
-        else if (!InArr(profile, contentLoaded, "allowed_content_sha256"))
-        {
-            return F("profile.content_mismatch");
-        }
-        if (memLoaded != Str(profile, "mem_sha256")) return F("profile.mem_mismatch");
-        if (!InArr(profile, listenerLoaded, "allowed_listener_sha256")) return F("profile.listener_unauthorized");
-
-        // Phase E : épinglage des réglages (DIP/vies/difficulté). Additif : on ne contrôle
-        // QUE si le profil épingle allowed_core_options_digest (sinon skip, rétro-compatible).
-        var allowedCoreOpts = profile["allowed_core_options_digest"] as JsonArray;
-        if (allowedCoreOpts is not null && allowedCoreOpts.Count > 0)
-        {
-            if (!InArr(profile, Str(passport, "artifacts", "core_options_digest"), "allowed_core_options_digest"))
-                return F("profile.core_options_mismatch");
-        }
-
-        // Epinglage de la NVRAM (reglages des jeux sans DIP switches). Additif : on ne controle
-        // QUE si le profil epingle nvram_pins. Les plages viennent du profil, jamais de la borne.
-        var pins = profile["nvram_pins"] as JsonArray;
-        if (pins is not null && pins.Count > 0)
-        {
-            var nvram = passport["artifacts"]?["nvram"] as JsonArray;
-            foreach (var pin in pins)
-            {
-                // Une epingle limitee a des coeurs ne concerne pas les autres moteurs du profil.
-                if (pin?["cores"] is JsonArray coeurs && coeurs.Count > 0
-                    && !coeurs.Any(c => string.Equals(c?.GetValue<string>(), coreLoaded, StringComparison.OrdinalIgnoreCase))) continue;
-                if (nvram is null) return F("profile.nvram_mismatch");
-                var fichier = (pin?["file"]?.GetValue<string>() ?? "").Replace('\\', '/');
-                var attendu = pin?["sha256"]?.GetValue<string>()?.ToLowerInvariant();
-                var plages = pin?["ranges"] as JsonArray;
-                if (fichier.Length == 0 || attendu is null || plages is null || plages.Count == 0) return F("profile.nvram_mismatch");
-                var entree = nvram.FirstOrDefault(n => (n?["file"]?.GetValue<string>() ?? "").Replace('\\', '/')
-                    .EndsWith(fichier, StringComparison.OrdinalIgnoreCase));
-                if (entree is null) return F("profile.nvram_mismatch");
-                foreach (var moment in new[] { "start", "end" })
-                {
-                    byte[] octets;
-                    try { octets = Convert.FromBase64String(entree[moment]?.GetValue<string>() ?? ""); }
-                    catch (FormatException) { return F("profile.nvram_mismatch"); }
-                    var zone = new List<byte>();
-                    foreach (var plage in plages)
-                    {
-                        var a = plage?[0]?.GetValue<int>() ?? -1;
-                        var b = plage?[1]?.GetValue<int>() ?? -1;
-                        if (a < 0 || b < a || b > octets.Length) return F("profile.nvram_mismatch");
-                        zone.AddRange(octets.AsSpan(a, b - a).ToArray());
-                    }
-                    if (Crypto.Sha256Hex(zone.ToArray()) != attendu) return F("profile.nvram_mismatch");
-                }
-            }
-        }
-
-        // BIOS declare par le profil. « none » : le jeu n'en utilise pas, rien a controler. « files » :
-        // chaque BIOS exige doit avoir ete hache par la borne, avec une empreinte autorisee.
-        if ((Str(profile, "bios", "mode") ?? "none") == "files")
-        {
-            if (profile["bios"]?["files"] is not JsonArray exiges || exiges.Count == 0) return F("profile.bios_mismatch");
-            var mesures = passport["artifacts"]?["bios"]?["files"] as JsonArray;
-            static string Nom(string? chemin) => Path.GetFileName((chemin ?? "").Replace('\\', '/'));
-            foreach (var exige in exiges)
-            {
-                if (exige?["cores"] is JsonArray coeurs && coeurs.Count > 0
-                    && !coeurs.Any(c => string.Equals(c?.GetValue<string>(), coreLoaded, StringComparison.OrdinalIgnoreCase))) continue;
-                var nom = Nom(exige?["name"]?.GetValue<string>());
-                var autorises = (exige?["allowed_sha256"] as JsonArray)?.Select(h => h?.GetValue<string>()?.ToLowerInvariant()).ToList();
-                if (nom.Length == 0 || autorises is null || autorises.Count == 0 || mesures is null) return F("profile.bios_mismatch");
-                var mesure = mesures.FirstOrDefault(m => string.Equals(Nom(m?["name"]?.GetValue<string>()), nom, StringComparison.OrdinalIgnoreCase));
-                var empreinte = mesure?["sha256"]?.GetValue<string>()?.ToLowerInvariant();
-                if (empreinte is null || !autorises.Contains(empreinte)) return F("profile.bios_mismatch");
-            }
-        }
+        // Les contrôles du profil sont à part : la borne les rejoue AVANT la partie (bandeau
+        // « certifiable / non certifiable »), avec le même code.
+        var profil = ProfileArtifacts(passport, profile);
+        if (profil.Length > 0) return F(profil);
 
         // modules par rôle + digest (§6.3-10, §5.5)
         var modules = passport["software"]?["modules"] as JsonArray;
@@ -272,6 +187,108 @@ public static class CoreVerifier
     }
 
     // ── helpers d'accès JsonNode ───────────────────────────────────────────────
+    /// <summary>
+    /// Les contrôles que le profil impose aux artefacts (émulateur, contenu, MEM, listener,
+    /// réglages, NVRAM, BIOS) : connus dès le chargement. À part pour que la borne les applique
+    /// avant la partie avec exactement ce code. Retourne le code d'échec, ou une chaîne vide.
+    /// </summary>
+    public static string ProfileArtifacts(JsonNode passport, JsonNode profile)
+    {
+        var coreLoaded = Str(passport, "artifacts", "core", "loaded_sha256");
+        var contentLoaded = Str(passport, "artifacts", "content", "loaded_sha256");
+        var memLoaded = Str(passport, "artifacts", "mem", "loaded_sha256");
+        var listenerLoaded = Str(passport, "listener", "loaded_sha256");
+
+        if (!InArr(profile, coreLoaded, "allowed_core_sha256")) return "profile.core_mismatch";
+        // Voie A : si le profil épingle la ROM par md5 (No-Intro/gamelist), on compare le md5
+        // (le wrapper homologué DOIT l'émettre) ; sinon on retombe sur le sha256 (legacy).
+        var allowedContentMd5 = profile["allowed_content_md5"] as JsonArray;
+        var allowedContentSha1 = profile["allowed_content_sha1"] as JsonArray;
+        if (allowedContentMd5 is not null && allowedContentMd5.Count > 0)
+        {
+            if (!InArr(profile, Str(passport, "artifacts", "content", "md5"), "allowed_content_md5")) return "profile.content_mismatch";
+        }
+        else if (allowedContentSha1 is not null && allowedContentSha1.Count > 0)
+        {
+            // MAME : identité = sha1 du set (gamelist), MAME vérifiant déjà le romset (DAT).
+            if (!InArr(profile, Str(passport, "artifacts", "content", "sha1"), "allowed_content_sha1")) return "profile.content_mismatch";
+        }
+        else if (!InArr(profile, contentLoaded, "allowed_content_sha256"))
+        {
+            return "profile.content_mismatch";
+        }
+        if (memLoaded != Str(profile, "mem_sha256")) return "profile.mem_mismatch";
+        if (!InArr(profile, listenerLoaded, "allowed_listener_sha256")) return "profile.listener_unauthorized";
+
+        // Phase E : épinglage des réglages (DIP/vies/difficulté). Additif : on ne contrôle
+        // QUE si le profil épingle allowed_core_options_digest (sinon skip, rétro-compatible).
+        var allowedCoreOpts = profile["allowed_core_options_digest"] as JsonArray;
+        if (allowedCoreOpts is not null && allowedCoreOpts.Count > 0)
+        {
+            if (!InArr(profile, Str(passport, "artifacts", "core_options_digest"), "allowed_core_options_digest"))
+                return "profile.core_options_mismatch";
+        }
+
+        // Epinglage de la NVRAM (reglages des jeux sans DIP switches). Additif : on ne controle
+        // QUE si le profil epingle nvram_pins. Les plages viennent du profil, jamais de la borne.
+        var pins = profile["nvram_pins"] as JsonArray;
+        if (pins is not null && pins.Count > 0)
+        {
+            var nvram = passport["artifacts"]?["nvram"] as JsonArray;
+            foreach (var pin in pins)
+            {
+                // Une epingle limitee a des coeurs ne concerne pas les autres moteurs du profil.
+                if (pin?["cores"] is JsonArray coeurs && coeurs.Count > 0
+                    && !coeurs.Any(c => string.Equals(c?.GetValue<string>(), coreLoaded, StringComparison.OrdinalIgnoreCase))) continue;
+                if (nvram is null) return "profile.nvram_mismatch";
+                var fichier = (pin?["file"]?.GetValue<string>() ?? "").Replace('\\', '/');
+                var attendu = pin?["sha256"]?.GetValue<string>()?.ToLowerInvariant();
+                var plages = pin?["ranges"] as JsonArray;
+                if (fichier.Length == 0 || attendu is null || plages is null || plages.Count == 0) return "profile.nvram_mismatch";
+                var entree = nvram.FirstOrDefault(n => (n?["file"]?.GetValue<string>() ?? "").Replace('\\', '/')
+                    .EndsWith(fichier, StringComparison.OrdinalIgnoreCase));
+                if (entree is null) return "profile.nvram_mismatch";
+                foreach (var moment in new[] { "start", "end" })
+                {
+                    byte[] octets;
+                    try { octets = Convert.FromBase64String(entree[moment]?.GetValue<string>() ?? ""); }
+                    catch (FormatException) { return "profile.nvram_mismatch"; }
+                    var zone = new List<byte>();
+                    foreach (var plage in plages)
+                    {
+                        var a = plage?[0]?.GetValue<int>() ?? -1;
+                        var b = plage?[1]?.GetValue<int>() ?? -1;
+                        if (a < 0 || b < a || b > octets.Length) return "profile.nvram_mismatch";
+                        zone.AddRange(octets.AsSpan(a, b - a).ToArray());
+                    }
+                    if (Crypto.Sha256Hex(zone.ToArray()) != attendu) return "profile.nvram_mismatch";
+                }
+            }
+        }
+
+        // BIOS declare par le profil. « none » : le jeu n'en utilise pas, rien a controler. « files » :
+        // chaque BIOS exige doit avoir ete hache par la borne, avec une empreinte autorisee.
+        if ((Str(profile, "bios", "mode") ?? "none") == "files")
+        {
+            if (profile["bios"]?["files"] is not JsonArray exiges || exiges.Count == 0) return "profile.bios_mismatch";
+            var mesures = passport["artifacts"]?["bios"]?["files"] as JsonArray;
+            static string Nom(string? chemin) => Path.GetFileName((chemin ?? "").Replace('\\', '/'));
+            foreach (var exige in exiges)
+            {
+                if (exige?["cores"] is JsonArray coeurs && coeurs.Count > 0
+                    && !coeurs.Any(c => string.Equals(c?.GetValue<string>(), coreLoaded, StringComparison.OrdinalIgnoreCase))) continue;
+                var nom = Nom(exige?["name"]?.GetValue<string>());
+                var autorises = (exige?["allowed_sha256"] as JsonArray)?.Select(h => h?.GetValue<string>()?.ToLowerInvariant()).ToList();
+                if (nom.Length == 0 || autorises is null || autorises.Count == 0 || mesures is null) return "profile.bios_mismatch";
+                var mesure = mesures.FirstOrDefault(m => string.Equals(Nom(m?["name"]?.GetValue<string>()), nom, StringComparison.OrdinalIgnoreCase));
+                var empreinte = mesure?["sha256"]?.GetValue<string>()?.ToLowerInvariant();
+                if (empreinte is null || !autorises.Contains(empreinte)) return "profile.bios_mismatch";
+            }
+        }
+
+        return "";
+    }
+
     /// <summary>Images a directions opposees tolerees par partie : un rebond de contact, pas un stick SOCD.</summary>
     public const long ImpossibleInputsTolerance = 3;
 

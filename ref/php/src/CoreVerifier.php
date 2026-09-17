@@ -48,106 +48,12 @@ final class CoreVerifier
             return self::f('profile.mismatch');
 
         $coreLoaded = self::s($passport, 'artifacts', 'core', 'loaded_sha256');
-        $contentLoaded = self::s($passport, 'artifacts', 'content', 'loaded_sha256');
-        $memLoaded = self::s($passport, 'artifacts', 'mem', 'loaded_sha256');
         $listenerLoaded = self::s($passport, 'listener', 'loaded_sha256');
-
-        if (!self::inArr($profile, $coreLoaded, 'allowed_core_sha256')) return self::f('profile.core_mismatch');
-        // Identité du contenu : chaque moteur ne sait prouver que CERTAINES formes.
-        // Le pont Lua MAME ne mesure pas la ROM - MAME la charge et la vérifie contre
-        // son DAT - et n'apporte que le sha1 du set. Le wrapper libretro, lui, mesure
-        // ce qu'il charge et donne un md5, parfois un sha256, jamais ce sha1.
-        //
-        // Une cascade exclusive rendait donc un profil ouvert aux DEUX moteurs
-        // impossible à satisfaire : épingler le md5 pour RetroArch faisait échouer
-        // MAME, et l'inverse. On raisonne en union.
-        //
-        // Règle : au moins une forme à la fois ÉPINGLÉE et PRÉSENTÉE doit correspondre,
-        // et aucune forme épinglée et présentée ne doit contredire. Un passeport muet
-        // sur toutes les formes épinglées est refusé - l'absence ne vaut pas identité.
-        $formes = [
-            ['allowed_content_md5', self::s($passport, 'artifacts', 'content', 'md5')],
-            ['allowed_content_sha1', self::s($passport, 'artifacts', 'content', 'sha1')],
-            ['allowed_content_sha256', $contentLoaded],
-        ];
-        $contenuReconnu = false;
-        foreach ($formes as [$cle, $presentee]) {
-            $epinglee = $profile->{$cle} ?? null;
-            if (!is_array($epinglee) || count($epinglee) === 0) continue;   // forme non épinglée
-            if ($presentee === null || $presentee === '') continue;         // forme non présentée
-            if (!self::inArr($profile, $presentee, $cle)) return self::f('profile.content_mismatch');
-            $contenuReconnu = true;
-        }
-        if (!$contenuReconnu) return self::f('profile.content_mismatch');
-        if ($memLoaded !== self::s($profile, 'mem_sha256')) return self::f('profile.mem_mismatch');
-        if (!self::inArr($profile, $listenerLoaded, 'allowed_listener_sha256')) return self::f('profile.listener_unauthorized');
-
-        // Phase E : epinglage des reglages (DIP/vies/difficulte). Additif : on ne controle
-        // QUE si le profil epingle allowed_core_options_digest (sinon on saute, retro-compatible).
-        $allowedCoreOpts = $profile->allowed_core_options_digest ?? null;
-        if (is_array($allowedCoreOpts) && count($allowedCoreOpts) > 0) {
-            if (!self::inArr($profile, self::s($passport, 'artifacts', 'core_options_digest'), 'allowed_core_options_digest'))
-                return self::f('profile.core_options_mismatch');
-        }
-
-        // Epinglage de la NVRAM (reglages des jeux sans DIP switches). Additif : on ne controle
-        // QUE si le profil epingle nvram_pins. Les plages viennent du profil, jamais de la borne.
-        $pins = $profile->nvram_pins ?? null;
-        if (is_array($pins) && count($pins) > 0) {
-            $nvram = $passport->artifacts->nvram ?? null;
-            foreach ($pins as $pin) {
-                // Une epingle limitee a des coeurs ne concerne pas les autres moteurs du profil.
-                $coeurs = $pin->cores ?? null;
-                if (is_array($coeurs) && count($coeurs) > 0
-                    && !in_array(strtolower((string) $coreLoaded), array_map(static fn($c) => strtolower((string) $c), $coeurs), true)) continue;
-                if (!is_array($nvram)) return self::f('profile.nvram_mismatch');
-                $fichier = str_replace('\\', '/', (string) ($pin->file ?? ''));
-                $attendu = strtolower((string) ($pin->sha256 ?? ''));
-                $plages = $pin->ranges ?? null;
-                if ($fichier === '' || $attendu === '' || !is_array($plages) || count($plages) === 0) return self::f('profile.nvram_mismatch');
-                $entree = null;
-                foreach ($nvram as $n) {
-                    $nom = str_replace('\\', '/', (string) ($n->file ?? ''));
-                    if (strlen($nom) >= strlen($fichier) && strcasecmp(substr($nom, -strlen($fichier)), $fichier) === 0) { $entree = $n; break; }
-                }
-                if ($entree === null) return self::f('profile.nvram_mismatch');
-                foreach (['start', 'end'] as $moment) {
-                    $octets = base64_decode((string) ($entree->$moment ?? ''), true);
-                    if ($octets === false) return self::f('profile.nvram_mismatch');
-                    $zone = '';
-                    foreach ($plages as $plage) {
-                        $a = is_array($plage) && isset($plage[0]) ? (int) $plage[0] : -1;
-                        $b = is_array($plage) && isset($plage[1]) ? (int) $plage[1] : -1;
-                        if ($a < 0 || $b < $a || $b > strlen($octets)) return self::f('profile.nvram_mismatch');
-                        $zone .= substr($octets, $a, $b - $a);
-                    }
-                    if (hash('sha256', $zone) !== $attendu) return self::f('profile.nvram_mismatch');
-                }
-            }
-        }
-
-        // BIOS declare par le profil. « none » : le jeu n'en utilise pas, rien a controler. « files » :
-        // chaque BIOS exige doit avoir ete hache par la borne, avec une empreinte autorisee.
-        if ((string) ($profile->bios->mode ?? 'none') === 'files') {
-            $exiges = $profile->bios->files ?? null;
-            if (!is_array($exiges) || count($exiges) === 0) return self::f('profile.bios_mismatch');
-            $mesures = $passport->artifacts->bios->files ?? null;
-            foreach ($exiges as $exige) {
-                $coeurs = $exige->cores ?? null;
-                if (is_array($coeurs) && count($coeurs) > 0
-                    && !in_array(strtolower((string) $coreLoaded), array_map(static fn($c) => strtolower((string) $c), $coeurs), true)) continue;
-                $nom = basename(str_replace('\\', '/', (string) ($exige->name ?? '')));
-                $autorises = array_map(static fn($h) => strtolower((string) $h), is_array($exige->allowed_sha256 ?? null) ? $exige->allowed_sha256 : []);
-                if ($nom === '' || count($autorises) === 0 || !is_array($mesures)) return self::f('profile.bios_mismatch');
-                $trouve = false;
-                foreach ($mesures as $m) {
-                    if (strcasecmp(basename(str_replace('\\', '/', (string) ($m->name ?? ''))), $nom) !== 0) continue;
-                    $trouve = in_array(strtolower((string) ($m->sha256 ?? '')), $autorises, true);
-                    break;
-                }
-                if (!$trouve) return self::f('profile.bios_mismatch');
-            }
-        }
+        // Les controles du profil sont a part : la borne les rejoue AVANT la partie (bandeau
+        // « certifiable / non certifiable »), avec le meme code, pour que les deux verdicts
+        // ne divergent jamais.
+        $profil = self::profileArtifacts($passport, $profile);
+        if ($profil !== '') return self::f($profil);
 
         $modules = $passport->software->modules ?? null;
         if (!is_array($modules)) return self::f('format.schema');
@@ -246,6 +152,119 @@ final class CoreVerifier
     }
 
     // ── helpers ─────────────────────────────────────────────────────────────────
+    /**
+     * Les controles que le profil impose aux ARTEFACTS (emulateur, contenu, MEM, listener,
+     * reglages, NVRAM, BIOS) : ce qui est connu des le chargement du jeu. Rendu a part pour
+     * que la borne puisse l'appliquer avant la partie, avec exactement ce code. Retourne le
+     * code d'echec, ou une chaine vide.
+     */
+    public static function profileArtifacts(\stdClass $passport, \stdClass $profile): string
+    {
+        $coreLoaded = self::s($passport, 'artifacts', 'core', 'loaded_sha256');
+        $contentLoaded = self::s($passport, 'artifacts', 'content', 'loaded_sha256');
+        $memLoaded = self::s($passport, 'artifacts', 'mem', 'loaded_sha256');
+        $listenerLoaded = self::s($passport, 'listener', 'loaded_sha256');
+
+        if (!self::inArr($profile, $coreLoaded, 'allowed_core_sha256')) return 'profile.core_mismatch';
+        // Identité du contenu : chaque moteur ne sait prouver que CERTAINES formes.
+        // Le pont Lua MAME ne mesure pas la ROM - MAME la charge et la vérifie contre
+        // son DAT - et n'apporte que le sha1 du set. Le wrapper libretro, lui, mesure
+        // ce qu'il charge et donne un md5, parfois un sha256, jamais ce sha1.
+        //
+        // Une cascade exclusive rendait donc un profil ouvert aux DEUX moteurs
+        // impossible à satisfaire : épingler le md5 pour RetroArch faisait échouer
+        // MAME, et l'inverse. On raisonne en union.
+        //
+        // Règle : au moins une forme à la fois ÉPINGLÉE et PRÉSENTÉE doit correspondre,
+        // et aucune forme épinglée et présentée ne doit contredire. Un passeport muet
+        // sur toutes les formes épinglées est refusé - l'absence ne vaut pas identité.
+        $formes = [
+            ['allowed_content_md5', self::s($passport, 'artifacts', 'content', 'md5')],
+            ['allowed_content_sha1', self::s($passport, 'artifacts', 'content', 'sha1')],
+            ['allowed_content_sha256', $contentLoaded],
+        ];
+        $contenuReconnu = false;
+        foreach ($formes as [$cle, $presentee]) {
+            $epinglee = $profile->{$cle} ?? null;
+            if (!is_array($epinglee) || count($epinglee) === 0) continue;   // forme non épinglée
+            if ($presentee === null || $presentee === '') continue;         // forme non présentée
+            if (!self::inArr($profile, $presentee, $cle)) return 'profile.content_mismatch';
+            $contenuReconnu = true;
+        }
+        if (!$contenuReconnu) return 'profile.content_mismatch';
+        if ($memLoaded !== self::s($profile, 'mem_sha256')) return 'profile.mem_mismatch';
+        if (!self::inArr($profile, $listenerLoaded, 'allowed_listener_sha256')) return 'profile.listener_unauthorized';
+
+        // Phase E : epinglage des reglages (DIP/vies/difficulte). Additif : on ne controle
+        // QUE si le profil epingle allowed_core_options_digest (sinon on saute, retro-compatible).
+        $allowedCoreOpts = $profile->allowed_core_options_digest ?? null;
+        if (is_array($allowedCoreOpts) && count($allowedCoreOpts) > 0) {
+            if (!self::inArr($profile, self::s($passport, 'artifacts', 'core_options_digest'), 'allowed_core_options_digest'))
+                return 'profile.core_options_mismatch';
+        }
+
+        // Epinglage de la NVRAM (reglages des jeux sans DIP switches). Additif : on ne controle
+        // QUE si le profil epingle nvram_pins. Les plages viennent du profil, jamais de la borne.
+        $pins = $profile->nvram_pins ?? null;
+        if (is_array($pins) && count($pins) > 0) {
+            $nvram = $passport->artifacts->nvram ?? null;
+            foreach ($pins as $pin) {
+                // Une epingle limitee a des coeurs ne concerne pas les autres moteurs du profil.
+                $coeurs = $pin->cores ?? null;
+                if (is_array($coeurs) && count($coeurs) > 0
+                    && !in_array(strtolower((string) $coreLoaded), array_map(static fn($c) => strtolower((string) $c), $coeurs), true)) continue;
+                if (!is_array($nvram)) return 'profile.nvram_mismatch';
+                $fichier = str_replace('\\', '/', (string) ($pin->file ?? ''));
+                $attendu = strtolower((string) ($pin->sha256 ?? ''));
+                $plages = $pin->ranges ?? null;
+                if ($fichier === '' || $attendu === '' || !is_array($plages) || count($plages) === 0) return 'profile.nvram_mismatch';
+                $entree = null;
+                foreach ($nvram as $n) {
+                    $nom = str_replace('\\', '/', (string) ($n->file ?? ''));
+                    if (strlen($nom) >= strlen($fichier) && strcasecmp(substr($nom, -strlen($fichier)), $fichier) === 0) { $entree = $n; break; }
+                }
+                if ($entree === null) return 'profile.nvram_mismatch';
+                foreach (['start', 'end'] as $moment) {
+                    $octets = base64_decode((string) ($entree->$moment ?? ''), true);
+                    if ($octets === false) return 'profile.nvram_mismatch';
+                    $zone = '';
+                    foreach ($plages as $plage) {
+                        $a = is_array($plage) && isset($plage[0]) ? (int) $plage[0] : -1;
+                        $b = is_array($plage) && isset($plage[1]) ? (int) $plage[1] : -1;
+                        if ($a < 0 || $b < $a || $b > strlen($octets)) return 'profile.nvram_mismatch';
+                        $zone .= substr($octets, $a, $b - $a);
+                    }
+                    if (hash('sha256', $zone) !== $attendu) return 'profile.nvram_mismatch';
+                }
+            }
+        }
+
+        // BIOS declare par le profil. « none » : le jeu n'en utilise pas, rien a controler. « files » :
+        // chaque BIOS exige doit avoir ete hache par la borne, avec une empreinte autorisee.
+        if ((string) ($profile->bios->mode ?? 'none') === 'files') {
+            $exiges = $profile->bios->files ?? null;
+            if (!is_array($exiges) || count($exiges) === 0) return 'profile.bios_mismatch';
+            $mesures = $passport->artifacts->bios->files ?? null;
+            foreach ($exiges as $exige) {
+                $coeurs = $exige->cores ?? null;
+                if (is_array($coeurs) && count($coeurs) > 0
+                    && !in_array(strtolower((string) $coreLoaded), array_map(static fn($c) => strtolower((string) $c), $coeurs), true)) continue;
+                $nom = basename(str_replace('\\', '/', (string) ($exige->name ?? '')));
+                $autorises = array_map(static fn($h) => strtolower((string) $h), is_array($exige->allowed_sha256 ?? null) ? $exige->allowed_sha256 : []);
+                if ($nom === '' || count($autorises) === 0 || !is_array($mesures)) return 'profile.bios_mismatch';
+                $trouve = false;
+                foreach ($mesures as $m) {
+                    if (strcasecmp(basename(str_replace('\\', '/', (string) ($m->name ?? ''))), $nom) !== 0) continue;
+                    $trouve = in_array(strtolower((string) ($m->sha256 ?? '')), $autorises, true);
+                    break;
+                }
+                if (!$trouve) return 'profile.bios_mismatch';
+            }
+        }
+
+        return '';
+    }
+
     /** Images a directions opposees tolerees par partie : un rebond de contact, pas un stick SOCD. */
     public const ImpossibleInputsTolerance = 3;
 
