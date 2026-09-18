@@ -38,7 +38,7 @@ final class ServerAdmissionVerifier
         // Socle déterministe, sans état.
         $core = CoreVerifier::verify($passport, $profile, $devPem, $issPem);
         if (!$core['ok']) return self::r('refused', $core['reason']);
-        $flags = self::informationFlags($passport, $core['flags'] ?? []);
+        $flags = self::informationFlags($passport, $profile, $core['flags'] ?? []);
 
         // Contrôles à état qui refusent (déterministes).
         if ($state->ticketConsumed($tid)) return self::r('refused', 'session.ticket_reused');
@@ -66,13 +66,16 @@ final class ServerAdmissionVerifier
      * Ce que le score dit de lui sans etre refuse (decisions du 2026-09-17) :
      *   interrupted     pas de fin de jeu, le score reste celui que les checkpoints prouvent ;
      *   autofire        des appuis d'une regularite mecanique. Une information, pas une anomalie :
-     *                   des manettes d'epoque le faisaient, et bien des jeux l'ont d'origine ;
+     *                   des manettes d'epoque le faisaient, et bien des jeux l'ont d'origine. Le
+     *                   profil dit comment la lire (attribut `autofire`, decision du 2026-09-18) :
+     *                   `original` ou `not_applicable` -> rien a dire ; `added` -> `autofire_added`
+     *                   (le jeu ne l'avait pas) ; absent -> `autofire` tel quel ;
      *   forced_options  la borne s'est alignee sur les reglages du profil au chargement.
      *
      * @param list<string> $core
      * @return list<string>
      */
-    private static function informationFlags(\stdClass $passport, array $core): array
+    private static function informationFlags(\stdClass $passport, \stdClass $profile, array $core): array
     {
         $flags = array_values(array_filter($core, 'is_string'));
         $sensitive = $passport->sensitive ?? null;
@@ -83,10 +86,23 @@ final class ServerAdmissionVerifier
             $sq = (float) ($sensitive->press_frames_sq ?? 0);
             $moyenne = $sum / $n;
             $variance = $sq / $n - $moyenne * $moyenne;
-            if ($variance < 0.25) $flags[] = 'autofire';
+            if ($variance < 0.25) {
+                $lecture = self::autofireFlag((string) ($profile->autofire ?? ''));
+                if ($lecture !== null) $flags[] = $lecture;
+            }
         }
         if ((string) ($passport->artifacts->forced_options ?? '') !== '') $flags[] = 'forced_options';
         return array_values(array_unique($flags));
+    }
+
+    /** Le drapeau que vaut un tir automatique detecte, selon ce que le profil en dit ; null = rien. */
+    public static function autofireFlag(string $attribut): ?string
+    {
+        return match ($attribut) {
+            'original', 'not_applicable' => null,
+            'added' => 'autofire_added',
+            default => 'autofire',
+        };
     }
 
     /** Repetitions a l'identique d'une meme seconde d'entrees a partir desquelles on signale. */

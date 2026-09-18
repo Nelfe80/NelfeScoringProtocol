@@ -251,6 +251,9 @@ Add("pass_input_bounce", "", p => p["sensitive"]!["impossible_inputs"] = 3);
 // Une meme seconde d'entrees rejouee sept fois a l'identique : le socle l'accepte (rien
 // d'invalide), c'est l'admission serveur qui SIGNALE (held, plausibility.macro_detected).
 Add("pass_macro_repeats", "", p => p["sensitive"]!["macro_repeats"] = 7);
+// Cent vingt appuis de trois images chacun, sans aucune dispersion : un tir automatique. Le socle
+// l'accepte ; l'admission serveur en fait une INFORMATION que le profil colore (attribut autofire).
+Add("pass_autofire", "", p => { var s = p["sensitive"]!; s["press_count"] = 120; s["press_frames_sum"] = 360; s["press_frames_sq"] = 1080; });
 Add("fail_core_options", "profile.core_options_mismatch", p => p["artifacts"]!["core_options_digest"] = H("tampered-options"));
 Add("fail_out_of_bounds", "format.out_of_bounds", p => p["metric"]!["value"] = "999");
 Add("fail_protocol", "format.protocol", p => p["protocol"] = 2);

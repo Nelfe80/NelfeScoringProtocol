@@ -89,6 +89,10 @@
         }
       }
     },
+    "autofire": {
+      "description": "Ce que le tir automatique veut dire pour CE jeu. Des appuis d'une regularite mecanique sont une information, jamais une anomalie ; l'attribut dit comment la lire. original : le jeu ou sa borne d'epoque l'avait, il ne se signale pas. added : le jeu ne l'avait pas, le repere le dit (autofire_added). not_applicable : la cadence des appuis ne veut rien dire ici (puzzle, beat'em up), rien ne se signale. Absent : repere generique autofire.",
+      "enum": ["original", "added", "not_applicable"]
+    },
     "nvram_pins": {
       "description": "Reglages des jeux sans DIP switches (EEPROM, RAM de sauvegarde) : plages d'octets calibrees par jeu et leur empreinte. Opt-in.",
       "type": "array",

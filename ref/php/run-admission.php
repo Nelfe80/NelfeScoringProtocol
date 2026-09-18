@@ -56,11 +56,18 @@ $issPem = (string) file_get_contents($root . '/keys/issuer.pub.pem');
 $valid = json_decode((string) file_get_contents($root . '/vectors/valid.passport.json'));
 $coreFail = json_decode((string) file_get_contents($root . '/vectors/fail_core_mismatch.passport.json'));
 $macro = json_decode((string) file_get_contents($root . '/vectors/pass_macro_repeats.passport.json'));
+$autofire = json_decode((string) file_get_contents($root . '/vectors/pass_autofire.passport.json'));
+// Le meme profil, avec chaque lecture du tir automatique (attribut `autofire`).
+$profilAutofire = static function (string $attribut) use ($profile): \stdClass {
+    $p = clone $profile;
+    if ($attribut === '') unset($p->autofire); else $p->autofire = $attribut;
+    return $p;
+};
 $listenerSha = $valid->listener->loaded_sha256;
 
-/** @var array<array{0:string,1:string,2:string,3:callable,4:object}> $cases */
+/** @var array<array{0:string,1:string,2:string,3:callable,4:object,5?:list<string>,6?:object}> $cases */
 $cases = [
-    // nom, status attendu, reason attendue, config(state), passport
+    // nom, status attendu, reason attendue, config(state), passport, [drapeaux attendus, profil]
     ['valid_published', 'published', '', fn(MemoryStateStore $s) => null, $valid],
     ['duplicate', 'duplicate', 'session.duplicate', fn(MemoryStateStore $s) => $s->seenSessions[] = $valid->session_id, $valid],
     ['ticket_reused', 'refused', 'session.ticket_reused', fn(MemoryStateStore $s) => $s->consumedTickets[] = $valid->ticket->ticket_id, $valid],
@@ -70,18 +77,27 @@ $cases = [
     ['statistical_held', 'held', 'plausibility.statistical_hold', fn(MemoryStateStore $s) => $s->statAnomaly = true, $valid],
     ['macro_held', 'held', 'plausibility.macro_detected', fn(MemoryStateStore $s) => null, $macro],
     ['core_failure_surfaced', 'refused', 'profile.core_mismatch', fn(MemoryStateStore $s) => null, $coreFail],
+    // Tir automatique : une information dont le profil dit la lecture (decision du 2026-09-18).
+    ['autofire_unspecified', 'published', '', fn(MemoryStateStore $s) => null, $autofire, ['autofire'], $profilAutofire('')],
+    ['autofire_added', 'published', '', fn(MemoryStateStore $s) => null, $autofire, ['autofire_added'], $profilAutofire('added')],
+    ['autofire_original', 'published', '', fn(MemoryStateStore $s) => null, $autofire, [], $profilAutofire('original')],
+    ['autofire_not_applicable', 'published', '', fn(MemoryStateStore $s) => null, $autofire, [], $profilAutofire('not_applicable')],
 ];
 
 $fail = 0;
 echo "── ServerAdmissionVerifier (§6.5) - cas à état ──\n";
-foreach ($cases as [$name, $expStatus, $expReason, $cfg, $passport]) {
+foreach ($cases as $cas) {
+    [$name, $expStatus, $expReason, $cfg, $passport] = $cas;
+    $expFlags = $cas[5] ?? null;
     $state = new MemoryStateStore($devPem, $issPem);
     $cfg($state);
-    $r = ServerAdmissionVerifier::admit($passport, $profile, $state);
-    $ok = ($r['status'] === $expStatus && $r['reason'] === $expReason);
+    $r = ServerAdmissionVerifier::admit($passport, $cas[6] ?? $profile, $state);
+    $ok = ($r['status'] === $expStatus && $r['reason'] === $expReason)
+        && ($expFlags === null || $r['flags'] === $expFlags);
     if (!$ok) $fail++;
-    printf("  %s %-24s attendu=%-10s %-28s obtenu=%s %s\n",
-        $ok ? 'OK ' : 'XX ', $name, $expStatus, $expReason, $r['status'], $r['reason']);
+    printf("  %s %-24s attendu=%-10s %-28s obtenu=%s %s%s\n",
+        $ok ? 'OK ' : 'XX ', $name, $expStatus, $expReason, $r['status'], $r['reason'],
+        $expFlags === null ? '' : ' [' . implode(',', $r['flags']) . ']');
 }
 $n = count($cases);
 echo $fail === 0 ? "\n✅ {$n}/{$n} - verdicts serveur (published/held/refused/duplicate) conformes.\n"

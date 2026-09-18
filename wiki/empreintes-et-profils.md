@@ -185,7 +185,7 @@ taille fixe, repliés une fois par image, émis en fin de session) :
 |---|---|---|
 | `impossible_inputs` | images où deux directions opposées étaient tenues ensemble | **refus** `runtime.impossible_inputs` au‑delà de 3 images (un rebond de contact) |
 | `macro_repeats` | le plus grand nombre de fois qu'une même seconde d'entrées (64 images, avec de la matière : 6 changements et deux directions ou deux boutons d'action) a été rejouée à l'identique sans chevauchement | **signalé** `plausibility.macro_detected` à partir de 5 : gardé pour le joueur, jamais classé ni ancré |
-| `press_count`, `press_frames_sum`, `press_frames_sq` | nombre, somme et somme des carrés des durées d'appui | **information** `autofire` si la variance est nulle sur 50 appuis ou plus |
+| `press_count`, `press_frames_sum`, `press_frames_sq` | nombre, somme et somme des carrés des durées d'appui | **information** si la variance est nulle sur 50 appuis ou plus, lue selon l'attribut `autofire` du profil : absent → `autofire` ; `added` → `autofire_added` (le jeu ne l'avait pas) ; `original` ou `not_applicable` → rien |
 
 Un tir automatique sur un seul bouton, direction tenue, n'entre pas dans la fenêtre d'une
 macro ; une routine humaine varie d'une image ou deux et ne se répète pas cinq fois à
@@ -197,7 +197,7 @@ meilleur segment croissant ; le verdict porte le drapeau `interrupted`, rien n'e
 **Trois sorts au dépôt** : `published` (classé, certificat, ancré), `held` (signalé : gardé,
 visible du seul joueur, jamais dans `scores` ni dans l'arbre ancré ; un signalement levé
 rejoint une génération suivante), `refused`. Les drapeaux d'information (`interrupted`,
-`autofire`, `forced_options`) voyagent avec le score et s'affichent par un repère ⓘ.
+`autofire`, `autofire_added`, `forced_options`) voyagent avec le score et s'affichent par un repère ⓘ.
 
 ## 6. Les deux vérifieurs JUMEAUX — garder synchro
 

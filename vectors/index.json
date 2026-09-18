@@ -132,6 +132,10 @@
     "expected": "pass"
   },
   {
+    "vector": "pass_autofire.passport.json",
+    "expected": "pass"
+  },
+  {
     "vector": "fail_core_options.passport.json",
     "expected": "profile.core_options_mismatch"
   },

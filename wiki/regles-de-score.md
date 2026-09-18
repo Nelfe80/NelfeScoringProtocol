@@ -81,7 +81,9 @@ Certaines choses se disent sans rien retirer au record, par un repère ⓘ à c�
 - **partie interrompue** : pas de fin de jeu (coupure, plantage, fermeture). Le score
   reste celui que les points de passage prouvent ; une interruption ne coûte jamais un record ;
 - **tir automatique** : des appuis d'une régularité mécanique. C'est une information, pas
-  une anomalie : des manettes d'époque le faisaient, et bien des jeux l'ont d'origine ;
+  une anomalie : des manettes d'époque le faisaient, et bien des jeux l'ont d'origine. Le
+  profil de chaque jeu dit comment la lire : d'origine sur ce jeu (rien à signaler), absent du
+  jeu d'origine (le repère le précise), ou sans objet pour ce jeu (rien à signaler) ;
 - **réglages appliqués** : la borne s'est alignée sur le profil au lancement.
 
 ### Pourquoi une macro est une anomalie et pas le tir automatique
