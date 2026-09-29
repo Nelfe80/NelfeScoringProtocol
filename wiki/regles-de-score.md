@@ -107,6 +107,22 @@ La finesse du jugement dépend de ce que le jeu **laisse voir** :
 La couverture du **1cc strict** s'étend donc au rythme des jeux instrumentés — c'est
 un travail de données, jeu par jeu, pas un interrupteur global.
 
+## Un classement par mode de jeu
+Certains jeux se jouent de plusieurs façons qui ne se comparent pas : Tetris sur Game Boy a un
+type A (score sans fin) et un type B (25 lignes à faire). Chaque mode a **son classement**, donc son
+profil, avec son propre `ruleset`.
+
+- La définition mémoire du jeu lit le mode choisi (action `GAME_MODE`). Le profil dit **quelle
+  valeur** il couvre ; le passeport signe **le mode joué** dans `game.mode`. La plateforme refuse
+  une partie dont le mode n'est pas celui du classement, et une partie sans mode mesuré.
+- La **difficulté de départ** (niveau, hauteur, difficulté choisie au menu, action
+  `GAME_DIFFICULTY`) est signée dans `game.difficulty`, une valeur par adresse mémoire.
+  Par défaut elle est **libre et affichée** : elle ne sépare pas les classements, elle s'affiche à
+  côté du score. Un profil peut la **restreindre** à une liste de valeurs ; ce qui en sort est refusé.
+- La valeur qui compte est celle **en vigueur au début du run retenu**. Le profil déclare la valeur
+  de démarrage de chaque champ : un joueur qui ne touche à rien au menu n'émet aucun signal, et
+  c'est elle qui vaut.
+
 ## En résumé
 - Le **run** (un crédit) est l'unité ; le **meilleur run** gagne.
 - **1cc = zéro continue**, gelé à la première mort — arcade et console, même règle.
@@ -115,3 +131,4 @@ un travail de données, jeu par jeu, pas un interrupteur global.
 - Une **partie interrompue** garde son score ; le **tir automatique** est une information.
 - **Meilleur** score, jamais le dernier.
 - L'éligibilité au 1cc strict dépend des repères que le jeu expose.
+- Un jeu à **modes** a un classement par mode ; la **difficulté** de départ s'affiche à côté du score.

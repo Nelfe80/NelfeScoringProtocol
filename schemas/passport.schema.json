@@ -21,7 +21,13 @@
         "ruleset": { "type": "string" },
         "profile_version": { "type": "integer", "minimum": 1 },
         "manifest_commit": { "type": "string" },
-        "profile_document_sha256": { "$ref": "#/$defs/sha256hex" }
+        "profile_document_sha256": { "$ref": "#/$defs/sha256hex" },
+        "mode": { "type": "integer", "minimum": 0 },
+        "difficulty": {
+          "type": "object",
+          "propertyNames": { "pattern": "^0x[0-9A-F]+$" },
+          "additionalProperties": { "type": "integer" }
+        }
       }
     },
 
