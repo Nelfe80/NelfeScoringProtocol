@@ -1,35 +1,83 @@
-# Règles de score — ce qui compte comme un record
+# Règles de score : ce qui compte comme un record
 
 Cette page explique **comment un score est jugé**, pour que chacun sache à quoi
 s'en tenir. Le *comment on mesure* (adresses mémoire, algorithme du listener) reste
-fermé — voir [Homologation](homologation.md) ; ici on décrit les **règles**, pas la
+fermé (voir [Homologation](homologation.md)) ; ici on décrit les **règles**, pas la
 technique.
 
-## L'unité, c'est le RUN (un crédit), pas la session
-Un **run** court **tant que le jeu est joué**. Il commence quand la partie démarre
-et il se **fige** à sa fin — une mort, un game over, la fin du jeu, un retour au
-titre, un reset, ou la sortie de l'émulateur. Ce qui vient après (une nouvelle
-tentative, un continue) appartient à **un autre run**.
+## Une partie, c'est un lancement du jeu
+Ta partie commence au **premier crédit consommé** en arcade, ou au départ sur console, et elle se
+termine **quand tu quittes le jeu**. Quitter termine la partie et garde ton score : inutile d'aller
+jusqu'au game over ou d'attendre un écran de fin.
 
-Conséquence : **enchaîner les parties ne peut jamais te coûter ton record.** Chaque
-run est jugé pour lui-même, et c'est **le meilleur run** qui est retenu au classement.
-Faire un gros score puis rater la tentative suivante ne l'efface pas — le gros run a
-déjà été figé et soumis.
+## Le 1cc : un crédit, sans continue
+Un record **1cc** est un score fait sur **un seul crédit, sans continue**, jeu fini ou non. C'est la
+catégorie de référence des records de score, celle où se jouent aussi les jeux sans fin. Dans les
+communautés de score, « 1CC » (« one credit clear ») désigne plus précisément le fait de *finir* le
+jeu sur un crédit : le site dit donc « Un crédit, sans continue ».
 
-## Le 1cc = zéro continue
-Un record **1cc** (« one-credit-clear ») est un score obtenu **sans utiliser un seul
-continue**. Dès qu'un continue est pris, le run n'est plus un 1cc : son score est figé
-**à la première mort**, avant le continue.
+La règle est la même en arcade et sur console, quel que soit le nombre de continues que le jeu
+propose.
 
-C'est le sens universel du 1cc (bornes d'arcade, tableaux de shmups). Et c'est **la
-même règle pour l'arcade et la console** : peu importe que la borne offre un ou
-plusieurs continues par crédit — la barre « zéro continue » ne dépend pas de ce
-réglage.
+### En arcade, le crédit fait foi
+- **Avant de jouer**, remets autant de pièces que tu veux. Le nombre de pièces par crédit varie
+  d'un jeu à l'autre ; la borne compte les crédits.
+- **Au départ**, le premier crédit consommé lance ta partie.
+- **Pendant la partie**, des crédits ajoutés ne changent rien tant qu'ils ne sont pas consommés.
+  **Tout crédit consommé ensuite est un continue**, sauf l'arrivée d'un autre joueur (voir
+  [Les parties à plusieurs](#les-parties-a-plusieurs)).
+- **Un continue ne fait pas refuser ta partie.** Ton score certifié s'arrête au dernier score
+  affiché avant le continue. Tu peux continuer à jouer, la suite ne compte plus.
+- **Rejouer sans quitter le jeu** consomme un crédit après le départ : pour la borne, c'est un
+  continue, même quand le jeu remet le score à zéro. Pour une nouvelle partie classée, **quitte le
+  jeu et relance-le**.
+
+### Les vies ne coupent jamais un 1cc
+Perdre une vie, en gagner une, tomber à zéro : rien de tout cela n'arrête une partie 1cc. Seul un
+crédit consommé la coupe. Les vies servent au classement « une vie » (1LC), là où un jeu l'ouvre.
+
+### Sur console, chaque jeu a son continue
+Une console n'a pas de pièce : chaque jeu gère ses continues à sa façon (un compteur de
+continues, un écran « Continue ? », un score remis à zéro). Le profil du jeu dit comment la borne
+reconnaît le sien. Un jeu dont le continue ne se reconnaît pas n'ouvre pas de classement 1cc.
+
+### Le doute profite au joueur
+Une partie n'est coupée que sur une **preuve** : un signal vérifié à l'écran pour ce jeu, avant son
+ouverture au scoring. Sans preuve, rien ne coupe.
+
+## Ce que la borne te dit pendant la partie
+Un bandeau orange s'affiche à chaque crédit consommé après le départ, et quand un joueur te rejoint :
+
+| Moment | Bandeau |
+|---|---|
+| premier continue | « Crédit consommé : ton score certifié reste 29 960 » ; « la partie qui vient n'est pas certifiable : quitte et relance le jeu pour une partie certifiée » |
+| continues suivants | « Partie non certifiable » ; « pour une partie certifiée, quitte et relance le jeu » |
+| un joueur te rejoint | « Un joueur te rejoint : ton score solo certifié reste 30 000 » ; « la suite se joue à plusieurs, hors classement solo » |
+| partie à plusieurs dès le départ | « Partie à plusieurs : hors classement solo » ; « l'arrivée d'un joueur ne compte pas comme un continue » |
+| la borne perd la lecture des crédits | « Crédits illisibles : partie non certifiable » |
+
+Le score du bandeau est celui que tu as vu à l'écran juste avant : c'est lui qui part au classement.
+
+## Les parties à plusieurs
+- **Le 1cc est solo.** Seul au départ, tu joues pour le 1cc, même si ta partie est ouverte aux
+  autres en netplay.
+- **Un joueur qui te rejoint en joueur** fait basculer la partie à plusieurs, pour toi comme pour
+  lui. Un spectateur ne change rien. **L'arrivée d'un joueur n'est pas un continue** : ton score
+  fait seul avant son arrivée reste un 1cc, certifié s'il bat ton record. La suite n'est pas encore
+  classée.
+- **Chaque borne le dit à son joueur** : l'hôte à l'arrivée de l'autre joueur, l'invité dès que sa
+  partie démarre. La borne qui rejoint une partie ne soumet aucun score solo.
+- **Le replay suit** : celui de ta partie solo s'arrête à l'arrivée du joueur, et un replay de la
+  partie à plusieurs commence aussitôt.
+- **À terme, un classement 1CC MULTI** : chaque joueur y fait sa partie sur un crédit, et chaque
+  borne certifie le score de son joueur. Il demande un jeu qui affiche le score de chaque joueur, et
+  le seul crédit permis en plus du départ y sera celui de l'arrivée d'un joueur.
 
 ## Le meilleur score, jamais le dernier
-On retient toujours **le meilleur run**, jamais le dernier joué. Si un jeu ne fournit
-pas assez de repères pour découper les runs, on retient **le meilleur score atteint**
-pendant la session — jamais la valeur finale, qui serait fragile.
+Sur une partie, on retient **le meilleur score atteint** (avant un éventuel continue), jamais la
+valeur affichée au moment où tu quittes. Au classement, c'est **ta meilleure partie** qui compte :
+enchaîner les parties ne peut jamais te coûter ton record, une partie ratée n'efface pas la
+précédente.
 
 ## Les réglages doivent être identiques
 Deux scores ne sont comparables **qu'à réglages égaux**. Le nombre de vies, la
@@ -94,18 +142,17 @@ aucun jeu ne l'a jamais permis. La borne compte l'une et l'autre sans rien coût
 partie ; la plateforme tranche au dépôt. Une routine apprise par un joueur ne tombe pas
 dans le filet : ses durées varient toujours d'une image ou deux.
 
-## Tous les jeux ne sont pas éligibles au 1cc strict
-La finesse du jugement dépend de ce que le jeu **laisse voir** :
+## Tous les jeux ne sont pas éligibles au 1cc
+Un jeu n'ouvre un classement 1cc que si la borne sait y reconnaître un continue :
 
 | Le jeu fournit… | Classement possible |
 |---|---|
-| l'état de jeu **et** les fins (mort, continue, fin) | **1cc strict certifié** + meilleur score |
-| les fins seules (beaucoup de jeux d'arcade) | 1cc via l'écran de continue |
-| seulement le score | **« meilleur score »** uniquement — pas de 1cc strict (on ne peut pas prouver « sans continue ») |
+| en arcade, son compteur de crédits | **1cc** (un crédit, sans continue) |
+| sur console, aucun continue, ou un continue reconnaissable | **1cc** |
+| un score, avec un continue qu'on ne sait pas reconnaître | pas de 1cc : on ne peut pas prouver « sans continue » |
 | pas de score lisible | non classé |
 
-La couverture du **1cc strict** s'étend donc au rythme des jeux instrumentés — c'est
-un travail de données, jeu par jeu, pas un interrupteur global.
+La couverture s'étend donc au rythme des jeux vérifiés : c'est un travail de données, jeu par jeu.
 
 ## Un classement par mode de jeu
 Certains jeux se jouent de plusieurs façons qui ne se comparent pas : Tetris sur Game Boy a un
@@ -124,11 +171,17 @@ profil, avec son propre `ruleset`.
   c'est elle qui vaut.
 
 ## En résumé
-- Le **run** (un crédit) est l'unité ; le **meilleur run** gagne.
-- **1cc = zéro continue**, gelé à la première mort — arcade et console, même règle.
+- Une **partie**, c'est un lancement du jeu : quitter la termine et garde ton score.
+- **1cc = un crédit, sans continue**, jeu fini ou non ; arcade et console, même règle.
+- En arcade, **tout crédit consommé après le départ est un continue** : le 1cc s'arrête au dernier
+  score affiché avant lui, et la partie n'est pas refusée.
+- Pour une nouvelle partie classée, **quitte le jeu et relance-le**.
+- Les **vies** ne coupent jamais un 1cc.
+- Le 1cc est **solo** ; un joueur qui te rejoint n'est pas un continue, et ton score fait seul
+  avant son arrivée reste certifié.
 - **Réglages de référence** obligatoires ; la borne les applique elle-même avant la partie.
 - **Trois sorts** : certifié, signalé (macro : gardé pour toi, jamais classé), refusé.
 - Une **partie interrompue** garde son score ; le **tir automatique** est une information.
 - **Meilleur** score, jamais le dernier.
-- L'éligibilité au 1cc strict dépend des repères que le jeu expose.
+- Le 1cc demande un jeu dont la borne sait reconnaître le continue.
 - Un jeu à **modes** a un classement par mode ; la **difficulté** de départ s'affiche à côté du score.
