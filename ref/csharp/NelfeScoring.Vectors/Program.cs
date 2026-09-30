@@ -254,6 +254,9 @@ Add("pass_macro_repeats", "", p => p["sensitive"]!["macro_repeats"] = 7);
 // Cent vingt appuis de trois images chacun, sans aucune dispersion : un tir automatique. Le socle
 // l'accepte ; l'admission serveur en fait une INFORMATION que le profil colore (attribut autofire).
 Add("pass_autofire", "", p => { var s = p["sensitive"]!; s["press_count"] = 120; s["press_frames_sum"] = 360; s["press_frames_sq"] = 1080; });
+// La version d'APIExpose, signee dans le passeport depuis la 1.8.24 : l'admission la compare au
+// minimum du profil (`min_api_version`). Le CoreVerifier ne la regarde pas.
+Add("pass_api_version", "", p => p["software"]!["apiexpose"] = "1.9.13+20260930.161515.748e6ea6");
 Add("fail_core_options", "profile.core_options_mismatch", p => p["artifacts"]!["core_options_digest"] = H("tampered-options"));
 Add("fail_out_of_bounds", "format.out_of_bounds", p => p["metric"]!["value"] = "999");
 Add("fail_protocol", "format.protocol", p => p["protocol"] = 2);

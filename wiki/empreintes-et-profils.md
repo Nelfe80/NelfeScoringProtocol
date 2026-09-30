@@ -114,6 +114,12 @@ On ne recalcule jamais à la main : chaque valeur vient d'une **source**.
   optionnel). La borne hache ces fichiers là où le cœur les charge ; un BIOS absent ou
   modifié donne `profile.bios_mismatch`.
 
+- **Version minimale d'APIExpose** (2026‑09‑30) : `min_api_version`, en **opt‑in**. Contrôlée à
+  l'admission, sur la version que la borne signe dans `software.apiexpose` (depuis la 1.8.24). Une
+  borne plus ancienne, ou un passeport sans version, donne `profile.api_outdated`. Sert quand un
+  profil suppose ce qu'une ancienne borne mesure mal, comme les scores des autres joueurs d'une
+  partie à plusieurs. La borne se met à jour seule au démarrage : le refus reste rare.
+
 Non contrôlé, par décision :
 - **frontend** : `process.executable_sha256` est informatif. Le frontend ne touche pas au
   jeu ; seuls le cœur, le contenu, les réglages et le BIOS font la validité d'un score.

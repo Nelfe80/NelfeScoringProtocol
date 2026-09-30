@@ -57,6 +57,13 @@ $valid = json_decode((string) file_get_contents($root . '/vectors/valid.passport
 $coreFail = json_decode((string) file_get_contents($root . '/vectors/fail_core_mismatch.passport.json'));
 $macro = json_decode((string) file_get_contents($root . '/vectors/pass_macro_repeats.passport.json'));
 $autofire = json_decode((string) file_get_contents($root . '/vectors/pass_autofire.passport.json'));
+$versionnee = json_decode((string) file_get_contents($root . '/vectors/pass_api_version.passport.json'));
+// Le meme profil, avec une version minimale d'APIExpose (`min_api_version`).
+$profilMin = static function (string $minimum) use ($profile): \stdClass {
+    $p = clone $profile;
+    if ($minimum === '') unset($p->min_api_version); else $p->min_api_version = $minimum;
+    return $p;
+};
 // Le meme profil, avec chaque lecture du tir automatique (attribut `autofire`).
 $profilAutofire = static function (string $attribut) use ($profile): \stdClass {
     $p = clone $profile;
@@ -82,6 +89,12 @@ $cases = [
     ['autofire_added', 'published', '', fn(MemoryStateStore $s) => null, $autofire, ['autofire_added'], $profilAutofire('added')],
     ['autofire_original', 'published', '', fn(MemoryStateStore $s) => null, $autofire, [], $profilAutofire('original')],
     ['autofire_not_applicable', 'published', '', fn(MemoryStateStore $s) => null, $autofire, [], $profilAutofire('not_applicable')],
+    // Version minimale d'APIExpose (2026-09-30) : le passeport signe dit 1.9.13+build.
+    ['api_min_absent_du_profil', 'published', '', fn(MemoryStateStore $s) => null, $versionnee, null, $profilMin('')],
+    ['api_min_atteinte', 'published', '', fn(MemoryStateStore $s) => null, $versionnee, null, $profilMin('1.9.13')],
+    ['api_min_depassee', 'published', '', fn(MemoryStateStore $s) => null, $versionnee, null, $profilMin('1.9.12')],
+    ['api_trop_ancienne', 'refused', 'profile.api_outdated', fn(MemoryStateStore $s) => null, $versionnee, null, $profilMin('1.10.0')],
+    ['api_version_inconnue', 'refused', 'profile.api_outdated', fn(MemoryStateStore $s) => null, $valid, null, $profilMin('1.8.24')],
 ];
 
 $fail = 0;

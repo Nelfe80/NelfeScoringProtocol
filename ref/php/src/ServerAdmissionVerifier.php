@@ -44,6 +44,11 @@ final class ServerAdmissionVerifier
         if ($state->ticketConsumed($tid)) return self::r('refused', 'session.ticket_reused');
         if ($state->listenerRevoked($passport->listener->loaded_sha256 ?? '')) return self::r('refused', 'profile.listener_revoked');
         if ($state->profileSuspended($passport->game->rom_group ?? '', $passport->game->ruleset ?? '')) return self::r('refused', 'profile.not_open');
+        // Version minimale d'APIExpose exigee par le profil : une borne plus ancienne mesure mal ce
+        // que le profil suppose. Lue dans le passeport SIGNE, donc apres sa verification.
+        if (!self::apiSuffisante((string) ($passport->software->apiexpose ?? ''), (string) ($profile->min_api_version ?? ''))) {
+            return self::r('refused', 'profile.api_outdated');
+        }
 
         // Anomalie : le score est SIGNALE, pas refuse. Il reste au joueur, ne classe pas, ne
         // s'ancre pas (decision du 2026-09-17). Une macro d'abord : une meme seconde d'entrees
@@ -103,6 +108,19 @@ final class ServerAdmissionVerifier
             'added' => 'autofire_added',
             default => 'autofire',
         };
+    }
+
+    /**
+     * Vrai sans minimum, ou si la version de la borne (« 1.9.13 », suivie ou non de « +build »)
+     * l'atteint. Une version absente ou illisible ne l'atteint jamais.
+     */
+    public static function apiSuffisante(string $version, string $minimum): bool
+    {
+        $minimum = trim($minimum);
+        if ($minimum === '') return true;
+        $v = trim(explode('+', $version, 2)[0]);
+        if (preg_match('/^\d+(\.\d+){0,3}$/D', $v) !== 1) return false;
+        return version_compare($v, $minimum, '>=');
     }
 
     /** Repetitions a l'identique d'une meme seconde d'entrees a partir desquelles on signale. */

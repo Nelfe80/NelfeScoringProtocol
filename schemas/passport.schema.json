@@ -78,7 +78,9 @@
             }
           }
         },
-        "modules_digest": { "$ref": "#/$defs/sha256hex" }
+        "modules_digest": { "$ref": "#/$defs/sha256hex" },
+        "apiexpose": { "type": "string", "maxLength": 120, "description": "Version d'APIExpose qui a mesure la partie (x.y.z, suivi eventuel de +build). Signee depuis la 1.8.24." },
+        "wrapper_state": { "type": "string", "maxLength": 24, "description": "Etat du wrapper sur la borne au moment de la partie." }
       }
     },
 
