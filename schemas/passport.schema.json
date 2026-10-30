@@ -222,6 +222,59 @@
       }
     },
 
+    "challenge": {
+      "$comment": "Défi chronométré (règlement nelfe.challenge.v2) : la tentative classée. Absent d'un passeport de score. Aucun nombre décimal : la cadence s'écrit en millionièmes.",
+      "type": "object", "additionalProperties": false,
+      "required": ["challenge_id", "version", "attempt_number", "start_policy", "timing", "events", "splits", "boards"],
+      "properties": {
+        "challenge_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,119}$" },
+        "version": { "type": "integer", "minimum": 1 },
+        "attempt_number": { "type": "integer", "minimum": 1 },
+        "start_policy": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,63}$" },
+        "state_sha256": { "$ref": "#/$defs/sha256hex" },
+        "timing": {
+          "type": "object", "additionalProperties": false,
+          "required": ["official", "aligned", "independent", "excluded", "game_time_seconds", "game_time_check", "clock_ms", "frame_rate_e6"],
+          "properties": {
+            "official": { "enum": ["game_timer_aligned", "independent"] },
+            "aligned": { "oneOf": [{ "$ref": "#/$defs/challengeChrono" }, { "type": "null" }] },
+            "independent": { "oneOf": [{ "$ref": "#/$defs/challengeChrono" }, { "type": "null" }] },
+            "excluded": {
+              "type": "array",
+              "items": {
+                "type": "object", "additionalProperties": false,
+                "required": ["from_frame", "to_frame"],
+                "properties": {
+                  "from_frame": { "type": "integer", "minimum": 0 },
+                  "to_frame": { "type": "integer", "minimum": 0 }
+                }
+              }
+            },
+            "game_time_seconds": { "type": ["integer", "null"], "minimum": 0 },
+            "game_time_check": { "enum": ["ok", "jeu_en_retard", "ecart", "non_mesure"] },
+            "clock_ms": { "type": "integer", "minimum": 0 },
+            "frame_rate_e6": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["role", "action", "address", "value", "frame"],
+            "properties": {
+              "role": { "type": "string" },
+              "action": { "type": "string" },
+              "address": { "type": "string", "pattern": "^0x[0-9A-F]+$" },
+              "value": { "type": "integer" },
+              "frame": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "splits": { "type": "array" },
+        "boards": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
     "local_check": { "type": "string" },
     "signature": { "$ref": "#/$defs/b64url" }
   },
@@ -233,6 +286,16 @@
     "b64url": { "type": "string", "pattern": "^[A-Za-z0-9_-]+$" },
     "uuid": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$" },
     "decimalString": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$" },
+    "challengeChrono": {
+      "$comment": "Un chrono d'une tentative, en images de la borne : frames = fin - début - plages exclues. Null tant qu'une borne n'est pas vue.",
+      "type": "object", "additionalProperties": false,
+      "required": ["start_frame", "end_frame", "frames"],
+      "properties": {
+        "start_frame": { "type": ["integer", "null"], "minimum": 0 },
+        "end_frame": { "type": ["integer", "null"], "minimum": 0 },
+        "frames": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
     "hashTriple": {
       "type": "object", "additionalProperties": false,
       "required": ["start_sha256", "loaded_sha256", "end_sha256"],

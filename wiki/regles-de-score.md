@@ -170,6 +170,25 @@ profil, avec son propre `ruleset`.
   de démarrage de chaque champ : un joueur qui ne touche à rien au menu n'émet aucun signal, et
   c'est elle qui vaut.
 
+## Les défis chronométrés
+Un défi classe un **temps** sur une épreuve : un niveau, un boss, le jeu entier. Son règlement
+(`nelfe.challenge.v2`) est publié, versionné et immuable ; il cite des lignes existantes de la
+définition mémoire du jeu, sans en ajouter.
+
+- Le passeport d'un défi garde sa forme. `game.ruleset` est celui du règlement (`ch-<épreuve>-v<n>`),
+  `game.profile_version` sa version, `game.profile_document_sha256` l'empreinte du règlement servi.
+  La métrique est le temps en images (`metric.type = time`, `unit = frames`, plus petit = meilleur).
+- Le bloc `challenge` porte la tentative : deux chronos mesurés ensemble (`aligned`, calé sur le timer
+  du jeu, et `independent`, entre deux événements du jeu), les plages exclues, le temps affiché par le
+  jeu, la durée à l'horloge de la borne et la cadence du cœur en millionièmes (`frame_rate_e6`).
+- La plateforme recompte les images de chaque chrono et compare le chrono officiel au temps du jeu :
+  une seconde d'écart, ou un retard de 5 % au plus (2 s au moins), car le timer d'un jeu perd les
+  images où il ralentit. Au-delà, le temps est refusé. Une horloge qui a tourné plus d'une seconde
+  sans les images révèle une pause : le temps est signalé.
+- Un état chargé, un rembobinage, une avance rapide, de la triche ou un run-ahead écartent toutes les
+  tentatives du lancement. Les continues restent permis.
+- Chaque épreuve a son classement au temps, à part des points du World Scoring.
+
 ## En résumé
 - Une **partie**, c'est un lancement du jeu : quitter la termine et garde ton score.
 - **1cc = un crédit, sans continue**, jeu fini ou non ; arcade et console, même règle.
